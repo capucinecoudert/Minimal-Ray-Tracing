@@ -10,28 +10,29 @@ public class RayRendering {
 
     public static void main(String[] args) throws IOException  // ?? ici je dois recup les infos de l'interface, i.e, liste des spheres
     {
-        Scene scene = new Scene(// mettre des array list la, 800, 600);
-        createImage(scene);
+        //Scene scene = new Scene(mettre array list des spheres, 800, 600);
+        //createImage(scene);
     }
 
 
 
-    public Color computeColor(){
+    public Color computeColor(Ray ray, Scene scene){
         Color pixelColor;
-        // ici on fait tout le calcul 
+        // ici on fait tout le calcul pour un Rayon, i.e. pixel
 
 
 
     }
 
 
-    public static void createImage(Scene scene){ // j'ai trouvé ce bout de code pour créer une buffered img
+    public static void createImage(Scene scene){ 
         ColorInt[][] img= new ColorInt[scene.width][scene.height];
 
+        // boucle dans laquelle tu calcules la couleur pour chaque rayon de la camera correspondant à un pixel
+        // chaque couleur transformer en colorInt et add to img
 
-
-
-        BufferedImage image = new BufferedImage(scene.width, scene.height, BufferedImage.TYPE_INT_RGB); 
+        // transformes le array de couleur en un bmp file via BufferedImg
+        BufferedImage image = new BufferedImage(scene.width, scene.height, BufferedImage.TYPE_INT_RGB); // j'ai trouvé ce bout de code pour créer une buffered img
         for (int y = 0; y < scene.height; y++) {
            for (int x = 0; x < scene.width; x++) {
               int rgb = img[y][x].red;

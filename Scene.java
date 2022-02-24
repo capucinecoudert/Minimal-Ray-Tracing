@@ -13,7 +13,11 @@ public class Scene {
         height=h;
         width=w;
 
-         // Left light
+
+        // Ici est ce qu'on fait des lights source modifiable ? je sais pas si ça complexifie bcp ou pas ?
+        // j'ai pris les valeurs du code du mec mais à voir ducoup
+        
+         // Left light  
          lights.add(new Light(
             new Point(0.0, 200.0, -100.0),     // Origin
             new Color(2.0, 2.0, 2.0)           // Intensity

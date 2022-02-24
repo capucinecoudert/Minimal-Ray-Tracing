@@ -9,4 +9,7 @@ public class Color {
         blue=b;
     }
     
+
+    // add a SRGB encode function for  Gamma correction
+    
 }

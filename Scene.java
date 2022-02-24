@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 public class Scene {
 
@@ -6,9 +7,9 @@ public class Scene {
     public ArrayList<Sphere> spheres;
     public ArrayList<Light> lights;
 
-    public Scene(ArrayList<Sphere> s,ArrayList<Light> l, int w, int h){
+    public Scene(ArrayList<Sphere> s, int w, int h){
         spheres=s;
-        lights=l;
+        lights=new ArrayList<Light>();
         height=h;
         width=w;
 

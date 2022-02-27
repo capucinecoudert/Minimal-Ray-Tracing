@@ -17,4 +17,9 @@ public class Point{
         this.y = y;
         this.z = z;
     }
+
+    public Point add(Vector v1){
+        return new Point(this.x+v1.x, this.y+v1.y, this.z+v1.z);
+    }
+
 }

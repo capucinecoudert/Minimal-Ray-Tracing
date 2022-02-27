@@ -55,8 +55,8 @@ public class Vector {
      * @param v Vector.
      * @return End point of the vector.
      */
-    public static Point add(Point p, Vector v){
-        return new Point(p.x + v.x, p.y + v.y, p.z + v.z);
+    public Point add(Point p){
+        return new Point(p.x + this.x, p.y + this.y, p.z + this.z);
     }
 
     /**
@@ -75,8 +75,8 @@ public class Vector {
      * @param v2 Another vector.
      * @return Difference of the two vectors.
      */
-    public static Vector subtract (Vector v1, Vector v2){
-        return new Vector(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
+    public Vector subtract ( Vector v2){
+        return new Vector(this.x - v2.x, this.y - v2.y, this.z - v2.z);
     }
 
     /**
@@ -85,17 +85,27 @@ public class Vector {
      * @param v A vector.
      * @return The result of the vector multiplied with the scalar.
      */
-    public static Vector multiply(double c, Vector v){
-        return new Vector(c * v.x, c * v.y, c * v.z);
+    public Vector multiply(double c){
+        return new Vector(c * this.x, c * this.y, c * this.z);
     }
 
+    public Vector divide(double c){
+        return new Vector( this.x/c , this.y/c , this.z/c );
+    }
     /**
      * Calculates the dot product of vectors v1 and v2.
      * @param v1 A vector.
      * @param v2 Another vector.
      * @return The dot product of the two vectors.
      */
-    public static double dotProduct(Vector v1, Vector v2){
-        return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+    public double dotProduct( Vector v2){
+        return this.x * v2.x + this.y * v2.y + this.z * v2.z;
+    }
+
+    public Vector crossProduct( Vector v2){
+        double x=  this.y*v2.z- this.z*v2.y;
+        double y= this.z*v2.x- this.x*v2.z;
+        double z= this.x*v2.y- this.y*v2.x;
+        return new Vector(x, y,z );
     }
 }

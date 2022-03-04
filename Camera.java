@@ -28,5 +28,6 @@ public class Camera {
         return new Ray(originCamera, rayVector);
     }
 
+    // ninon test
 
 }

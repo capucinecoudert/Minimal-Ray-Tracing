@@ -20,11 +20,11 @@ public class Camera {
     }
 
     public Ray computeRay(double percentX, double percentY){
-        Point pixel= new Point(centreImg.x+ extentX.norm()*percentX, centreImg.x+ extentX.norm()*percentY, centreImg.z);
         Vector vecX = extentX.multiply(percentX);
         Vector vecY = extentY.multiply(percentY);
         Point pixel = vecX.add(centreImg).add(vecY);
         Vector rayVector= new Vector(originCamera, pixel);
+        
         return new Ray(originCamera, rayVector);
     }
 

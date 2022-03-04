@@ -7,6 +7,7 @@ public class Interface {
     // a cote affichage de la scene 2D 
     // bouton calculer img
     // zone pour afficher bmp file
+    // blzblaba
     
 
 }

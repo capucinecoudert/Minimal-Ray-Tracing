@@ -17,12 +17,80 @@ public class RayRendering {
 
 
     public Color computeColor(Ray ray, Scene scene){
-        Color pixelColor;
-        
+        Color pixelColor= new Color(0,0,0);
+        double distance= 0;
+        Sphere object= null;
+        double t=0;
 
+        // first compute if the ray hits a sphere
+        do{
+            for(Sphere s : scene.spheres){
+                distance= s.center.distance(ray.origin);
+                HitResult result= hitObject(ray, s, distance);
+                if(result.hit){
+                    object=s;
+                    t=result.distance;
+
+                }
+            }
+        // if not exit
+            if(object==null){
+                break;
+            }
+
+            
+         // Compute the point where the ray intersected the object.
+
+            Point intersectPoint= ray.origin.add(ray.direction.multiply(t));
+
+
+        // Calculate a vector normal to the surface of the object at the point of intersection of the ray and the object.
+
+            Vector normalVector = new Vector(object.center, intersectPoint);
+
+
+        // Normalize the normal vector.
+
+        // PB d'ombre ect :  // Lambertian coeffecient // Blinn-Phong specular term
+
+
+        return pixelColor;   
     }
 
-    public Ray 
+
+    public HitResult hitObject(Ray ray, Sphere sphere, double distance){
+        Vector l = new Vector(ray.origin, sphere.center);
+        double lSize= l.norm();
+        double tCA=  l.dotProduct(ray.direction);
+
+        if (tCA < 0){
+            return new HitResult(0, false);
+        }
+         
+        double d = Math.sqrt(lSize*lSize - tCA*tCA);
+        if (d<0){
+            return new HitResult(0, false);
+        }
+
+        double tCH= Math.sqrt(d*d- sphere.radius*sphere.radius);
+        double t0= tCA-tCH;
+        double t1= tCA+tCH;
+
+
+        if (t0 > 0.1 && t0 < distance) {
+            return new HitResult(t0, true);
+        }
+
+        if (t1 > 0.1 && t1 < distance) {
+            return new HitResult(t1, true);
+        }
+
+        return new HitResult(distance, false);
+    }
+
+
+
+
 
     public static void createImage(Scene scene){ 
         ColorInt[][] img= new ColorInt[scene.camera.resolutionX][scene.camera.resolutionY];

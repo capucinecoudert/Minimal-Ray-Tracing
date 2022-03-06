@@ -1,6 +1,6 @@
 public class MaterialBlack extends Material {
     
-    public MaterialBlack (){
+    public MaterialBlack(){
         reflectionCoeff = 1.0;
         specularPower = 60;
         specularColor = new Color(1.0, 1.0, 1.0);

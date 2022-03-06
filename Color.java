@@ -17,7 +17,6 @@ public class Color {
     }
 
 
-
     // add a SRGB encode function for  Gamma correction
 
 

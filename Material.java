@@ -10,6 +10,7 @@ public class Material {
         specularColor=s;
         diffusionColor=d;
     }
+    public Material(){}
 
 
 

@@ -27,10 +27,11 @@ classDiagram
         + originCamera : Point
         + extentX : Vector
         + extentY :  Vector
+         Camera : + Camera (Point c, int d, Vector vX, int rX, Vector vY, int rY)
+        Camera : + computeRay (double percentX, double percentY) Ray
     }
-    Camera : + Camera (Point c, int d, Vector vX, int rX, Vector vY, int rY)
-    Camera : + computeRay (double percentX, double percentY) Ray
-    
+   
+
 
 
 

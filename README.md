@@ -10,13 +10,25 @@ Compute image of a scene composed of Spheres.
 ```mermaid
 classDiagram
     class Point{
-        +Double x
-        +Double y
-        +Double z
+        + x : double
+        + y : double
+        + z : double
     }
     class Vector{
-        +Double x
-        +Double y
-        +Double z
+        + x : double
+        + y : double
+        + z : double
     }
-```
+    class Camera{
+        + resolutionX : int
+        + resolutionY : int
+        + focalDistance : int
+        + centreImg : Point
+        + originCamera : Point
+        + extentX : Vector
+        + extentY :  Vector
+
+        
+
+    }
+

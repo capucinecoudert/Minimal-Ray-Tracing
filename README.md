@@ -4,9 +4,6 @@ Compute image of a scene composed of Spheres.
 
 ## Class Diagram
 
-
-
-
 ```mermaid
 classDiagram
     class Point{
@@ -31,6 +28,7 @@ classDiagram
         computeRay(double percentX, double percentY) Ray
     }
 '''
+
 
 
 

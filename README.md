@@ -30,10 +30,7 @@ classDiagram
         Camera(Point c, int d, Vector vX, int rX, Vector vY, int rY)
         computeRay(double percentX, double percentY) Ray
     }
-   
+'''
 
 
-
-
-    }
 

@@ -90,7 +90,7 @@ public class RayRendering {
 
 
     public  void createImage()throws IOException { 
-        ColorInt[][] img= new ColorInt[scene.camera.resolutionY][scene.camera.resolutionX];
+        ColorInt[][] img= new ColorInt[scene.camera.resolutionX][scene.camera.resolutionY];
         // boucle dans laquelle tu calcules la couleur pour chaque rayon de la camera correspondant à un pixel
         Color pixelColor;
         Ray rayPixel;
@@ -100,19 +100,19 @@ public class RayRendering {
             for(int x=0; x< scene.camera.resolutionX; x++){
                 rayPixel= scene.camera.getRay(x,y);
                 pixelColor=intersectRay(rayPixel, scene) ; 
-                img[y][x] = pixelColor.colorToInt();
+                img[x][y] = pixelColor.colorToInt();
             }
         }
 
         // chaque couleur transformer en colorInt et add to img
         // transformes le array de couleur en un bmp file via BufferedImg
-        BufferedImage image = new BufferedImage(scene.camera.resolutionY, scene.camera.resolutionX, BufferedImage.TYPE_INT_RGB); // j'ai trouvé ce bout de code pour créer une buffered img
+        BufferedImage image = new BufferedImage(scene.camera.resolutionX, scene.camera.resolutionY, BufferedImage.TYPE_INT_RGB); // j'ai trouvé ce bout de code pour créer une buffered img
         for (int y = 0; y < scene.camera.resolutionY; y++) {
            for (int x = 0; x < scene.camera.resolutionX ; x++) {
-              int rgb = img[y][x].red;
-              rgb = (rgb << 8) + img[y][x].green; 
-              rgb = (rgb << 8) + img[y][x].blue;
-              image.setRGB(y, x, rgb);
+              int rgb = img[x][y].red;
+              rgb = (rgb << 8) + img[x][y].green; 
+              rgb = (rgb << 8) + img[x][y].blue;
+              image.setRGB(x, y, rgb);
            }
         }
         File outputFile = new File("C:\\Users\\coude\\Documents\\output.bmp\\");

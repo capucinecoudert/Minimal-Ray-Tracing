@@ -10,16 +10,15 @@ public class RayRendering {
         scene=s;
     }
 
-    public ColorInt computeColor(Ray ray, Scene scene){
-        Color pixelColor= new Color(0,0,0);
+    public Color intersectRay(Ray ray, Scene scene){
+        Color pixelColor= new Color(1,0.2,0.5);
         double distance= Double.POSITIVE_INFINITY;
         Sphere object= null;
         
 
         // first compute if the ray hits a sphere
-        do{
             for(Sphere s : scene.spheres){
-                HitResult result= hitObject(ray, s, distance);
+                HitResult result= hitObject(ray, s);
                 if(result.hit && result.distance<distance){
                     object=s;
                     distance=result.distance;
@@ -27,10 +26,11 @@ public class RayRendering {
             }
             // if not exit
             if(object==null){
-                pixelColor= new Color(0,0,0);
-                break;
+                return new Color(0,0,0);
+            }else{
+                return object.material.specularColor;
             }
-        
+        /*
             // Compute the point where the ray intersected the object.
             Point intersectPoint= ray.origin.add(ray.direction.multiply(distance));
 
@@ -61,53 +61,46 @@ public class RayRendering {
 
                 } 
             }
-        }while(object!=null);
-        return pixelColor.colorToInt(); 
+        return pixelColor; 
+        */
     }
 
 
-    public HitResult hitObject(Ray ray, Sphere sphere, double distance){
+    public HitResult hitObject(Ray ray, Sphere sphere){
         Vector l = new Vector(ray.origin, sphere.center);
-        double lSize= l.norm();
-        double tCA=  l.dotProduct(ray.direction);
+        double tCA =  l.dotProduct(ray.direction);
+        double dl= l.norm();
 
         if (tCA < 0){
             return new HitResult(0, false);
         }
-         
-        double d = Math.sqrt(lSize*lSize - tCA*tCA);
-        if (d<0){
+
+        double d = ray.distancePoint(sphere.center);
+        
+        if (d> sphere.radius){
             return new HitResult(0, false);
         }
 
-        double tCH= Math.sqrt(d*d- sphere.radius*sphere.radius);
-        double t0= tCA-tCH;
-        double t1= tCA+tCH;
+        double a =  Math.sqrt(sphere.radius*sphere.radius - d*d);
+        double c =  Math.sqrt(dl*dl - d*d);
 
-        if (t0 > 0.1 && t0 < distance) {
-            return new HitResult(t0, true);
-        }
-
-        if (t1 > 0.1 && t1 < distance) {
-            return new HitResult(t1, true);
-        }
-
-        return new HitResult(distance, false);
+        return new HitResult(c-a, true);
     }
 
 
 
     public  void createImage()throws IOException { 
         ColorInt[][] img= new ColorInt[scene.camera.resolutionY][scene.camera.resolutionX];
-
         // boucle dans laquelle tu calcules la couleur pour chaque rayon de la camera correspondant à un pixel
-
+        Color pixelColor;
         Ray rayPixel;
+
         // ici on fait tout le calcul pour un Rayon, i.e. pixel
         for(int y = 0 ; y< scene.camera.resolutionY; y++){
             for(int x=0; x< scene.camera.resolutionX; x++){
-                rayPixel= new Ray(scene.camera.originCamera, new Vector(scene.camera.originCamera, new Point(x,y, scene.camera.centreImg.z)));
-                img[y][x] = computeColor(rayPixel, scene);
+                rayPixel= scene.camera.getRay(x,y);
+                pixelColor=intersectRay(rayPixel, scene) ; 
+                img[y][x] = pixelColor.colorToInt();
             }
         }
 

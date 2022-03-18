@@ -21,7 +21,7 @@ public class Interface implements ActionListener {
          public JTextField JextentYz;
          public JButton ValidateCamera; //bouton pour valider la caméra
          //on branche les écoueteurs pour la caméra
-         ValidateCamera.addActionListener(this);
+         //ValidateCamera.addActionListener(this);
 
 
     public Interface (){
@@ -34,15 +34,8 @@ public class Interface implements ActionListener {
 
 
 
-
     }
-public class Interface {
-    // Choix de la scene : width, height
-    // choix  de la sphere : radius, materiau, centre avec bouton Add et Remove
-    // a cote affichage de la scene 2D 
-    // bouton calculer img
-    // zone pour afficher bmp file
-    // blzblaba
+    
     
     public void actionPerformed (ActionEvent e){
         if((e.getSource()== ValidateCamera)&&(verifINT(Jresolutionx.getText()))&&(verifINT(Jresolutiony.getText()))&&verifINT(JfocalDistance.getText())){
@@ -52,7 +45,7 @@ public class Interface {
             Point centreImg = new Point (Double.parseDouble(JcentreImgX.getText()),Double.parseDouble(JcentreImgY.getText()), Double.parseDouble(JcentreImgZ.getText()) );
             Vector extentX = new Vector (Double.parseDouble(JextentXx.getText()),Double.parseDouble(JextentXy.getText()), Double.parseDouble(JextentXz.getText()) );
             Vector extentY = new Vector (Double.parseDouble(JextentYx.getText()),Double.parseDouble(JextentYy.getText()), Double.parseDouble(JextentYz.getText()) );
-            Camera c= new Camera(resolutionX, d)
+            //Camera c= new Camera(resolutionX, d);
 
         }
 

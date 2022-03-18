@@ -16,18 +16,21 @@ public class Camera {
         extentY=vY;
         Vector normal = vX.crossProduct(vY);
         normal.normalize();
-        originCamera= normal.multiply(focalDistance).add(centreImg);
+        originCamera= centreImg.add(normal.multiply(-focalDistance));
     }
 
-    public Ray computeRay(double percentX, double percentY){
-        Vector vecX = extentX.multiply(percentX);
-        Vector vecY = extentY.multiply(percentY);
-        Point pixel = vecX.add(centreImg).add(vecY);
+    public Ray getRay(int x, int y){
+        double percentX= ((double) x)/resolutionX;
+        double percentY= ((double) y)/resolutionY;
+
+        Vector vecX = extentX.multiply(percentX-0.5);
+        Vector vecY = extentY.multiply(percentY-0.5);
+        
+        Point pixel = centreImg.add(vecX).add(vecY);
         Vector rayVector= new Vector(originCamera, pixel);
         
         return new Ray(originCamera, rayVector);
     }
 
-    // ninon test
 
 }

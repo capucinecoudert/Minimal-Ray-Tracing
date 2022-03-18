@@ -14,6 +14,7 @@ public class RayRendering {
         Color pixelColor= new Color(0,0,0);
         double distance= Double.POSITIVE_INFINITY;
         Sphere object= null;
+        
 
         // first compute if the ray hits a sphere
         do{
@@ -121,7 +122,7 @@ public class RayRendering {
               image.setRGB(y, x, rgb);
            }
         }
-        File outputFile = new File("/output.bmp");
+        File outputFile = new File("C:\\Users\\coude\\Documents\\output.bmp\\");
         ImageIO.write(image, "bmp", outputFile);
     }
     

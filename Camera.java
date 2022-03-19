@@ -28,8 +28,9 @@ public class Camera {
         
         Point pixel = centreImg.add(vecX).add(vecY);
         Vector rayVector= new Vector(originCamera, pixel);
-        
-        return new Ray(originCamera, rayVector);
+        rayVector.normalize();
+
+        return new Ray(originCamera, rayVector); 
     }
 
 

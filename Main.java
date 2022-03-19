@@ -14,7 +14,8 @@ import java.util.*;
         // la lumière
         ArrayList<Light> lights= new ArrayList<Light>();
         // Light behind the camera
-        lights.add(new Light(new Point(640.0, 240.0, -10000.0), new Color(0.4, 0.4, 0.5)));
+        lights.add(new Light(new Point(250, 0, 300), new Color(0.4, 0.4, 0.5)));
+        
 
         // créer la caméra
         Point pointOrigin= new Point(0,0,0);

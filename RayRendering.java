@@ -11,58 +11,57 @@ public class RayRendering {
     }
 
     public Color intersectRay(Ray ray, Scene scene){
-        Color pixelColor= new Color(1,0.2,0.5);
+        Color backgroundColor= new Color(0.5,0.5,1);
         double distance= Double.POSITIVE_INFINITY;
         Sphere object= null;
         
-
         // first compute if the ray hits a sphere
+        for(Sphere s : scene.spheres){
+            HitResult result= hitObject(ray, s);
+            if(result.hit && result.distance<distance){
+                object=s;
+                distance=result.distance;
+            }
+        }
+        // if not exit
+        if(object==null){
+            return backgroundColor;
+        }else{
+            return computeColor(ray, object, scene, distance);
+        }
+    }
+
+    public Color computeColor(Ray ray, Sphere sphere, Scene scene, double distance){
+        Color pixelColor= new Color(0,0,0);
+        // Compute the point where the ray intersected the object.
+        Point intersectPoint= ray.origin.add(ray.direction.multiply(distance));
+        // Calculate a vector normal to the surface of the object at the point of intersection of the ray and the object.
+        Vector normalVector = new Vector(sphere.center, intersectPoint);
+        // Normalize the normal vector.
+        normalVector.normalize();
+
+        for(Light l : scene.lights){
+            Ray lightRay= new Ray(intersectPoint, new Vector(intersectPoint, l.origin));
+            lightRay.direction.normalize();
+
+            //double lightDistance= lightRay.direction.norm();
+            boolean hidden=false;
+
+            // je verifie que la lumière ne rencontre pas d'autres sphères avant
             for(Sphere s : scene.spheres){
-                HitResult result= hitObject(ray, s);
-                if(result.hit && result.distance<distance){
-                    object=s;
-                    distance=result.distance;
+                HitResult obstacle =  hitObject(lightRay, s);
+                if(obstacle.hit){
+                    hidden=true;
                 }
             }
-            // if not exit
-            if(object==null){
-                return new Color(0,0,0);
-            }else{
-                return object.material.specularColor;
-            }
-        /*
-            // Compute the point where the ray intersected the object.
-            Point intersectPoint= ray.origin.add(ray.direction.multiply(distance));
 
-            // Calculate a vector normal to the surface of the object at the point of intersection of the ray and the object.
-            Vector normalVector = new Vector(object.center, intersectPoint);
-
-            // Normalize the normal vector.
-            normalVector.normalize();
-    
-            // PB d'ombre ect :  // Lambertian coeffecient // Blinn-Phong specular term
-
-            for(Light l : scene.lights){
-                Ray lightRay= new Ray(intersectPoint, new Vector(intersectPoint, l.origin));
-                double lightDistance= lightRay.direction.norm();
-                boolean hidden=false;
-
-                // je verifie que la lumière ne rencontre pas d'autres sphères avant
-                for( Sphere s : scene.spheres){
-                    HitResult obstacle = hitObject(lightRay, s, lightDistance);
-                    if(obstacle.hit){
-                        hidden=true;
-                    }
-                }
-                // si ma lumière rencontre cette sphère en premier 
-                if(hidden==false){
-                    //double facingRatio= lightRay.direction.dotProduct(normalVector);
-                    pixelColor= new Color(1, 1, 1);
-
-                } 
-            }
+            // si ma lumière rencontre cette sphère en premier 
+            if(hidden==false){
+                double facingRatio= lightRay.direction.dotProduct(normalVector);
+                pixelColor= sphere.material.diffusionColor.multiply(Math.max(0,facingRatio));
+            } 
+        }
         return pixelColor; 
-        */
     }
 
 

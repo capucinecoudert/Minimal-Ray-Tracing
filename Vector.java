@@ -65,8 +65,8 @@ public class Vector {
      * @param v2 Another vector.
      * @return Sum of the two vectors.
      */
-    public static Vector add(Vector v1, Vector v2){
-        return new Vector(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
+    public  Vector add(Vector v2){
+        return new Vector(this.x + v2.x, this.y + v2.y, this.z + v2.z);
     }
 
     /**

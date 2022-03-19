@@ -5,13 +5,14 @@ import javax.imageio.ImageIO;
 
 public class RayRendering {
     public Scene scene;
+    public int maxReflectionGeneration = 10;
 
     public RayRendering(Scene s){
         scene=s;
     }
 
-    public Color intersectRay(Ray ray, Scene scene){
-        Color backgroundColor= new Color(0.5,0.5,1);
+    public Color intersectRay(Ray ray, Scene scene, int generation){
+        Color backgroundColor= new Color(0,0,0.3);
         double distance= Double.POSITIVE_INFINITY;
         Sphere object= null;
         
@@ -27,11 +28,11 @@ public class RayRendering {
         if(object==null){
             return backgroundColor;
         }else{
-            return computeColor(ray, object, scene, distance);
+            return computeColor(ray, object, scene, distance, generation);
         }
     }
 
-    public Color computeColor(Ray ray, Sphere sphere, Scene scene, double distance){
+    public Color computeColor(Ray ray, Sphere sphere, Scene scene, double distance, int generation){
         Color pixelColor= new Color(0,0,0);
         // Compute the point where the ray intersected the object.
         Point intersectPoint= ray.origin.add(ray.direction.multiply(distance));
@@ -57,12 +58,19 @@ public class RayRendering {
 
             // si ma lumière rencontre cette sphère en premier 
             if(hidden==false){
+                // gestion dela diffusion
                 double facingRatio= Math.max(0,lightRay.direction.dotProduct(normalVector));
-                Color facingColor =sphere.material.diffusionColor.multiply(facingRatio).multiply(sphere.material.reflectionCoeff);
-                pixelColor = pixelColor.add(facingColor.multiply(l.intensity));
-
-                
-
+                Color facingColor =sphere.material.diffusionColor.multiply(facingRatio).multiply(sphere.material.specularPower);
+                Color lightedColor = facingColor.multiply(l.intensity);
+                Color reflectedColor = new Color(0,0,0);
+                // gestion de la reflection
+                if( generation <= maxReflectionGeneration && sphere.material.reflectionCoeff >0){
+                    double lambda = -2*normalVector.dotProduct(ray.direction);
+                    Vector reflectedVector = normalVector.multiply(lambda).add(ray.direction);
+                    Ray reflectedRay = new Ray(intersectPoint, reflectedVector);
+                    reflectedColor= intersectRay(reflectedRay, scene, generation+1);
+                }
+                pixelColor = pixelColor.add(lightedColor).add(reflectedColor.multiply(sphere.material.reflectionCoeff));
             } 
         }
         return pixelColor; 
@@ -102,7 +110,7 @@ public class RayRendering {
         for(int y = 0 ; y< scene.camera.resolutionY; y++){
             for(int x=0; x< scene.camera.resolutionX; x++){
                 rayPixel= scene.camera.getRay(x,y);
-                pixelColor=intersectRay(rayPixel, scene) ; 
+                pixelColor=intersectRay(rayPixel, scene, 0) ; 
                 img[x][y] = pixelColor.colorToInt();
             }
         }
@@ -115,7 +123,7 @@ public class RayRendering {
               int rgb = img[x][y].red;
               rgb = (rgb << 8) + img[x][y].green; 
               rgb = (rgb << 8) + img[x][y].blue;
-              image.setRGB(x, y, rgb);
+              image.setRGB(x, scene.camera.resolutionY -1 -y, rgb);
            }
         }
         File outputFile = new File("C:\\Users\\coude\\Documents\\output.bmp\\");

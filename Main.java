@@ -6,11 +6,14 @@ import java.util.*;
         // 1 sphère blanche
         ArrayList<Sphere> spheres = new ArrayList<Sphere>();
 
-        Material white= new Material(1.0, 60, new Color(1.0, 1.0, 1.0),new Color(1.0, 1.0, 1.0) );
-        Material red= new Material(1.0, 60, new Color(1.0, 0, 0),new Color(1.0, 0, 0) );
-        
+        Material white= new Material(0.0, 1.0, new Color(1.0, 1.0, 1.0),new Color(1.0, 1.0, 1.0) );
+        Material red= new Material(0.5, 0.5, new Color(1.0, 0, 0),new Color(1.0, 0, 0) );
+        Material metal = new Material(1.0, 0.0, new Color(1.0, 0, 0),new Color(1.0, 0, 0) );
+
         spheres.add(new Sphere(new Point(0, 0, 500.0), 100.0, white ));
         spheres.add(new Sphere(new Point(150, 0, 400.0), 30.0, red ));
+        spheres.add(new Sphere(new Point(100, -100, 400.0), 40.0, metal ));
+        
         // la lumière
         ArrayList<Light> lights= new ArrayList<Light>();
         // Light behind the camera

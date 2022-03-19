@@ -40,11 +40,24 @@ public class Interface implements ActionListener {
     public void actionPerformed (ActionEvent e){
         if((e.getSource()== ValidateCamera)&&(verifINT(Jresolutionx.getText()))&&(verifINT(Jresolutiony.getText()))&&verifINT(JfocalDistance.getText())){
             int resolutionX = Integer.parseInt(Jresolutionx.getText()) ;
+            Jresolutionx.setText("");
             int resolutionY = Integer.parseInt(Jresolutiony.getText());
+            Jresolutiony.setText("");
             int focalDistance= Integer.parseInt(JfocalDistance.getText());
+            JfocalDistance.setText("");
             Point centreImg = new Point (Double.parseDouble(JcentreImgX.getText()),Double.parseDouble(JcentreImgY.getText()), Double.parseDouble(JcentreImgZ.getText()) );
+            JcentreImgX.setText("");
+            JcentreImgY.setText("");
+            JcentreImgZ.setText("");
             Vector extentX = new Vector (Double.parseDouble(JextentXx.getText()),Double.parseDouble(JextentXy.getText()), Double.parseDouble(JextentXz.getText()) );
+            JextentXx.setText("");
+            JextentXy.setText("");
+            JextentXz.setText("");
             Vector extentY = new Vector (Double.parseDouble(JextentYx.getText()),Double.parseDouble(JextentYy.getText()), Double.parseDouble(JextentYz.getText()) );
+            JextentYx.setText("");
+            JextentYy.setText("");
+            JextentYz.setText("");
+            
             //Camera c= new Camera(resolutionX, d);
 
         }
@@ -63,7 +76,7 @@ public class Interface implements ActionListener {
 
     // Method to verify that the characters are integers
     public boolean verifINT (String Averifier){
-            
+   
         boolean isINT = true;
         if (Averifier.length() == 0){
             return false;

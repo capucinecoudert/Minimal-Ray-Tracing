@@ -57,8 +57,12 @@ public class RayRendering {
 
             // si ma lumière rencontre cette sphère en premier 
             if(hidden==false){
-                double facingRatio= lightRay.direction.dotProduct(normalVector);
-                pixelColor= sphere.material.diffusionColor.multiply(Math.max(0,facingRatio));
+                double facingRatio= Math.max(0,lightRay.direction.dotProduct(normalVector));
+                Color facingColor =sphere.material.diffusionColor.multiply(facingRatio).multiply(sphere.material.reflectionCoeff);
+                pixelColor = pixelColor.add(facingColor.multiply(l.intensity));
+
+                
+
             } 
         }
         return pixelColor; 

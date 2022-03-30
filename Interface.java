@@ -1,13 +1,13 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.util.*;
 
-public class Interface implements ActionListener {
+public class Interface extends JFrame implements ActionListener {
     // 
          //attributes for the camera's definition
          public JTextField Jresolutionx;
@@ -47,14 +47,42 @@ public class Interface implements ActionListener {
        
 
     public Interface (){
+        super("Mon Interface");
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        
+        ValidateCamera = new JButton("Validate Camera");
         ValidateCamera.addActionListener(this);
+        ValidateLight1= new JButton("Validate Light");
         ValidateLight1.addActionListener(this);
+        ValidateSphere1= new JButton("Validate Sphere");
         ValidateSphere1.addActionListener(this);
+
         //String[] Menu = {"Definition of the camera", "Definition of the lights", "Definition of the spheres"};
        // String Menu2 = (String) JOptionPane.showInputDialog(null,"Select the objects you want to define", "Deinition of the parameters", JOptionPane.QUESTION_MESSAGE,null,Menu,null);
 
+            Jresolutionx=new JTextField();
+            Jresolutiony=new JTextField();
+            JfocalDistance=new JTextField();
+            JcentreImgX=new JTextField(); // on a besoin de 3 points cordonnées pour créer le point le centre de l'image
+            JcentreImgY=new JTextField();
+            JcentreImgZ=new JTextField();
+            JextentXx=new JTextField();// on a besoin de 3 coordonnées pour le vecteur exentent x
+            JextentXy=new JTextField();
+            JextentXz=new JTextField();
+            JextentYx=new JTextField(); //on a besoin de 3 coordonnées pour le vecteur exentent x
+            JextentYy=new JTextField();
+            JextentYz=new JTextField();
+            origin1x=new JTextField(); // we need 3 coordinates to define the location of the first light
+            origin1y=new JTextField();
+            origin1z=new JTextField();
+            Red1=new JTextField();// We need the red-grren-blue combination to define the color of the light
+            Green1=new JTextField();
+            Blue1=new JTextField();
+            radius1=new JTextField();
+            sphere1x=new JTextField();
+            sphere1y=new JTextField();
+            sphere1z=new JTextField();
 
         //creation of the camera's definition pan
         JLabel Resolution = new JLabel("Resolution(x,y)=");
@@ -67,26 +95,6 @@ public class Interface implements ActionListener {
         CameraDefinition.setLayout(null);
         CameraDefinition.setBounds(0,0,300,200);
         CameraDefinition.setVisible(true);
-
-        CameraDefinition.add(Resolution);
-        CameraDefinition.add(FocalDistance);
-        CameraDefinition.add(Centre);
-        CameraDefinition.add(Vectorx);
-        CameraDefinition.add(Vectory);
-        CameraDefinition.add(Jresolutionx);
-        CameraDefinition.add(Jresolutiony);
-        CameraDefinition.add(JfocalDistance);
-        CameraDefinition.add(JcentreImgX);
-        CameraDefinition.add(JcentreImgY);
-        CameraDefinition.add(JcentreImgZ);
-        CameraDefinition.add(JextentXy);
-        CameraDefinition.add(JextentXy);
-        CameraDefinition.add(JextentXz);
-        CameraDefinition.add(JextentYx);
-        CameraDefinition.add(JextentYy);
-        CameraDefinition.add(JextentYz);
-        CameraDefinition.add(ValidateCamera);
-
 
         Resolution.setBounds(10, 10, 50 ,15);
         FocalDistance.setBounds(10, 40, 50 ,15);
@@ -106,6 +114,27 @@ public class Interface implements ActionListener {
         JextentYy.setBounds(10, 130, 20 ,20);
         JextentYz.setBounds(10, 130, 20 ,20);
         ValidateCamera.setBounds(10,200,100,40);
+
+        
+        CameraDefinition.add(Resolution);
+        CameraDefinition.add(FocalDistance);
+        CameraDefinition.add(Centre);
+        CameraDefinition.add(Vectorx);
+        CameraDefinition.add(Vectory);
+        CameraDefinition.add(Jresolutionx);
+        CameraDefinition.add(Jresolutiony);
+        CameraDefinition.add(JfocalDistance);
+        CameraDefinition.add(JcentreImgX);
+        CameraDefinition.add(JcentreImgY);
+        CameraDefinition.add(JcentreImgZ);
+        CameraDefinition.add(JextentXy);
+        CameraDefinition.add(JextentXy);
+        CameraDefinition.add(JextentXz);
+        CameraDefinition.add(JextentYx);
+        CameraDefinition.add(JextentYy);
+        CameraDefinition.add(JextentYz);
+        CameraDefinition.add(ValidateCamera);
+
 
         //creation of the light's definition pan
         JPanel LightDefinition= new JPanel();
@@ -176,16 +205,27 @@ public class Interface implements ActionListener {
         final JComboBox<String> material = new JComboBox<String>(Materials1);
         material.setVisible(true);
         SphereDefinition.add(material);
+
+
+        this.add(LightDefinition);
+        this.add(SphereDefinition);
+        this.add(CameraDefinition);
+        this.setVisible(true);
+
     }
     // choix  de la sphere : radius, materiau, centre avec bouton Add et Remove
     // a cote affichage de la scene 2D 
     // bouton calculer img
     // zone pour afficher bmp file
     // blablaba
-    }
     
     
     public void actionPerformed (ActionEvent e){
+        Camera c;
+        LinkedList<Sphere> spheres;
+        LinkedList<Light> lights;
+
+
         if((e.getSource()== ValidateCamera)&&(verifINT(Jresolutionx.getText()))&&(verifINT(Jresolutiony.getText()))&&(verifINT(JfocalDistance.getText()))&&(verifDOUBLE(JextentXy.getText()))&&(verifDOUBLE(JextentXx.getText()))&&(verifDOUBLE(JextentXz.getText()))&&(verifDOUBLE(JextentYx.getText()))&&((verifDOUBLE(JextentYy.getText())))&&(verifDOUBLE(JextentYz.getText()))&&(verifDOUBLE(JcentreImgX.getText()))&&(verifDOUBLE(JcentreImgY.getText()))&&(verifDOUBLE(JcentreImgZ.getText()))){
             int resolutionX = Integer.parseInt(Jresolutionx.getText()) ;
             Jresolutionx.setText("");

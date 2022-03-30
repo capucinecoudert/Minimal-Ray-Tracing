@@ -5,21 +5,28 @@ import java.util.*;
     public static void main(String[] args) throws IOException {
         // 1 sphère blanche
         ArrayList<Sphere> spheres = new ArrayList<Sphere>();
-        Material white= new Material(1.0, 60,new Color(1.0, 1.0, 1.0),new Color(1.0, 1.0, 1.0) );
-        spheres.add(new Sphere(new Point(400.0, 300.0, 0.0),200.0, white ));
-    
+
+        Material white= new Material(0.0, 1.0, new Color(1.0, 1.0, 1.0),new Color(1.0, 1.0, 1.0) );
+        Material red= new Material(0.5, 0.5, new Color(1.0, 0, 0),new Color(1.0, 0, 0) );
+        Material metal = new Material(1.0, 0.0, new Color(1.0, 0, 0),new Color(1.0, 0, 0) );
+
+        spheres.add(new Sphere(new Point(0, 0, 500.0), 100.0, white ));
+        spheres.add(new Sphere(new Point(150, 0, 400.0), 30.0, red ));
+        spheres.add(new Sphere(new Point(100, -100, 400.0), 40.0, metal ));
+        
         // la lumière
         ArrayList<Light> lights= new ArrayList<Light>();
         // Light behind the camera
-        lights.add(new Light( new Point(640.0, 240.0, -10000.0), new Color(0.4, 0.4, 0.5)));
+        lights.add(new Light(new Point(250, 0, 300), new Color(0.4, 0.4, 0))); // lumiere cote droit jaune
+        lights.add(new Light(new Point(0, 200, 0), new Color(0.6, 0.6, 0.6))); // lumiere face grise
+        
 
         // créer la caméra
-
         Point pointOrigin= new Point(0,0,0);
-        int distanceFocale= 1000;
-        Vector vX= new Vector(new Point(0, 0, 0), new Point(800, 0, 0));
+        int distanceFocale= 100;
+        Vector vX= new Vector(new Point(0, 0, 0), new Point(80, 0, 0));
         int rX= 800;
-        Vector vY= new Vector(new Point(0, 0, 0), new Point(0, 600, 0));
+        Vector vY= new Vector(new Point(0, 0, 0), new Point(0, 60, 0));
         int rY= 600;
         Camera cam = new Camera(pointOrigin, distanceFocale, vX, rX, vY, rY);
 

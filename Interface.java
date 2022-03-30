@@ -24,6 +24,7 @@ public class Interface implements ActionListener {
          public JTextField JextentYz;
          public JButton ValidateCamera; //bouton pour valider la caméra
          //on branche les écoueteurs pour la caméra
+         //ValidateCamera.addActionListener(this);
 
          // attributes for the lights definition
          public JTextField origin1x; // we need 3 coordinates to define the location of the first light
@@ -181,14 +182,25 @@ public class Interface implements ActionListener {
     // bouton calculer img
     // zone pour afficher bmp file
     // blablaba
+    }
+    
     
     public void actionPerformed (ActionEvent e){
         if((e.getSource()== ValidateCamera)&&(verifINT(Jresolutionx.getText()))&&(verifINT(Jresolutiony.getText()))&&(verifINT(JfocalDistance.getText()))&&(verifDOUBLE(JextentXy.getText()))&&(verifDOUBLE(JextentXx.getText()))&&(verifDOUBLE(JextentXz.getText()))&&(verifDOUBLE(JextentYx.getText()))&&((verifDOUBLE(JextentYy.getText())))&&(verifDOUBLE(JextentYz.getText()))&&(verifDOUBLE(JcentreImgX.getText()))&&(verifDOUBLE(JcentreImgY.getText()))&&(verifDOUBLE(JcentreImgZ.getText()))){
             int resolutionX = Integer.parseInt(Jresolutionx.getText()) ;
+            Jresolutionx.setText("");
             int resolutionY = Integer.parseInt(Jresolutiony.getText());
+            Jresolutiony.setText("");
             int focalDistance= Integer.parseInt(JfocalDistance.getText());
+            JfocalDistance.setText("");
             Point centreImg = new Point (Double.parseDouble(JcentreImgX.getText()),Double.parseDouble(JcentreImgY.getText()), Double.parseDouble(JcentreImgZ.getText()) );
+            JcentreImgX.setText("");
+            JcentreImgY.setText("");
+            JcentreImgZ.setText("");
             Vector extentX = new Vector (Double.parseDouble(JextentXx.getText()),Double.parseDouble(JextentXy.getText()), Double.parseDouble(JextentXz.getText()) );
+            JextentXx.setText("");
+            JextentXy.setText("");
+            JextentXz.setText("");
             Vector extentY = new Vector (Double.parseDouble(JextentYx.getText()),Double.parseDouble(JextentYy.getText()), Double.parseDouble(JextentYz.getText()) );
             Camera c = new Camera(centreImg,focalDistance,extentX,resolutionX, extentY,resolutionY);
             Jresolutionx.setText("");
@@ -203,6 +215,12 @@ public class Interface implements ActionListener {
             JextentYx.setText("");
             JextentYy.setText("");
             JextentYz.setText("");
+            JextentYx.setText("");
+            JextentYy.setText("");
+            JextentYz.setText("");
+            
+            //Camera c= new Camera(resolutionX, d);
+
         }
         if ((e.getSource()==ValidateLight1)&&(verifINT(Red1.getText()))&&(verifINT(Green1.getText()))&&verifINT(Blue1.getText())&&(verifDOUBLE(origin1x.getText()))&&(verifDOUBLE(origin1y.getText()))&&(verifDOUBLE(origin1z.getText()))){
             Point origin1 = new Point (Double.parseDouble(origin1x.getText()),Double.parseDouble(origin1y.getText()), Double.parseDouble(origin1z.getText()));
@@ -244,7 +262,7 @@ public class Interface implements ActionListener {
 
     // Method to verify that the characters are integers
     public boolean verifINT (String Averifier){
-            
+   
         boolean isINT = true;
         if (Averifier.length() == 0){
             return false;

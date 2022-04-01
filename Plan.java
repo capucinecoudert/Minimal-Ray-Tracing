@@ -9,13 +9,15 @@ public class Plan {
         this.normalVector=normalVector;
     }
     
-    public boolean intersectRayPlane(Ray ray){
+    public Point intersectRayPlane(Ray ray){
         double denom = normalVector.dotProduct(ray.direction); 
-        if (denom > EPSILON) { 
+        if (denom < EPSILON) { 
+            return null;
+        }else{
             Vector rayPlane = new Vector(origin, ray.origin); 
             double t = rayPlane.dotProduct(normalVector)/(denom); 
-        return (t >= 0); 
-    } 
-    return false; 
+            Point p =  origin.add(rayPlane.add(ray.direction.multiply(t)));
+        return p;
     }
+}
 }

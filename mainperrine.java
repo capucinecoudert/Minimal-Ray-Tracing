@@ -1,6 +1,7 @@
+ 
  public class mainperrine{
     
     public static void main(String[] args) {
-        public Interface=new Interface();
+         Interface monInterface =new Interface();
     }
 }

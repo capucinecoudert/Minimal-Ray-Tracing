@@ -1,4 +1,4 @@
-/*import java.io.IOException;
+import java.io.IOException;
 import java.util.*;
  class Main {
     
@@ -6,7 +6,7 @@ import java.util.*;
         // 1 sphère blanche
         ArrayList<Sphere> spheres = new ArrayList<Sphere>();
 
-        Material white= new Material(0.0, 1.0, new Color(1.0, 1.0, 1.0),new Color(1.0, 1.0, 1.0) );
+        Material white= new Material(0.0, 1.0, new Color(0.98, 0.45, 0.46),new Color(0.98, 0.45, 0.46) );
         Material red= new Material(0.5, 0.5, new Color(1.0, 0, 0),new Color(1.0, 0, 0) );
         Material metal = new Material(1.0, 0.0, new Color(1.0, 0, 0),new Color(1.0, 0, 0) );
 
@@ -19,8 +19,11 @@ import java.util.*;
         // Light behind the camera
         lights.add(new Light(new Point(250, 0, 300), new Color(0.4, 0.4, 0))); // lumiere cote droit jaune
         lights.add(new Light(new Point(0, 200, 0), new Color(0.6, 0.6, 0.6))); // lumiere face grise
+         
+        //Plan
+        ArrayList<Plan> planes= new ArrayList<Plan>();
+        planes.add(new Plan(new Point(0, 0, 0), new Vector(new Point(0, 0, 0), new Point(0, 1, 0)), new Vector(new Point(0, 0, 0), new Point(0, 0, 1))));
         
-
         // créer la caméra
         Point pointOrigin= new Point(0,0,0);
         int distanceFocale= 100;
@@ -30,7 +33,7 @@ import java.util.*;
         int rY= 600;
         Camera cam = new Camera(pointOrigin, distanceFocale, vX, rX, vY, rY);
 
-        Scene scene = new Scene(spheres, cam , lights);
+        Scene scene = new Scene(spheres, cam , lights, planes);
         RayRendering r = new RayRendering(scene);
         r.createImage();
 
@@ -42,4 +45,3 @@ import java.util.*;
     
 }
 
-*/

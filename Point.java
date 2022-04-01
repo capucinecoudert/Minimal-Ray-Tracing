@@ -22,6 +22,10 @@ public class Point{
         return new Point(this.x+v1.x, this.y+v1.y, this.z+v1.z);
     }
 
+    public Point substract(Point v1){
+        return new Point(this.x-v1.x, this.y-v1.y, this.z-v1.z);
+    }
+
     public double distance(Point p) {
         return Math.sqrt(Math.pow(x - p.x, 2) + Math.pow(y - p.y, 2) + Math.pow(z - p.z, 2));
     }

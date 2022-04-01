@@ -1,21 +1,28 @@
 
-public class Plan {
+public class Plan extends Hitable {
+    
     private final static double EPSILON = 0.00001;
-    Point origin;
-    Vector normalVector;
+    public  Point origin;
+    public Vector normalVector;
+    public Vector vX;
+    public Vector vY;
 
-    public Plan(Point origin, Vector normalVector){
+    public Plan(Point origin, Vector vX, Vector vY){
         this.origin=origin;
-        this.normalVector=normalVector;
+        this.vX= vX;
+        this.vY=vY;
+        normalVector=vX.crossProduct(vY);
     }
     
-    public boolean intersectRayPlane(Ray ray){
+    public Point intersectRayPlane(Ray ray){
         double denom = normalVector.dotProduct(ray.direction); 
-        if (denom > EPSILON) { 
+        if (denom < EPSILON) { 
+            return null;
+        }else{
             Vector rayPlane = new Vector(origin, ray.origin); 
             double t = rayPlane.dotProduct(normalVector)/(denom); 
-        return (t >= 0); 
-    } 
-    return false; 
+            Point p =  origin.add(rayPlane.add(ray.direction.multiply(t)));
+        return p;
+        }
     }
 }

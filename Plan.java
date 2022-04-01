@@ -1,12 +1,17 @@
 
-public class Plan {
+public class Plan extends Hitable {
+    
     private final static double EPSILON = 0.00001;
-    Point origin;
-    Vector normalVector;
+    public  Point origin;
+    public Vector normalVector;
+    public Vector vX;
+    public Vector vY;
 
-    public Plan(Point origin, Vector normalVector){
+    public Plan(Point origin, Vector vX, Vector vY){
         this.origin=origin;
-        this.normalVector=normalVector;
+        this.vX= vX;
+        this.vY=vY;
+        normalVector=vX.crossProduct(vY);
     }
     
     public Point intersectRayPlane(Ray ray){
@@ -18,6 +23,6 @@ public class Plan {
             double t = rayPlane.dotProduct(normalVector)/(denom); 
             Point p =  origin.add(rayPlane.add(ray.direction.multiply(t)));
         return p;
+        }
     }
-}
 }

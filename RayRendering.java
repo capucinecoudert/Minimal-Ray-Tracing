@@ -12,7 +12,7 @@ public class RayRendering {
     }
 
     public Color intersectRay(Ray ray, Scene scene, int generation){
-        Color backgroundColor= new Color(0,0,0.3);
+        Color backgroundColor= new Color(0.4,0.9,0.95);
         double distance= Double.POSITIVE_INFINITY;
         Sphere object= null;
         
@@ -24,12 +24,20 @@ public class RayRendering {
                 distance=result.distance;
             }
         }
-        // if not exit
+
+        // if not exit compute if ray hits a plane
         if(object==null){
-            return backgroundColor;
+            for(Plan p : scene.planes){
+                HitResult result= hitPlane(ray, p);
+                if(result.hit && result.distance<distance){
+                    return new Color(0.1,0.1,0.1);
+                }
+            }
         }else{
             return computeColor(ray, object, scene, distance, generation);
         }
+        return backgroundColor;
+
     }
 
     public Color computeColor(Ray ray, Sphere sphere, Scene scene, double distance, int generation){
@@ -96,6 +104,16 @@ public class RayRendering {
         double c =  Math.sqrt(dl*dl - d*d);
 
         return new HitResult(c-a, true);
+    }
+
+    public HitResult hitPlane(Ray ray, Plan plan){
+        Point result= plan.intersectRayPlane(ray);
+        if( result==null){
+            return  new HitResult(0, false);
+        }
+        Vector planRay = new Vector(ray.origin, result);
+        double distance= planRay.norm();
+        return new HitResult(distance, true);
     }
 
 

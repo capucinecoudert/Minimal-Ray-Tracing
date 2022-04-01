@@ -6,9 +6,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.util.*;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
 
 public class Interface extends JFrame implements ActionListener {
     // 
+
          //attributes for the camera's definition
          public JTextField Jresolutionx;
          public JTextField Jresolutiony;
@@ -50,6 +55,26 @@ public class Interface extends JFrame implements ActionListener {
         super("Mon Interface");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel Interface = new JPanel();
+        this.setContentPane(Interface);
+        //our interface will be divided into cases where we will put the widgets
+        Interface.setLayout(new GridBagLayout());
+        //gc will determine the size and the positions on the different widgets
+        GridBagConstraints gc = new GridBagConstraints();
+        //the command both means that the widgets will take the maximum place in the vertical and the horizontal direction, in the case
+        gc.fill = GridBagConstraints.BOTH;
+        // Here, we are adding space between the components
+        gc.insets = new Insets(5, 5, 5, 5);
+        gc.ipady = gc.anchor = GridBagConstraints.CENTER;
+        //we need 18 cases in the x direction and 14 in the y one
+        gc.weightx = 18;
+        gc.weighty = 14;
+
+        gc.gridx = 0;
+		gc.gridy = 0;
+
+
+
 
         ValidateCamera = new JButton("Validate Camera");
         ValidateCamera.addActionListener(this);
@@ -91,73 +116,91 @@ public class Interface extends JFrame implements ActionListener {
         JLabel Vectorx = new JLabel(" Vector Extent x (x,t,z)=");
         JLabel Vectory = new JLabel(" Vector Extent y (x,t,z)=");
 
-        JPanel CameraDefinition= new JPanel();
-        CameraDefinition.setLayout(null);
-        CameraDefinition.setBounds(0,0,300,200);
-        CameraDefinition.setVisible(true);
+        Interface.setLayout(null);
+        Interface.setBounds(0,0,300,200);
+        Interface.setVisible(true);
 
-        Resolution.setBounds(10, 10, 50 ,15);
-        FocalDistance.setBounds(10, 40, 50 ,15);
-        Centre.setBounds(10, 70, 50 ,15);
-        Vectorx.setBounds(10, 100, 50 ,15);
-        Vectory.setBounds(10, 130, 50 ,15);
-        Jresolutionx.setBounds(10,10,20,20);
-        Jresolutiony.setBounds(10, 10, 20 ,20);
-        JfocalDistance.setBounds(10, 40, 20 ,20);
-        JcentreImgX.setBounds(10, 70, 20 ,20);
-        JcentreImgY.setBounds(10, 70, 20 ,20);
-        JcentreImgZ.setBounds(10, 70, 20 ,20);
-        JextentXx.setBounds(10, 100, 20 ,20);
-        JextentXy.setBounds(10,100,20,20);
-        JextentXz.setBounds(10, 100, 20,20);
-        JextentYx.setBounds(10, 130, 20 ,20);
-        JextentYy.setBounds(10, 130, 20 ,20);
-        JextentYz.setBounds(10, 130, 20 ,20);
-        ValidateCamera.setBounds(10,200,100,40);
-
-        
-        CameraDefinition.add(Resolution);
-        CameraDefinition.add(FocalDistance);
-        CameraDefinition.add(Centre);
-        CameraDefinition.add(Vectorx);
-        CameraDefinition.add(Vectory);
-        CameraDefinition.add(Jresolutionx);
-        CameraDefinition.add(Jresolutiony);
-        CameraDefinition.add(JfocalDistance);
-        CameraDefinition.add(JcentreImgX);
-        CameraDefinition.add(JcentreImgY);
-        CameraDefinition.add(JcentreImgZ);
-        CameraDefinition.add(JextentXy);
-        CameraDefinition.add(JextentXy);
-        CameraDefinition.add(JextentXz);
-        CameraDefinition.add(JextentYx);
-        CameraDefinition.add(JextentYy);
-        CameraDefinition.add(JextentYz);
-        CameraDefinition.add(ValidateCamera);
+               
+        Interface.add(Resolution,gc);
+        gc.gridx = 0;
+		gc.gridy = 6;
+        gc.gridwidth = 3;
+        Interface.add(FocalDistance,gc);
+        gc.gridx = 0;
+		gc.gridy = 7;
+        gc.gridwidth = 3;
+        Interface.add(Centre,gc);
+        gc.gridx = 0;
+		gc.gridy = 8;
+        gc.gridwidth = 3;
+        Interface.add(Vectorx,gc);
+        gc.gridx = 0;
+		gc.gridy = 10;
+        gc.gridwidth = 3;
+        Interface.add(Vectory,gc);
+        gc.gridx = 0;
+		gc.gridy = 11;
+        gc.gridwidth = 3;
+        Interface.add(Jresolutionx,gc);
+        gc.gridx = 4;
+		gc.gridy = 6;
+        Interface.add(Jresolutiony,gc);
+        gc.gridx = 5;
+		gc.gridy = 6;
+        Interface.add(JfocalDistance,gc);
+        gc.gridx = 5;
+		gc.gridy = 7;
+        Interface.add(JcentreImgX,gc);
+        gc.gridx = 4;
+		gc.gridy =8;
+        Interface.add(JcentreImgY,gc);
+        gc.gridx = 5;
+		gc.gridy =8;
+        Interface.add(JcentreImgZ,gc);
+        gc.gridx = 6;
+		gc.gridy =8;
+        Interface.add(JextentXy,gc);
+        gc.gridx = 4;
+		gc.gridy =10;
+        Interface.add(JextentXy,gc);
+        gc.gridx = 5;
+		gc.gridy =10;
+        Interface.add(JextentXz,gc);
+        gc.gridx = 6;
+		gc.gridy =10;
+        Interface.add(JextentYx,gc);
+        gc.gridx = 4;
+		gc.gridy =11;
+        Interface.add(JextentYy,gc);
+        gc.gridx = 5;
+		gc.gridy =11;
+        Interface.add(JextentYz,gc);
+        gc.gridx = 6;
+		gc.gridy =12;
+        Interface.add(ValidateCamera,gc);
+        gc.gridx = 0;
+		gc.gridy =12;
+        gc.gridwidth = 2;
 
 
         //creation of the light's definition pan
-        JPanel LightDefinition= new JPanel();
 
         JLabel Light1 = new JLabel("Light1 1");
         JLabel OriginSphere1 = new JLabel(" Origin of the first light(x,y,z) =");
         JLabel RGBcode1 = new JLabel("RGB Code of the first light (Red, Green, Blue)=");
         
         
-        LightDefinition.setLayout(null);
-        LightDefinition.setBounds(300,200,300,300);
-        LightDefinition.setVisible(true);
-
-        LightDefinition.add(Light1);
-        LightDefinition.add(OriginSphere1);
-        LightDefinition.add(RGBcode1);
-        LightDefinition.add(origin1x);
-        LightDefinition.add(origin1y);
-        LightDefinition.add(origin1z);
-        LightDefinition.add(Red1);
-        LightDefinition.add(Green1);
-        LightDefinition.add(Blue1);
-        LightDefinition.add(ValidateLight1);
+      
+        Interface.add(Light1);
+        Interface.add(OriginSphere1);
+        Interface.add(RGBcode1);
+        Interface.add(origin1x);
+        Interface.add(origin1y);
+        Interface.add(origin1z);
+        Interface.add(Red1);
+        Interface.add(Green1);
+        Interface.add(Blue1);
+        Interface.add(ValidateLight1);
 
         Light1.setBounds(50,10,50,50);
         OriginSphere1.setBounds(10,30, 50, 50);
@@ -172,24 +215,19 @@ public class Interface extends JFrame implements ActionListener {
 
         //creation of the sphere's definition pan
 
-        JPanel SphereDefinition= new JPanel();
-        SphereDefinition.setLayout(null);
-        SphereDefinition.setBounds(300,0,300,500);
-        SphereDefinition.setVisible(true);
-
-
+        
         JLabel Sphere1 = new JLabel("Sphere 1");
         JLabel Radius1 = new JLabel("Radius of the 1st sphere");
         JLabel centre1 = new JLabel("Centre of the 1st Sphere");
         
-        SphereDefinition.add(Sphere1);
-        SphereDefinition.add(Radius1);
-        SphereDefinition.add(centre1);
-        SphereDefinition.add(radius1);
-        SphereDefinition.add(sphere1x);
-        SphereDefinition.add(sphere1y);
-        SphereDefinition.add(sphere1z);
-        SphereDefinition.add(ValidateSphere1);
+        Interface.add(Sphere1);
+        Interface.add(Radius1);
+        Interface.add(centre1);
+        Interface.add(radius1);
+        Interface.add(sphere1x);
+        Interface.add(sphere1y);
+        Interface.add(sphere1z);
+        Interface.add(ValidateSphere1);
 
 
         Sphere1.setBounds(50,10,50,50);
@@ -204,12 +242,9 @@ public class Interface extends JFrame implements ActionListener {
 
         final JComboBox<String> material = new JComboBox<String>(Materials1);
         material.setVisible(true);
-        SphereDefinition.add(material);
+        Interface.add(material);
 
 
-        this.add(LightDefinition);
-        this.add(SphereDefinition);
-        this.add(CameraDefinition);
         this.setVisible(true);
 
     }
@@ -242,7 +277,7 @@ public class Interface extends JFrame implements ActionListener {
             JextentXy.setText("");
             JextentXz.setText("");
             Vector extentY = new Vector (Double.parseDouble(JextentYx.getText()),Double.parseDouble(JextentYy.getText()), Double.parseDouble(JextentYz.getText()) );
-            Camera c = new Camera(centreImg,focalDistance,extentX,resolutionX, extentY,resolutionY);
+            //Camera c = new Camera(centreImg,focalDistance,extentX,resolutionX, extentY,resolutionY);
             Jresolutionx.setText("");
             Jresolutiony.setText("");
             JfocalDistance.setText("");

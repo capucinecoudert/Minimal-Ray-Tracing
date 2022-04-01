@@ -191,28 +191,42 @@ public class Interface extends JFrame implements ActionListener {
         
         
       
-        Interface.add(Light1);
-        Interface.add(OriginSphere1);
-        Interface.add(RGBcode1);
-        Interface.add(origin1x);
-        Interface.add(origin1y);
-        Interface.add(origin1z);
-        Interface.add(Red1);
-        Interface.add(Green1);
-        Interface.add(Blue1);
-        Interface.add(ValidateLight1);
+        Interface.add(Light1,gc);
+        gc.gridx = 6;
+		gc.gridy = 3;
+        gc.gridwidth = 3;
+        Interface.add(OriginSphere1,gc);
+        gc.gridx = 6;
+		gc.gridy = 8;
+        gc.gridwidth = 3;
+        Interface.add(RGBcode1,gc);
+        gc.gridx = 6;
+		gc.gridy = 8;
+        gc.gridwidth = 3;
+        Interface.add(origin1x,gc);
+        gc.gridx = 9;
+		gc.gridy = 8;
+        Interface.add(origin1y,gc);
+        gc.gridx = 10;
+		gc.gridy = 8;
+        Interface.add(origin1z,gc);
+        gc.gridx = 11;
+		gc.gridy = 8;
+        Interface.add(Red1,gc);
+        gc.gridx = 9;
+		gc.gridy = 6;
+        Interface.add(Green1,gc);
+        gc.gridx = 10;
+		gc.gridy = 6;
+        Interface.add(Blue1,gc);
+        gc.gridx = 11;
+		gc.gridy = 6;
+        Interface.add(ValidateLight1,gc);
+        gc.gridx = 6;
+		gc.gridy = 12;
+        gc.gridwidth = 3;
 
-        Light1.setBounds(50,10,50,50);
-        OriginSphere1.setBounds(10,30, 50, 50);
-        origin1x.setBounds(100, 30,20,20);
-        origin1y.setBounds(110,30,20,20);
-        origin1z.setBounds(130,30,20,20);
-        RGBcode1.setBounds(10,50,50,50);
-        Red1.setBounds(100, 50, 20, 20);
-        Green1.setBounds(110, 50, 20, 20);
-        Blue1.setBounds(130, 50, 20, 20);
-        ValidateLight1.setBounds(30,90,50,50);
-
+        
         //creation of the sphere's definition pan
 
         
@@ -220,24 +234,35 @@ public class Interface extends JFrame implements ActionListener {
         JLabel Radius1 = new JLabel("Radius of the 1st sphere");
         JLabel centre1 = new JLabel("Centre of the 1st Sphere");
         
-        Interface.add(Sphere1);
-        Interface.add(Radius1);
-        Interface.add(centre1);
-        Interface.add(radius1);
-        Interface.add(sphere1x);
-        Interface.add(sphere1y);
-        Interface.add(sphere1z);
-        Interface.add(ValidateSphere1);
+        Interface.add(Sphere1,gc);
+        gc.gridx = 12;
+		gc.gridy = 3;
+        gc.gridwidth = 3;
+        Interface.add(Radius1,gc);
+        gc.gridx = 12;
+		gc.gridy = 6;
+        gc.gridwidth = 3;
+        Interface.add(centre1,gc);
+        gc.gridx = 12;
+		gc.gridy = 8;
+        gc.gridwidth = 3;
+        Interface.add(radius1,gc);
+        gc.gridx = 17;
+		gc.gridy = 6;
+        Interface.add(sphere1x,gc);
+        gc.gridx = 16;
+		gc.gridy = 6;
+        Interface.add(sphere1y,gc);
+        gc.gridx = 17;
+		gc.gridy = 6;
+        Interface.add(sphere1z,gc);
+        gc.gridx = 18;
+		gc.gridy = 6;
+        Interface.add(ValidateSphere1,gc);
+        gc.gridx = 12;
+		gc.gridy = 12;
+        gc.gridwidth = 3;
 
-
-        Sphere1.setBounds(50,10,50,50);
-        Radius1.setBounds(10, 30, 50, 50);
-        radius1.setBounds(10,30,20,20);
-        centre1.setBounds(10,60,50,50);
-        sphere1x.setBounds(100, 60, 20, 20);
-        sphere1y.setBounds(110, 60, 20, 20);
-        sphere1z.setBounds(130, 60, 20, 20);
-        ValidateSphere1.setBounds(20,90,50,20);
            
 
         final JComboBox<String> material = new JComboBox<String>(Materials1);
@@ -277,7 +302,7 @@ public class Interface extends JFrame implements ActionListener {
             JextentXy.setText("");
             JextentXz.setText("");
             Vector extentY = new Vector (Double.parseDouble(JextentYx.getText()),Double.parseDouble(JextentYy.getText()), Double.parseDouble(JextentYz.getText()) );
-            //Camera c = new Camera(centreImg,focalDistance,extentX,resolutionX, extentY,resolutionY);
+            c = new Camera(centreImg,focalDistance,extentX,resolutionX, extentY,resolutionY);
             Jresolutionx.setText("");
             Jresolutiony.setText("");
             JfocalDistance.setText("");

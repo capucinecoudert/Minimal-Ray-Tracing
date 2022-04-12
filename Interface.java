@@ -91,7 +91,7 @@ public class Interface extends JFrame implements ActionListener {
         DeleteSphere.addActionListener(this);
 
         //String[] Menu = {"Definition of the camera", "Definition of the lights", "Definition of the spheres"};
-       // String Menu2 = (String) JOptionPane.showInputDialog(null,"Select the objects you want to define", "Deinition of the parameters", JOptionPane.QUESTION_MESSAGE,null,Menu,null);
+        // String Menu2 = (String) JOptionPane.showInputDialog(null,"Select the objects you want to define", "Deinition of the parameters", JOptionPane.QUESTION_MESSAGE,null,Menu,null);
 
             Jresolutionx=new JTextField();
             Jresolutiony=new JTextField();
@@ -123,10 +123,7 @@ public class Interface extends JFrame implements ActionListener {
         JLabel Vectorx = new JLabel(" Vector Extent x (x,t,z)=");
         JLabel Vectory = new JLabel(" Vector Extent y (x,t,z)=");
 
-        Interface.setLayout(null);
-        Interface.setBounds(0,0,300,200);
-        Interface.setVisible(true);
-
+        
                
         Interface.add(Resolution,gc);
         gc.gridx = 0;
@@ -272,12 +269,17 @@ public class Interface extends JFrame implements ActionListener {
 
            
 
-        final JComboBox<String> material = new JComboBox<String>(Materials1);
-        material.setVisible(true);
-        Interface.add(material);
+        //final JComboBox<String> material = new JComboBox<String>(Materials1);
+       // material.setVisible(true);
+        // Interface.add(material);
 
+        //Interface.setVisible(true);
 
+        this.add(Interface);
+        this.setContentPane(Interface);
         this.setVisible(true);
+
+    
 
     }
     // choix  de la sphere : radius, materiau, centre avec bouton Add et Remove
@@ -355,7 +357,7 @@ public class Interface extends JFrame implements ActionListener {
         }
         
         if(e.getSource()==DeleteCamera){
-            
+
         }
 
 

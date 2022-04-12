@@ -59,7 +59,6 @@ public class Interface extends JFrame implements ActionListener {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel Interface = new JPanel();
-        this.setContentPane(Interface);
         //our interface will be divided into cases where we will put the widgets
         Interface.setLayout(new GridBagLayout());
         //gc will determine the size and the positions on the different widgets
@@ -122,9 +121,11 @@ public class Interface extends JFrame implements ActionListener {
         JLabel Centre = new JLabel("Centre of the image (x,y,z)=");
         JLabel Vectorx = new JLabel(" Vector Extent x (x,t,z)=");
         JLabel Vectory = new JLabel(" Vector Extent y (x,t,z)=");
-
+        JLabel cameraTest= new JLabel ("camera");
         
-               
+        Interface.add(cameraTest,gc);
+        gc.gridx=0;
+        gc.gridy=3;
         Interface.add(Resolution,gc);
         gc.gridx = 0;
 		gc.gridy = 6;
@@ -146,8 +147,8 @@ public class Interface extends JFrame implements ActionListener {
 		gc.gridy = 11;
         gc.gridwidth = 3;
         Interface.add(Jresolutionx,gc);
-        gc.gridx = 4;
-		gc.gridy = 6;
+        gc.gridx = 3;
+		gc.gridy = 3;
         Interface.add(Jresolutiony,gc);
         gc.gridx = 5;
 		gc.gridy = 6;

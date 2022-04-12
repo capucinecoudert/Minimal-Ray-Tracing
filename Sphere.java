@@ -1,4 +1,4 @@
-public class Sphere extends Hitable {
+public class Sphere{
     
     public Point center;
     public double radius;

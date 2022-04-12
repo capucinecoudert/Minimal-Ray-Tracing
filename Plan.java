@@ -1,5 +1,5 @@
 
-public class Plan extends Hitable {
+public class Plan {
     
     private final static double EPSILON = 0.00001;
     public  Point origin;

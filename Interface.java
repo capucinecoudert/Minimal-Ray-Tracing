@@ -28,6 +28,7 @@ public class Interface extends JFrame implements ActionListener {
          public JTextField JextentYy;
          public JTextField JextentYz;
          public JButton ValidateCamera; //bouton pour valider la caméra
+         public JButton DeleteCamera;
          //on branche les écoueteurs pour la caméra
          //ValidateCamera.addActionListener(this);
 
@@ -39,6 +40,7 @@ public class Interface extends JFrame implements ActionListener {
          public JTextField Green1;
          public JTextField Blue1;
          public JButton ValidateLight1;
+         public JButton DeleteLight;
          
          
         //Attributes for the spheres definition
@@ -48,6 +50,7 @@ public class Interface extends JFrame implements ActionListener {
         public JTextField sphere1y;
         public JTextField sphere1z;
         public JButton ValidateSphere1;
+        public JButton DeleteSphere;
 
        
 
@@ -74,14 +77,18 @@ public class Interface extends JFrame implements ActionListener {
 		gc.gridy = 0;
 
 
-
-
         ValidateCamera = new JButton("Validate Camera");
         ValidateCamera.addActionListener(this);
         ValidateLight1= new JButton("Validate Light");
         ValidateLight1.addActionListener(this);
         ValidateSphere1= new JButton("Validate Sphere");
         ValidateSphere1.addActionListener(this);
+        DeleteCamera = new JButton("Delete Camera");
+        DeleteCamera.addActionListener(this);
+        DeleteLight= new JButton("Delete Light");
+        DeleteLight.addActionListener(this);
+        DeleteSphere= new JButton("Delete Sphere");
+        DeleteSphere.addActionListener(this);
 
         //String[] Menu = {"Definition of the camera", "Definition of the lights", "Definition of the spheres"};
        // String Menu2 = (String) JOptionPane.showInputDialog(null,"Select the objects you want to define", "Deinition of the parameters", JOptionPane.QUESTION_MESSAGE,null,Menu,null);
@@ -346,7 +353,10 @@ public class Interface extends JFrame implements ActionListener {
             sphere1z.setText("");
             radius1.setText("");
         }
-               
+        
+        if(e.getSource()==DeleteCamera){
+            
+        }
 
 
     }

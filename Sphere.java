@@ -1,4 +1,6 @@
 public class Sphere{
+
+    // Defines a sphere with a center, a radius and a material
     
     public Point center;
     public double radius;

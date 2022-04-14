@@ -1,4 +1,7 @@
  public class ColorInt{
+
+    // the ColorInt Class contains 3 components Red, Green, Blue between 0-255.
+    
     public int red;
     public int green;
     public int blue;

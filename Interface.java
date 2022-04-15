@@ -56,21 +56,23 @@ public class Interface extends JFrame implements ActionListener {
 
     public Interface (){
         super("Mon Interface");
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel Interface = new JPanel();
+        Interface.setSize(1000, 1000);
         //our interface will be divided into cases where we will put the widgets
         Interface.setLayout(new GridBagLayout());
         //gc will determine the size and the positions on the different widgets
         GridBagConstraints gc = new GridBagConstraints();
         //the command both means that the widgets will take the maximum place in the vertical and the horizontal direction, in the case
-        gc.fill = GridBagConstraints.BOTH;
+        gc.fill = GridBagConstraints.CENTER;
         // Here, we are adding space between the components
         gc.insets = new Insets(5, 5, 5, 5);
         gc.ipady = gc.anchor = GridBagConstraints.CENTER;
         //we need 18 cases in the x direction and 14 in the y one
         gc.weightx = 18;
         gc.weighty = 14;
+       
 
         gc.gridx = 0;
 		gc.gridy = 0;
@@ -126,66 +128,100 @@ public class Interface extends JFrame implements ActionListener {
         Interface.add(cameraTest,gc);
         gc.gridx=0;
         gc.gridy=3;
+        
+
         Interface.add(Resolution,gc);
         gc.gridx = 0;
 		gc.gridy = 6;
-        gc.gridwidth = 3;
+        
+        //gc.gridwidth = 3;
+        
+
         Interface.add(FocalDistance,gc);
         gc.gridx = 0;
 		gc.gridy = 7;
-        gc.gridwidth = 3;
+        //gc.gridwidth = 3;
+         
+
         Interface.add(Centre,gc);
         gc.gridx = 0;
 		gc.gridy = 8;
-        gc.gridwidth = 3;
+        //gc.gridwidth = 3;
+         
+
         Interface.add(Vectorx,gc);
         gc.gridx = 0;
 		gc.gridy = 10;
-        gc.gridwidth = 3;
+       // gc.gridwidth = 3;
+
         Interface.add(Vectory,gc);
         gc.gridx = 0;
 		gc.gridy = 11;
-        gc.gridwidth = 3;
+       // gc.gridwidth = 3;
+
         Interface.add(Jresolutionx,gc);
         gc.gridx = 3;
 		gc.gridy = 3;
+        
+
         Interface.add(Jresolutiony,gc);
         gc.gridx = 5;
 		gc.gridy = 6;
+
         Interface.add(JfocalDistance,gc);
         gc.gridx = 5;
 		gc.gridy = 7;
+
         Interface.add(JcentreImgX,gc);
         gc.gridx = 4;
 		gc.gridy =8;
+
         Interface.add(JcentreImgY,gc);
         gc.gridx = 5;
 		gc.gridy =8;
+        gc.gridwidth=2;
+
         Interface.add(JcentreImgZ,gc);
         gc.gridx = 6;
 		gc.gridy =8;
+        gc.gridwidth=2;
+
         Interface.add(JextentXy,gc);
         gc.gridx = 4;
 		gc.gridy =10;
+        gc.gridwidth=2;
+
         Interface.add(JextentXy,gc);
         gc.gridx = 5;
 		gc.gridy =10;
+        gc.gridwidth=2;
+
         Interface.add(JextentXz,gc);
         gc.gridx = 6;
 		gc.gridy =10;
+        gc.gridwidth=2;
+
         Interface.add(JextentYx,gc);
         gc.gridx = 4;
 		gc.gridy =11;
+        gc.gridwidth=2;
+
         Interface.add(JextentYy,gc);
         gc.gridx = 5;
 		gc.gridy =11;
+        gc.gridwidth=2;
+
         Interface.add(JextentYz,gc);
         gc.gridx = 6;
 		gc.gridy =12;
+        gc.gridwidth=2;
+
         Interface.add(ValidateCamera,gc);
         gc.gridx = 0;
 		gc.gridy =12;
         gc.gridwidth = 2;
+
+
 
 
         //creation of the light's definition pan
@@ -199,37 +235,55 @@ public class Interface extends JFrame implements ActionListener {
         Interface.add(Light1,gc);
         gc.gridx = 6;
 		gc.gridy = 3;
-        gc.gridwidth = 3;
+       // gc.gridwidth = 3;
+        
+
         Interface.add(OriginSphere1,gc);
         gc.gridx = 6;
 		gc.gridy = 8;
-        gc.gridwidth = 3;
+       // gc.gridwidth = 3;
+        
         Interface.add(RGBcode1,gc);
         gc.gridx = 6;
 		gc.gridy = 8;
-        gc.gridwidth = 3;
+       // gc.gridwidth = 3;
+        
+
         Interface.add(origin1x,gc);
         gc.gridx = 9;
 		gc.gridy = 8;
+          
+
         Interface.add(origin1y,gc);
         gc.gridx = 10;
 		gc.gridy = 8;
+     
         Interface.add(origin1z,gc);
         gc.gridx = 11;
 		gc.gridy = 8;
+  
+
         Interface.add(Red1,gc);
         gc.gridx = 9;
 		gc.gridy = 6;
+         
+
         Interface.add(Green1,gc);
         gc.gridx = 10;
 		gc.gridy = 6;
+ 
+
         Interface.add(Blue1,gc);
         gc.gridx = 11;
 		gc.gridy = 6;
+        
+
         Interface.add(ValidateLight1,gc);
         gc.gridx = 6;
 		gc.gridy = 12;
-        gc.gridwidth = 3;
+      //  gc.gridwidth = 2;
+        
+
 
         
         //creation of the sphere's definition pan
@@ -242,31 +296,46 @@ public class Interface extends JFrame implements ActionListener {
         Interface.add(Sphere1,gc);
         gc.gridx = 12;
 		gc.gridy = 3;
-        gc.gridwidth = 3;
+        //gc.gridwidth = 3;
+        
+
         Interface.add(Radius1,gc);
         gc.gridx = 12;
 		gc.gridy = 6;
-        gc.gridwidth = 3;
+      //  gc.gridwidth = 3;
+        
         Interface.add(centre1,gc);
         gc.gridx = 12;
 		gc.gridy = 8;
-        gc.gridwidth = 3;
+      //  gc.gridwidth = 3;
+          
+
         Interface.add(radius1,gc);
         gc.gridx = 17;
 		gc.gridy = 6;
+        
+
         Interface.add(sphere1x,gc);
         gc.gridx = 16;
 		gc.gridy = 6;
+         
+
         Interface.add(sphere1y,gc);
         gc.gridx = 17;
 		gc.gridy = 6;
+        
+
         Interface.add(sphere1z,gc);
         gc.gridx = 18;
 		gc.gridy = 6;
+        
+        
         Interface.add(ValidateSphere1,gc);
         gc.gridx = 12;
 		gc.gridy = 12;
-        gc.gridwidth = 3;
+        //gc.gridwidth = 2;
+        
+
 
            
 

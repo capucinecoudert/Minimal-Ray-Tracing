@@ -56,16 +56,16 @@ public class Interface extends JFrame implements ActionListener {
 
     public Interface (){
         super("Mon Interface");
-        //setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel Interface = new JPanel();
-        Interface.setSize(1000, 1000);
+        //Interface.setSize(1000, 1000);
         //our interface will be divided into cases where we will put the widgets
         Interface.setLayout(new GridBagLayout());
         //gc will determine the size and the positions on the different widgets
         GridBagConstraints gc = new GridBagConstraints();
         //the command both means that the widgets will take the maximum place in the vertical and the horizontal direction, in the case
-        gc.fill = GridBagConstraints.CENTER;
+        gc.fill = GridBagConstraints.HORIZONTAL;
         // Here, we are adding space between the components
         gc.insets = new Insets(5, 5, 5, 5);
         gc.ipady = gc.anchor = GridBagConstraints.CENTER;
@@ -361,8 +361,8 @@ public class Interface extends JFrame implements ActionListener {
     
     public void actionPerformed (ActionEvent e){
         Camera c;
-        LinkedList<Sphere> spheres;
-        LinkedList<Light> lights;
+        LinkedList<Sphere> spheres=new LinkedList<>();
+        LinkedList<Light> lights=new LinkedList<>();
 
 
         if((e.getSource()== ValidateCamera)&&(verifINT(Jresolutionx.getText()))&&(verifINT(Jresolutiony.getText()))&&(verifINT(JfocalDistance.getText()))&&(verifDOUBLE(JextentXy.getText()))&&(verifDOUBLE(JextentXx.getText()))&&(verifDOUBLE(JextentXz.getText()))&&(verifDOUBLE(JextentYx.getText()))&&((verifDOUBLE(JextentYy.getText())))&&(verifDOUBLE(JextentYz.getText()))&&(verifDOUBLE(JcentreImgX.getText()))&&(verifDOUBLE(JcentreImgY.getText()))&&(verifDOUBLE(JcentreImgZ.getText()))){
@@ -424,6 +424,7 @@ public class Interface extends JFrame implements ActionListener {
             sphere1y.setText("");
             sphere1z.setText("");
             radius1.setText("");
+            spheres.add(Sphere1);
         }
         
         if(e.getSource()==DeleteCamera){

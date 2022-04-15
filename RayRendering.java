@@ -4,40 +4,44 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 public class RayRendering {
+    // Creates an object RayRendering containing a scene and the number limit of reflection of the rays.
     public Scene scene;
-    public int maxReflectionGeneration = 10;
+    public int maxReflectionGeneration = 10; 
 
     public RayRendering(Scene s){
         scene=s;
     }
 
+    //
     public Color intersectRay(Ray ray, Scene scene, int generation){
         Color backgroundColor= new Color(0.4,0.9,0.95);
         double distance= Double.POSITIVE_INFINITY;
         Sphere object= null;
         
-        // first compute if the ray hits a sphere
+        // Computes if the ray hits a sphere of the scene
         for(Sphere s : scene.spheres){
             HitResult result= hitObject(ray, s);
-            if(result.hit && result.distance<distance){
+            if(result.hit && result.distance<distance){ // if yes, returns the color of the pixel
                 object=s;
                 distance=result.distance;
+                backgroundColor=computeColor(ray, object, scene, distance, generation);
             }
         }
 
         // if not exit compute if ray hits a plane
-        if(object==null){
+        /* if(object==null){
             for(Plan p : scene.planes){
                 HitResult result= hitPlane(ray, p);
                 if(result.hit && result.distance<distance){
                     return new Color(0.1,0.1,0.1);
                 }
             }
-        }else{
+        
+        else{
             return computeColor(ray, object, scene, distance, generation);
-        }
+        } 
+        */
         return backgroundColor;
-
     }
 
     public Color computeColor(Ray ray, Sphere sphere, Scene scene, double distance, int generation){
@@ -50,13 +54,13 @@ public class RayRendering {
         normalVector.normalize();
 
         for(Light l : scene.lights){
+            // Creates the light ray between the point of intersection on the sphere and the origin of the light 
             Ray lightRay= new Ray(intersectPoint, new Vector(intersectPoint, l.origin));
+            //normalizes the light ray
             lightRay.direction.normalize();
-
-            //double lightDistance= lightRay.direction.norm();
             boolean hidden=false;
 
-            // je verifie que la lumière ne rencontre pas d'autres sphères avant
+            // Checks that the lightRay doesn't hit nearer spheres
             for(Sphere s : scene.spheres){
                 HitResult obstacle =  hitObject(lightRay, s);
                 if(obstacle.hit){
@@ -64,14 +68,15 @@ public class RayRendering {
                 }
             }
 
-            // si ma lumière rencontre cette sphère en premier 
+            // if the light ray hits this sphere first, then it computes the color of the pixel 
             if(hidden==false){
-                // gestion dela diffusion
+                // Manages the diffusion of the material
                 double facingRatio= Math.max(0,lightRay.direction.dotProduct(normalVector));
                 Color facingColor =sphere.material.diffusionColor.multiply(facingRatio).multiply(sphere.material.specularPower);
                 Color lightedColor = facingColor.multiply(l.intensity);
                 Color reflectedColor = new Color(0,0,0);
-                // gestion de la reflection
+
+                // Manages the reflection between the spheres  
                 if( generation <= maxReflectionGeneration && sphere.material.reflectionCoeff >0){
                     double lambda = -2*normalVector.dotProduct(ray.direction);
                     Vector reflectedVector = normalVector.multiply(lambda).add(ray.direction);
@@ -81,10 +86,10 @@ public class RayRendering {
                 pixelColor = pixelColor.add(lightedColor).add(reflectedColor.multiply(sphere.material.reflectionCoeff));
             } 
         }
-        return pixelColor; 
+        return pixelColor; // returns the color of the pixel of the img
     }
 
-
+    // Check if the given ray hits or not the given sphere
     public HitResult hitObject(Ray ray, Sphere sphere){
         Vector l = new Vector(ray.origin, sphere.center);
         double tCA =  l.dotProduct(ray.direction);
@@ -106,6 +111,7 @@ public class RayRendering {
         return new HitResult(c-a, true);
     }
 
+    /*
     public HitResult hitPlane(Ray ray, Plan plan){
         Point result= plan.intersectRayPlane(ray);
         if( result==null){
@@ -115,26 +121,24 @@ public class RayRendering {
         double distance= planRay.norm();
         return new HitResult(distance, true);
     }
+    */
 
-
-
+    // Creates the final image as a BMP file
     public  void createImage()throws IOException { 
         ColorInt[][] img= new ColorInt[scene.camera.resolutionX][scene.camera.resolutionY];
-        // boucle dans laquelle tu calcules la couleur pour chaque rayon de la camera correspondant à un pixel
         Color pixelColor;
         Ray rayPixel;
 
-        // ici on fait tout le calcul pour un Rayon, i.e. pixel
+        // this loop computes for each point(x,y) on the plane of the image, the color of this pixel
         for(int y = 0 ; y< scene.camera.resolutionY; y++){
             for(int x=0; x< scene.camera.resolutionX; x++){
-                rayPixel= scene.camera.getRay(x,y);
-                pixelColor=intersectRay(rayPixel, scene, 0) ; 
-                img[x][y] = pixelColor.colorToInt();
+                rayPixel= scene.camera.getRay(x,y); //the ray between this pixel and the origin of the camera 
+                pixelColor=intersectRay(rayPixel, scene, 0) ; //finds the color of the pixel 
+                img[x][y] = pixelColor.colorToInt(); // add this color as a ColorInt to the img[][] array
             }
         }
 
-        // chaque couleur transformer en colorInt et add to img
-        // transformes le array de couleur en un bmp file via BufferedImg
+        // this loop transforms the img[][] to a BMP file
         BufferedImage image = new BufferedImage(scene.camera.resolutionX, scene.camera.resolutionY, BufferedImage.TYPE_INT_RGB); // j'ai trouvé ce bout de code pour créer une buffered img
         for (int y = 0; y < scene.camera.resolutionY; y++) {
            for (int x = 0; x < scene.camera.resolutionX ; x++) {
@@ -144,8 +148,9 @@ public class RayRendering {
               image.setRGB(x, scene.camera.resolutionY -1 -y, rgb);
            }
         }
-        File outputFile = new File("C:\\Users\\coude\\Documents\\output.bmp\\");
+        File outputFile = new File("C:\\Users\\coude\\Documents\\output.bmp\\"); // here, we can write the path we want
         ImageIO.write(image, "bmp", outputFile);
     }
+
     
 }

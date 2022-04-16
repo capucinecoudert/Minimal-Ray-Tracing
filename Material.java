@@ -6,13 +6,13 @@ public class Material {
 
     double reflectionCoeff;
     double specularPower;
-    Color specularColor; //not used
+    //Color specularColor; //not used
     Color diffusionColor;
 
-    public Material(double r, double p, Color s, Color d){
+    public Material(double r, double p,/* Color s,*/ Color d){
         reflectionCoeff=r;
         specularPower=p;
-        specularColor=s;
+        //specularColor=s;
         diffusionColor=d;
     }
 

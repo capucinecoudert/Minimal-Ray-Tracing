@@ -60,7 +60,7 @@ public class Interface extends JFrame implements ActionListener {
        
 
     public Interface (){
-        super("Mon Interface");
+        super("Minimal Ray Tracing");
        // setExtendedState(JFrame.MAXIMIZED_BOTH);
       //  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1050, 1000);
@@ -111,8 +111,8 @@ public class Interface extends JFrame implements ActionListener {
         JLabel Resolution = new JLabel("Resolution(x,y)=");
         JLabel FocalDistance = new JLabel("focal distance =");
         JLabel Centre = new JLabel("Centre of the image (x,y,z)=");
-        JLabel Vectorx = new JLabel(" Vector Extent x (x,t,z)=");
-        JLabel Vectory = new JLabel(" Vector Extent y (x,t,z)=");
+        JLabel Vectorx = new JLabel(" Vector Extent x (x,y,z)=");
+        JLabel Vectory = new JLabel(" Vector Extent y (x,y,z)=");
         JLabel Camera= new JLabel ("Description of the camera");
         JLabel Scene= new JLabel("Description of the scene");
         JLabel Light =new JLabel ("Description of the lights");
@@ -178,10 +178,10 @@ public class Interface extends JFrame implements ActionListener {
         Vectory.setBounds(10, 525, 140, 50);
 
         this.add(ValidateCamera);
-        ValidateCamera.setBounds(10,600,140,50);
+        ValidateCamera.setBounds(20,600,130,50);
 
         this.add(DeleteCamera);
-        DeleteCamera.setBounds(200,600,150,50);
+        DeleteCamera.setBounds(200,600,130,50);
 
         this.add(RGBcode);
         RGBcode.setBounds(350, 225, 150, 50);
@@ -196,16 +196,16 @@ public class Interface extends JFrame implements ActionListener {
         centre.setBounds(700,300,150,50);
 
         this.add(ValidateLight1);
-        ValidateLight1.setBounds(350,600,150,50);
+        ValidateLight1.setBounds(370,600,130,50);
 
         this.add(DeleteLight);
-        DeleteLight.setBounds(550,600,150,50);
+        DeleteLight.setBounds(550,600,130,50);
 
         this.add(ValidateSphere1);
-        ValidateSphere1.setBounds(700,600,150,50);
+        ValidateSphere1.setBounds(720,600,130,50);
 
         this.add(DeleteSphere);
-        DeleteSphere.setBounds(900,600,150,50);
+        DeleteSphere.setBounds(900,600,130,50);
         
         //ajout des JTextField
 

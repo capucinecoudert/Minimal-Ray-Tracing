@@ -275,6 +275,21 @@ public class Interface extends JFrame implements ActionListener {
         this.add(sphere1z);
         sphere1z.setBounds(1000,300,37,50);
 
+        //COMBOBOX
+        JPanel PanelComboBoxLight = new JPanel();
+        String [] light = {"light1", "light2", "light3"};
+        JComboBox comboBoxLight = new JComboBox (light);
+        PanelComboBoxLight.add(comboBoxLight);
+        PanelComboBoxLight.setBounds(450, 125, 140, 50);
+        this.add(PanelComboBoxLight);
+
+        JPanel PanelComboBoxSphere = new JPanel();
+        String [] sphere = {"sphere1", "sphere2", "sphere3"};
+        JComboBox comboBoxSphere = new JComboBox (sphere);
+        PanelComboBoxSphere.add(comboBoxSphere);
+        PanelComboBoxSphere.setBounds(850, 125, 140, 50);
+        this.add(PanelComboBoxSphere);
+
         //final JComboBox<String> material = new JComboBox<String>(Materials1);
        // material.setVisible(true);
         // Interface.add(material);
@@ -285,7 +300,8 @@ public class Interface extends JFrame implements ActionListener {
         //this.setContentPane(Interface);
         this.setVisible(true);
 
-    
+        
+
 
     }
     // choix  de la sphere : radius, materiau, centre avec bouton Add et Remove
@@ -293,6 +309,9 @@ public class Interface extends JFrame implements ActionListener {
     // bouton calculer img
     // zone pour afficher bmp file
     // blablaba
+    
+    // COMBOBOX 
+    
     
     
     public void actionPerformed (ActionEvent e){

@@ -99,7 +99,7 @@ public class Interface extends JFrame implements ActionListener {
             origin1x=new JTextField(); // we need 3 coordinates to define the location of the first light
             origin1y=new JTextField();
             origin1z=new JTextField();
-            Red1=new JTextField();// We need the red-grren-blue combination to define the color of the light
+            Red1=new JTextField();// We need the red-green-blue combination to define the color of the light
             Green1=new JTextField();
             Blue1=new JTextField();
             radius1=new JTextField();
@@ -108,20 +108,20 @@ public class Interface extends JFrame implements ActionListener {
             sphere1z=new JTextField();
 
         //creation of the camera's definition pan
-        JLabel Resolution = new JLabel("Resolution(x,y)=");
-        JLabel FocalDistance = new JLabel("focal distance =");
-        JLabel Centre = new JLabel("Centre of the image (x,y,z)=");
-        JLabel Vectorx = new JLabel(" Vector Extent x (x,y,z)=");
-        JLabel Vectory = new JLabel(" Vector Extent y (x,y,z)=");
+        JLabel Resolution = new JLabel("Resolution(x,y) :");
+        JLabel FocalDistance = new JLabel("Focal distance :");
+        JLabel Centre = new JLabel("Image center (x,y,z) :");
+        JLabel Vectorx = new JLabel(" Vector Extent x (x,y,z) :");
+        JLabel Vectory = new JLabel(" Vector Extent y (x,y,z) :");
         JLabel Camera= new JLabel ("Description of the camera");
-        JLabel Scene= new JLabel("Description of the scene");
+        JLabel Scene= new JLabel(" Description of the scene");
         JLabel Light =new JLabel ("Description of the lights");
         JLabel Sphere =new JLabel ("Description of the spheres");
 
-        JLabel OriginSphere = new JLabel(" Origin of the first light(x,y,z) =");
-        JLabel RGBcode = new JLabel("RGB Code of the first light (Red, Green, Blue)=");
-        JLabel Radius = new JLabel("Radius of the 1st sphere");
-        JLabel centre = new JLabel("Centre of the 1st Sphere");
+        JLabel OriginSphere = new JLabel(" Origin of the light (x,y,z) :");
+        JLabel RGBcode = new JLabel("Light Code (Red, Green, Blue) :");
+        JLabel Radius = new JLabel("Radius of the 1st sphere :");
+        JLabel centre = new JLabel("Centre of the 1st Sphere :");
        
         JPanel CAMERA =new JPanel();
         CAMERA.setOpaque(false);
@@ -157,10 +157,10 @@ public class Interface extends JFrame implements ActionListener {
         Camera.setBounds(10, 50, 340, 50);
         
         this.add(Light);
-        Light.setBounds(350, 50, 350, 50);
+        Light.setBounds(360, 50, 350, 50);
 
         this.add(Sphere);
-        Sphere.setBounds(700, 50, 350, 50);
+        Sphere.setBounds(710, 50, 350, 50);
 
         this.add(Resolution);
         Resolution.setBounds(10, 225, 140, 50);
@@ -184,16 +184,16 @@ public class Interface extends JFrame implements ActionListener {
         DeleteCamera.setBounds(200,600,130,50);
 
         this.add(RGBcode);
-        RGBcode.setBounds(350, 225, 150, 50);
+        RGBcode.setBounds(360, 225, 200, 50);
         
         this.add(OriginSphere);
-        OriginSphere.setBounds(350,300,150,50);
+        OriginSphere.setBounds(360,300,150,50);
 
         this.add(Radius);
-        Radius.setBounds(700,225,150,50);
+        Radius.setBounds(710,225,150,50);
 
         this.add(centre);
-        centre.setBounds(700,300,150,50);
+        centre.setBounds(710,300,150,50);
 
         this.add(ValidateLight1);
         ValidateLight1.setBounds(370,600,130,50);

@@ -20,6 +20,11 @@ public class Interface extends JFrame implements ActionListener {
     // 
 
          //attributes for the camera's definition
+         public Camera c;
+         public LinkedList<Sphere> spheres=new LinkedList<>(); //liste des spheres
+         public LinkedList<Light> lights = new LinkedList<>(); // liste des light 
+         public LinkedList <String> lightString = new LinkedList <String> ("light1", "ligth 2");
+
          public JTextField Jresolutionx;
          public JTextField Jresolutiony;
          public JTextField JfocalDistance;
@@ -277,8 +282,9 @@ public class Interface extends JFrame implements ActionListener {
 
         //COMBOBOX
         JPanel PanelComboBoxLight = new JPanel();
-        String [] light = {"light1", "light2", "light3"};
-        JComboBox comboBoxLight = new JComboBox (light);
+
+        //String [] light = {"light1", "light2", "light3"};
+        JComboBox comboBoxLight = new JComboBox (lightString);
         PanelComboBoxLight.add(comboBoxLight);
         PanelComboBoxLight.setBounds(450, 125, 140, 50);
         this.add(PanelComboBoxLight);
@@ -315,9 +321,10 @@ public class Interface extends JFrame implements ActionListener {
     
     
     public void actionPerformed (ActionEvent e){
-        Camera c;
+        /*Camera c;
         LinkedList<Sphere> spheres=new LinkedList<>();
-        LinkedList<Light> lights = new LinkedList<>();
+        LinkedList<Light> lights = new LinkedList<>(); 
+        ------> mise en attribut au debut */ 
 
 
         if((e.getSource()== ValidateCamera)&&(verifINT(Jresolutionx.getText()))&&(verifINT(Jresolutiony.getText()))&&(verifINT(JfocalDistance.getText()))&&(verifDOUBLE(JextentXy.getText()))&&(verifDOUBLE(JextentXx.getText()))&&(verifDOUBLE(JextentXz.getText()))&&(verifDOUBLE(JextentYx.getText()))&&((verifDOUBLE(JextentYy.getText())))&&(verifDOUBLE(JextentYz.getText()))&&(verifDOUBLE(JcentreImgX.getText()))&&(verifDOUBLE(JcentreImgY.getText()))&&(verifDOUBLE(JcentreImgZ.getText()))){

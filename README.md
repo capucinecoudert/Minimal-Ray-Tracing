@@ -1,6 +1,6 @@
 # Minimal-Ray-Tracing
 
-Compute image of a scene composed of Spheres.
+Compute image of a scene composed of spheres and lights from a camera position.
 
 ## Class Diagram
 

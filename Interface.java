@@ -13,11 +13,22 @@ import java.util.*;
 import java.awt.Insets;
 import java.awt.*;
 
+import java.io.IOException;
+
 import java.awt.BorderLayout;
 import javax.swing.border.Border;
 
 public class Interface extends JFrame implements ActionListener {
     // 
+        public Material black;
+        public Material white;
+        public Material green;
+        public Material cyan;
+        public Material red;
+        public Material magenta;
+        public Material yellow;
+        public Material blue;
+
 
          //attributes for the camera's definition
          public JTextField Jresolutionx;
@@ -57,6 +68,8 @@ public class Interface extends JFrame implements ActionListener {
         public JButton ValidateSphere1;
         public JButton DeleteSphere;
 
+        public JButton ValidateScene;
+
        
 
     public Interface (){
@@ -67,6 +80,18 @@ public class Interface extends JFrame implements ActionListener {
         this.setLayout(null);
         JPanel Interface = new JPanel();
         Interface.setBounds(0,0,1050, 700);
+
+        //Create the serie of materials
+         white= new Material(1.0, 1.0, new Color(1.0, 1.0, 1.0));
+         red= new Material(0.5, 0.5, new Color(1.0, 0.0, 0) );
+         black = new Material(1.0, 60.0, new Color(0.01, 0.01, 0.01));
+         blue= new Material(0.0, 0.5, new Color(0.0, 0.0, 1.0) );
+         cyan= new Material(0.0, 0.5, new Color(0.0, 1.0, 1.0));
+         green = new Material(0.5, 0.5, new Color(0.0, 1.0, 0.0));
+         magenta= new Material(0.0, 60, new Color(1.0, 0.0, 1.0));
+         yellow= new Material(0.5, 60, new Color(1.0, 1.0, 0.0));
+
+
         
         ValidateCamera = new JButton("Validate Camera");
         ValidateCamera.addActionListener(this);
@@ -80,6 +105,8 @@ public class Interface extends JFrame implements ActionListener {
         DeleteLight.addActionListener(this);
         DeleteSphere= new JButton("Delete Sphere");
         DeleteSphere.addActionListener(this);
+        ValidateScene= new JButton("Display the image");
+        ValidateScene.addActionListener(this);
 
         //String[] Menu = {"Definition of the camera", "Definition of the lights", "Definition of the spheres"};
         // String Menu2 = (String) JOptionPane.showInputDialog(null,"Select the objects you want to define", "Deinition of the parameters", JOptionPane.QUESTION_MESSAGE,null,Menu,null);
@@ -338,9 +365,10 @@ public class Interface extends JFrame implements ActionListener {
 
         }
         if ((e.getSource()==ValidateLight1)&&(verifINT(Red1.getText()))&&(verifINT(Green1.getText()))&&verifINT(Blue1.getText())&&(verifDOUBLE(origin1x.getText()))&&(verifDOUBLE(origin1y.getText()))&&(verifDOUBLE(origin1z.getText()))){
-            Point origin1 = new Point (Double.parseDouble(origin1x.getText()),Double.parseDouble(origin1y.getText()), Double.parseDouble(origin1z.getText()));
-            Color i1= new Color (Integer.parseInt(Red1.getText()),Integer.parseInt(Green1.getText()),Integer.parseInt(Blue1.getText()));
-           // Light FirstLight = new Light(origin1, i1);
+            Point origin1 = new Point(Double.parseDouble(origin1x.getText()),Double.parseDouble(origin1y.getText()), Double.parseDouble(origin1z.getText()));
+            Color i1= new Color(Double.parseDouble(Red1.getText()), Double.parseDouble(Green1.getText()), Double.parseDouble(Blue1.getText()));
+            Light firstLight = new Light(origin1, i1);
+
             //We delete the informations written the informations written in the JtextField
             Red1.setText("");
             Green1.setText("");
@@ -348,15 +376,14 @@ public class Interface extends JFrame implements ActionListener {
             origin1x.setText("");
             origin1y.setText("");
             origin1z.setText("");
-           // lights.add(FirstLight);
+            lights.add(firstLight);
            
         }
         
         if(e.getSource()==ValidateSphere1){
             Point pointFirstSphere= new Point (Double.parseDouble(sphere1x.getText()),Double.parseDouble(sphere1y.getText()), Double.parseDouble(sphere1z.getText()));
             Double RadiusFirstSphere = new Double (Double.parseDouble(radius1.getText()));
-            Material MaterialThirdSphere=new MaterialBlack();
-            Sphere Sphere1 = new Sphere(pointFirstSphere , RadiusFirstSphere, MaterialThirdSphere);
+            Sphere Sphere1 = new Sphere(pointFirstSphere , RadiusFirstSphere, black);
             sphere1x.setText("");
             sphere1y.setText("");
             sphere1z.setText("");
@@ -368,6 +395,21 @@ public class Interface extends JFrame implements ActionListener {
         if(e.getSource()==DeleteCamera){
 
         }
+
+        if(e.getSource()==ValidateScene){
+            Scene s = new Scene(spheres, c, lights);
+            RayRendering r = new RayRendering(s);
+            r.createImage();
+        }
+
+        /*
+
+        if(e.getSource()==ValidateScene){
+            Scene scene = new Scene(spheres, cam , lights);
+            RayRendering r = new RayRendering(scene);
+            r.createImage();
+        }
+        */
 
 
     }

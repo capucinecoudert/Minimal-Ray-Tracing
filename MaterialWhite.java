@@ -1,4 +1,4 @@
-public class MaterialWhite extends Material {
+/*public class MaterialWhite extends Material {
     
     public MaterialWhite (){
         reflectionCoeff = 1.0;
@@ -7,3 +7,4 @@ public class MaterialWhite extends Material {
         diffusionColor = new Color(1.0, 1.0, 1.0);
     }
 }
+*/

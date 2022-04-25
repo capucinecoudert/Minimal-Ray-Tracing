@@ -1,4 +1,4 @@
-public class MaterialBlack extends Material {
+/*public class MaterialBlack extends Material {
     
     public MaterialBlack(){
         reflectionCoeff = 1.0;
@@ -6,4 +6,4 @@ public class MaterialBlack extends Material {
         //specularColor = new Color(1.0, 1.0, 1.0);
         diffusionColor = new Color(0.01, 0.01, 0.01);
     }
-}
+}*/

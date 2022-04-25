@@ -1,4 +1,4 @@
-public class MaterialGreen extends Material {
+/*public class MaterialGreen extends Material {
     
     public MaterialGreen (){
         reflectionCoeff = 0.5;
@@ -8,3 +8,4 @@ public class MaterialGreen extends Material {
     }
 }
 
+*/

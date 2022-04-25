@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import javax.swing.BorderFactory;
-import java.awt.Color;
+//import java.awt.Color;
 import java.awt.Dimension;
 import java.util.*;
 import java.awt.Insets;
@@ -323,9 +323,9 @@ public class Interface extends JFrame implements ActionListener {
     
     
     public void actionPerformed (ActionEvent e){
-        Camera c;
-        LinkedList<Sphere> spheres=new LinkedList<>();
-        LinkedList<Light> lights = new LinkedList<>();
+        Camera c=null;
+        LinkedList<Sphere> spheres= new LinkedList<Sphere>();
+        LinkedList<Light> lights = new LinkedList<Light>();
 
 
         if((e.getSource()== ValidateCamera)&&(verifINT(Jresolutionx.getText()))&&(verifINT(Jresolutiony.getText()))&&(verifINT(JfocalDistance.getText()))&&(verifDOUBLE(JextentXy.getText()))&&(verifDOUBLE(JextentXx.getText()))&&(verifDOUBLE(JextentXz.getText()))&&(verifDOUBLE(JextentYx.getText()))&&((verifDOUBLE(JextentYy.getText())))&&(verifDOUBLE(JextentYz.getText()))&&(verifDOUBLE(JcentreImgX.getText()))&&(verifDOUBLE(JcentreImgY.getText()))&&(verifDOUBLE(JcentreImgZ.getText()))){
@@ -397,9 +397,14 @@ public class Interface extends JFrame implements ActionListener {
         }
 
         if(e.getSource()==ValidateScene){
-            Scene s = new Scene(spheres, c, lights);
-            RayRendering r = new RayRendering(s);
-            r.createImage();
+            if(!(c==null) && !spheres.isEmpty() && !lights.isEmpty()){
+                Scene s = new Scene(spheres, c, lights);
+                RayRendering r = new RayRendering(s);
+                r.createImage();
+            }else{
+                
+            }
+            
         }
 
         /*

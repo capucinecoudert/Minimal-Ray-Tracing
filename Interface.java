@@ -22,8 +22,7 @@ public class Interface extends JFrame implements ActionListener {
          //attributes for the camera's definition
          public Camera c;
          public LinkedList<Sphere> spheres=new LinkedList<>(); //liste des spheres
-         public LinkedList<Light> lights = new LinkedList<>(); // liste des light 
-         public LinkedList <String> lightString = new LinkedList <String> ("light1", "ligth 2");
+         public LinkedList<Light> lights = new LinkedList<>(); // liste des lights
 
          public JTextField Jresolutionx;
          public JTextField Jresolutiony;
@@ -282,15 +281,14 @@ public class Interface extends JFrame implements ActionListener {
 
         //COMBOBOX
         JPanel PanelComboBoxLight = new JPanel();
-
-        //String [] light = {"light1", "light2", "light3"};
-        JComboBox comboBoxLight = new JComboBox (lightString);
+        String [] lightName = {" "};
+        JComboBox comboBoxLight = new JComboBox (lightName);
         PanelComboBoxLight.add(comboBoxLight);
         PanelComboBoxLight.setBounds(450, 125, 140, 50);
         this.add(PanelComboBoxLight);
 
         JPanel PanelComboBoxSphere = new JPanel();
-        String [] sphere = {"sphere1", "sphere2", "sphere3"};
+        String [] sphereName = {" "};
         JComboBox comboBoxSphere = new JComboBox (sphere);
         PanelComboBoxSphere.add(comboBoxSphere);
         PanelComboBoxSphere.setBounds(850, 125, 140, 50);
@@ -366,7 +364,7 @@ public class Interface extends JFrame implements ActionListener {
         if ((e.getSource()==ValidateLight1)&&(verifINT(Red1.getText()))&&(verifINT(Green1.getText()))&&verifINT(Blue1.getText())&&(verifDOUBLE(origin1x.getText()))&&(verifDOUBLE(origin1y.getText()))&&(verifDOUBLE(origin1z.getText()))){
             Point origin1 = new Point (Double.parseDouble(origin1x.getText()),Double.parseDouble(origin1y.getText()), Double.parseDouble(origin1z.getText()));
             Color i1= new Color (Integer.parseInt(Red1.getText()),Integer.parseInt(Green1.getText()),Integer.parseInt(Blue1.getText()));
-           // Light FirstLight = new Light(origin1, i1);
+            Light FirstLight = new Light(origin1, i1);
             //We delete the informations written the informations written in the JtextField
             Red1.setText("");
             Green1.setText("");
@@ -374,7 +372,7 @@ public class Interface extends JFrame implements ActionListener {
             origin1x.setText("");
             origin1y.setText("");
             origin1z.setText("");
-           // lights.add(FirstLight);
+            lights.add(FirstLight);
            
         }
         

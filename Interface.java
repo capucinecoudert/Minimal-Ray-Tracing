@@ -57,7 +57,7 @@ public class Interface extends JFrame implements ActionListener {
         public JButton ValidateSphere1;
         public JButton DeleteSphere;
 
-       
+       public JButton ValidateALL;
 
     public Interface (){
         super("Mon Interface");
@@ -107,6 +107,7 @@ public class Interface extends JFrame implements ActionListener {
             sphere1y=new JTextField();
             sphere1z=new JTextField();
 
+            ValidateALL=new JButton("Validate the scene");
         //creation of the camera's definition pan
         JLabel Resolution = new JLabel("Resolution(x,y)=");
         JLabel FocalDistance = new JLabel("focal distance =");
@@ -147,20 +148,19 @@ public class Interface extends JFrame implements ActionListener {
 
 
         this.add(Scene);
-        Scene.setFont(new Font("Serif", Font.BOLD, 20));
-        Scene.setOpaque(true);
-        Scene.setForeground(Color.WHITE);
-        Scene.setBackground(Color.DARK_GRAY);
-        Scene.setBounds(400,0,210,50);
+        Scene.setFont(new Font("Serif", Font.BOLD, 40));
+        Scene.setOpaque(false);
+        Scene.setForeground(Color.DARK_GRAY);
+        Scene.setBounds(260,0,800,50);
 
         this.add(Camera);
-        Camera.setBounds(10, 50, 340, 50);
+        Camera.setBounds(50, 50, 200, 50);
         
         this.add(Light);
-        Light.setBounds(350, 50, 350, 50);
+        Light.setBounds(400, 50, 200, 50);
 
         this.add(Sphere);
-        Sphere.setBounds(700, 50, 350, 50);
+        Sphere.setBounds(750, 50, 200, 50);
 
         this.add(Resolution);
         Resolution.setBounds(10, 225, 140, 50);
@@ -181,7 +181,7 @@ public class Interface extends JFrame implements ActionListener {
         ValidateCamera.setBounds(10,600,140,50);
 
         this.add(DeleteCamera);
-        DeleteCamera.setBounds(200,600,150,50);
+        DeleteCamera.setBounds(205,600,140,50);
 
         this.add(RGBcode);
         RGBcode.setBounds(350, 225, 150, 50);
@@ -196,16 +196,16 @@ public class Interface extends JFrame implements ActionListener {
         centre.setBounds(700,300,150,50);
 
         this.add(ValidateLight1);
-        ValidateLight1.setBounds(350,600,150,50);
+        ValidateLight1.setBounds(355,600,140,50);
 
         this.add(DeleteLight);
-        DeleteLight.setBounds(550,600,150,50);
+        DeleteLight.setBounds(555,600,140,50);
 
         this.add(ValidateSphere1);
-        ValidateSphere1.setBounds(700,600,150,50);
+        ValidateSphere1.setBounds(705,600,140,50);
 
         this.add(DeleteSphere);
-        DeleteSphere.setBounds(900,600,150,50);
+        DeleteSphere.setBounds(895,600,140,50);
         
         //ajout des JTextField
 
@@ -274,6 +274,12 @@ public class Interface extends JFrame implements ActionListener {
 
         this.add(sphere1z);
         sphere1z.setBounds(1000,300,37,50);
+
+        this.add(ValidateALL);
+        ValidateALL.setBounds(800,450,200,75);
+        Border lineborderValidate = BorderFactory.createLineBorder(Color.GRAY, 1); 
+        ValidateALL.setBorder(lineborderValidate);
+        
 
         //final JComboBox<String> material = new JComboBox<String>(Materials1);
        // material.setVisible(true);

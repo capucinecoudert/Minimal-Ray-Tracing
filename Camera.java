@@ -3,7 +3,7 @@ public class Camera {
     /*a camera takes as parameters : 
      - a point which is the center of the image that the camera is forming
      - an integer which is the focal distance
-     - 2 vectors extentX and extentY which are defining the plane of the image 
+     - 2 vectors extentX and extentY which are defining the plane of the image, the norms of those vectors are defining the size of the final image
      - 2 int resolutionX and resolutionY which are the resolution of each side of the plane of the image 
      - the origin of the camera which is defined as the point situed at the focal distance from the normal of the plane of the image
 
@@ -23,15 +23,15 @@ public class Camera {
 
 
     public Camera(Point c, int d, Vector vX, int rX, Vector vY, int rY){ 
-        focalDistance=d;
-        centreImg=c;
-        resolutionX= rX;
-        resolutionY= rY;
-        extentX=vX;
-        extentY=vY;
+        this.focalDistance=d;
+        this.centreImg=c;
+        this.resolutionX= rX;
+        this.resolutionY= rY;
+        this. extentX=vX;
+        this.extentY=vY;
         Vector normal = vX.crossProduct(vY);
         normal.normalize();
-        originCamera= centreImg.add(normal.multiply(-focalDistance));
+        this.originCamera= centreImg.add(normal.multiply(-this.focalDistance));
     }
 
     /*  the method getRay() takes 2 integers as parameters. 
@@ -43,14 +43,14 @@ public class Camera {
     */
 
     public Ray getRay(int x, int y){
-        double percentX= ((double) x)/resolutionX;
-        double percentY= ((double) y)/resolutionY;
+        double percentX= ((double) x)/this.resolutionX;
+        double percentY= ((double) y)/this.resolutionY;
 
         Vector vecX = extentX.multiply(percentX-0.5);
         Vector vecY = extentY.multiply(percentY-0.5);
         
         Point pixel = centreImg.add(vecX).add(vecY);
-        Vector rayVector= new Vector(originCamera, pixel);
+        Vector rayVector= new Vector(this.originCamera, pixel);
         rayVector.normalize();
 
         return new Ray(originCamera, rayVector); 

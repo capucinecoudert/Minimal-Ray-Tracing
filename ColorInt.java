@@ -7,8 +7,8 @@
     public int blue;
 
     public ColorInt(int r, int g, int b){
-        red=r;
-        green=g;
-        blue=b;
+        this.red=r;
+        this.green=g;
+        this.blue=b;
     }
 }

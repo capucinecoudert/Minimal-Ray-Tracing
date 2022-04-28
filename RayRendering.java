@@ -4,12 +4,12 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 public class RayRendering {
-    // Creates an object RayRendering containing a scene and the number limit of reflection of the rays.
+    // Creates an object RayRendering containing a scene and the limit number of reflection of a ray.
     public Scene scene;
-    public int maxReflectionGeneration = 10; 
+    public int maxReflectionGeneration = 10; // defining the maximum number of times a ray can be reflected 
 
     public RayRendering(Scene s){
-        scene=s;
+        this.scene=s;
     }
 
     //this method returns the color of the pixel if the given ray hits an object of the sphere
@@ -27,6 +27,7 @@ public class RayRendering {
                 backgroundColor=computeColor(ray, object, scene, distance, generation);
             }
         }
+
 
         // if not exit compute if ray hits a plane
         /* if(object==null){

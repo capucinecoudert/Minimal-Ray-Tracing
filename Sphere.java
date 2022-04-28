@@ -7,9 +7,9 @@ public class Sphere{
     public Material material;
 
     public Sphere(Point c, double r, Material m){
-        center=c;
-        radius=r;
-        material=m;
+        this.center=c;
+        this.radius=r;
+        this.material=m;
     }
     
 }

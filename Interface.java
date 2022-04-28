@@ -70,6 +70,17 @@ public class Interface extends JFrame implements ActionListener {
         public JButton ValidateSphere1;
         public JButton DeleteSphere;
 
+        //Mise en place des combobox
+        public JPanel PanelComboBoxLight;
+        String [] lightName = {"create a new light"};
+        JComboBox comboBoxLight;
+        
+
+        public JPanel PanelComboBoxSphere;
+        String [] sphereName = {"create a new sphere"};
+        JComboBox comboBoxSphere;
+        
+
         public JButton ValidateScene;
        
 
@@ -303,16 +314,18 @@ public class Interface extends JFrame implements ActionListener {
         sphere1z.setBounds(1000,300,37,50);
 
         //COMBOBOX
-        JPanel PanelComboBoxLight = new JPanel();
-        String [] lightName = {" "};
-        JComboBox comboBoxLight = new JComboBox (lightName);
+        PanelComboBoxLight = new JPanel();
+        patatipatata = new LinkedList<String>();
+        patatipatata.add("test combobox avce linked list");
+        comboBoxLight = new JComboBox (patatipatata);
+        comboBoxLight.addActionListener(this);
         PanelComboBoxLight.add(comboBoxLight);
         PanelComboBoxLight.setBounds(450, 125, 140, 50);
         this.add(PanelComboBoxLight);
 
-        JPanel PanelComboBoxSphere = new JPanel();
-        String [] sphereName = {" "};
-        JComboBox comboBoxSphere = new JComboBox (sphere);
+        PanelComboBoxSphere = new JPanel();
+        comboBoxSphere = new JComboBox (sphereName);
+        comboBoxSphere.addActionListener(this);
         PanelComboBoxSphere.add(comboBoxSphere);
         PanelComboBoxSphere.setBounds(850, 125, 140, 50);
         this.add(PanelComboBoxSphere);
@@ -342,6 +355,14 @@ public class Interface extends JFrame implements ActionListener {
     
     
     public void actionPerformed (ActionEvent e){
+        /*Camera c;
+        LinkedList<Sphere> spheres=new LinkedList<>();
+        LinkedList<Light> lights = new LinkedList<>(); 
+        ------> mise en attribut au debut */ 
+
+        if (e.getSource() == comboBoxLight) {
+            // faire en sorte d'afficher les attributs de chaque light quand on clique sur le nom correspondant
+        }
         /*c=null;
         LinkedList<Sphere> spheres= new LinkedList<Sphere>();
         LinkedList<Light> lights = new LinkedList<Light>();
@@ -352,6 +373,10 @@ public class Interface extends JFrame implements ActionListener {
         this.spheres=new LinkedList<Sphere>();
         this.lights = new LinkedList<Light>();
 
+        if (e.getSource() == comboBoxSphere) {
+            // faire en sorte d'afficher les attributs de chaque sphere quand on clique sur le nom correspondant
+
+        }
         if((e.getSource()== ValidateCamera)&&(verifINT(Jresolutionx.getText()))&&(verifINT(Jresolutiony.getText()))&&(verifINT(JfocalDistance.getText()))&&(verifDOUBLE(JextentXy.getText()))&&(verifDOUBLE(JextentXx.getText()))&&(verifDOUBLE(JextentXz.getText()))&&(verifDOUBLE(JextentYx.getText()))&&((verifDOUBLE(JextentYy.getText())))&&(verifDOUBLE(JextentYz.getText()))&&(verifDOUBLE(JcentreImgX.getText()))&&(verifDOUBLE(JcentreImgY.getText()))&&(verifDOUBLE(JcentreImgZ.getText()))){
             int resolutionX = Integer.parseInt(Jresolutionx.getText()) ;
             Jresolutionx.setText("");
@@ -400,6 +425,10 @@ public class Interface extends JFrame implements ActionListener {
             origin1x.setText("");
             origin1y.setText("");
             origin1z.setText("");
+            lights.add(FirstLight);
+            comboBoxLight.addItem("light 1");
+            //faire une boucle pour que ça marche à chaque fois
+
             lights.add(firstLight);
            
         }
@@ -413,12 +442,16 @@ public class Interface extends JFrame implements ActionListener {
             sphere1z.setText("");
             radius1.setText("");
             spheres.add(Sphere1);
-        
+            comboBoxSphere.addItem("sphere 1");
+            //faire boucle pour que ça marche à chaque fois
         }
         
+        if(e.getSource()==DeleteCamera){
+            //essayer de choper quelle camera c'est pour la supprimer de la lsite
         /*if(e.getSource()==DeleteCamera){
 
         }*/
+        }
 
         if(e.getSource()==ValidateScene){
             if(!(c==null) && !spheres.isEmpty() && !lights.isEmpty()){
@@ -430,6 +463,7 @@ public class Interface extends JFrame implements ActionListener {
             }
             
         }
+        //if(e.getSource()==)
 
         //PB avec les colors à regler
         //lancement d'1 calcul

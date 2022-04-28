@@ -12,5 +12,4 @@ public class Scene {
         this.lights=l;
         this.camera=c;
     }
-    
 }

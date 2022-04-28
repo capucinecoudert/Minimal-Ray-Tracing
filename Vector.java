@@ -8,7 +8,8 @@ public class Vector {
         X coordinate of the point
         Y coordinate of the point
         Z coordinate of the point
-     */
+    */
+
     public Vector(double x, double y, double z){
         this.x = x;
         this.y = y;
@@ -22,8 +23,7 @@ public class Vector {
         this.z = p2.z - p1.z;
     }
 
-    // return the norm of the vector.
-    
+    //Returns the norm of the vector.  
     public double norm(){
         return Math.sqrt(x * x + y * y + z * z);
     }
@@ -59,6 +59,7 @@ public class Vector {
         return new Vector(c * this.x, c * this.y, c * this.z);
     }
 
+    //Divides a vector by a scalar c.
     public Vector divide(double c){
         return new Vector( this.x/c , this.y/c , this.z/c );
     }

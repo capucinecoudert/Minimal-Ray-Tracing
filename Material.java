@@ -6,10 +6,10 @@ public class Material {
 
     double reflectionCoeff; // reflection coefficient of the material
     double specularPower; // specular Power of the material
-    Color diffusionColor; // the diffusion color of the material
+    ColorFloat diffusionColor; // the diffusion color of the material
 
-    public Material(double r, double p,Color d){
-        this.reflectionCoeff=r;
+    public Material(double r, double p,ColorFloat d){
+        this.reflectionCoeff= r;
         this.specularPower=p;
         this.diffusionColor=d;
     }

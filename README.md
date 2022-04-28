@@ -1,6 +1,6 @@
 # Minimal-Ray-Tracing
 
-Compute image of a scene composed of spheres and lights from a camera position.
+The program contained in this archive computes the image of a scene composed of spheres and lights from a camera position by using a ray tracing algorithm.
 
 // Point Class
 attributes: 3 double as position coordinates : x, y, z
@@ -15,9 +15,9 @@ methods: norm(); normalize(); add(Point); add(Vector); substract(Vector); multip
 attributes: a point of Origin, a Vector of direction
 methods: distancePoint(Point)
 
-// Color Class
+// ColorFloat Class
 attributes: 3 doubles parameters defining the red, green, blue components of the color between 0-1.
-methods: multiply(Color); multiply(double); add(Color); colorToInt()
+methods: multiply(ColorFloat); multiply(double); add(ColorFloat); colorToInt()
 
 // ColorInt Class
 attributes: 3 int parameters defining the red, green, blue components of the color between 0-255.
@@ -54,7 +54,7 @@ methods: intersectRay(Ray, Scene, int); computeColor(Ray, Scene, Sphere, double,
 
 // Interface Class
 attributes: several Materials, several JButtons and several JTextField that create the interface
-methods: actionPerformed(actionEvent);
+methods: actionPerformed(actionEvent); verifSaisie(String); verifINT(String); verifDOUBLE(String)
 
 
 // Main Class
@@ -81,13 +81,13 @@ classDiagram
         + red : int
         + blue : int
         + green : int
-        Color (int r, int b, int g)
+        ColorFloat (int r, int b, int g)
     }
-    class Color{
+    class ColorFloat{
         + red : double
         + blue : double
         + green : double
-        Color (double r, double b, double g)
+        ColorFloat (double r, double b, double g)
         ColorToInt () : ColorInt
     }
     class HitResult{
@@ -112,16 +112,16 @@ classDiagram
         Interface()
     }
     class Light{
-        + intensity : Color
+        + intensity : ColorFloat
         + origin : Point
-        Light(Point o, Color i)
+        Light(Point o, ColorFloat i)
     }
     class Material{
         + reflectionCoeff : double
         + specularPower : double
-        + specularColor : Color
-        + diffusionColor : Color
-        Material (double r, double p, Color s, Color d)
+        + specularColor : ColorFloat
+        + diffusionColor : ColorFloat
+        Material (double r, double p, ColorFloat s, ColorFloat d)
     }
     class Point{
         + x : double
@@ -140,7 +140,7 @@ classDiagram
         + scene : Scene
         + camera : Camera
         main () 
-        computeColor (Ray ray, Scene scene) : Color
+        computeColor (Ray ray, Scene scene) : ColorFloat
         hitObject (Ray ray, Sphere sphere, double distance) : HitResult
         createImage (Scene scene)
     }

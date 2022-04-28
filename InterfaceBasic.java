@@ -1,14 +1,49 @@
-import java.io.IOException;
+import javax.swing.*;
+import java.awt.event.*;
 import java.util.*;
+import javax.swing.JButton;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.IOException;
+import java.io.File;
 
- class Main {
-    public static void main(String[] args) {
-        InterfaceBasic monInterface =new InterfaceBasic();
+public class InterfaceBasic extends JFrame implements ActionListener {
+
+    JButton b ;
+    JLabel image;
+
+    public InterfaceBasic(){
+        super("Minimal Ray Tracing");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(1050, 1000);
+        this.setLayout(null);
+
+        this.b= new JButton("START");
+        this.b.setBounds(20, 20, 200, 50);
+        this.b.addActionListener(this);
+        this.add(this.b);
+
+        this.image = new JLabel();
+        this.image.setBounds(20, 100, 800, 600);
+        this.add(this.image);
+
+
+        this.setVisible(true);
     }
-}
- 
-/*
-    public static void main(String[] args) throws IOException {
+
+    public void actionPerformed(ActionEvent e){
+        try { 
+            launchRayRendering();
+
+            BufferedImage myPicture = ImageIO.read(new File("C:\\Users\\coude\\Documents\\output.bmp\\"));
+            ImageIcon imgIc = new ImageIcon(myPicture);
+            this.image.setIcon(imgIc);
+        } catch (IOException a) {
+            a.printStackTrace();
+        }
+    }
+
+    public static void launchRayRendering() throws IOException{
         // 1 sphère blanche
         ArrayList<Sphere> spheres = new ArrayList<Sphere>();
 
@@ -26,10 +61,7 @@ import java.util.*;
         lights.add(new Light(new Point(250, 0, 300), new ColorFloat(0.4, 0.4, 0))); // lumiere cote droit jaune
         lights.add(new Light(new Point(0, 200, 0), new ColorFloat(0.6, 0.6, 0.6))); // lumiere face grise
          
-        //Plan
-       // ArrayList<Plan> planes= new ArrayList<Plan>();
-        //planes.add(new Plan(new Point(0, 0, 0), new Vector(new Point(0, 0, 0), new Point(0, 1, 0)), new Vector(new Point(0, 0, 0), new Point(0, 0, 1))));
-        
+    
         // créer la caméra
         Point pointOrigin= new Point(0,0,0);
         int distanceFocale= 100;
@@ -41,13 +73,10 @@ import java.util.*;
 
         Scene scene = new Scene(spheres, cam , lights);
         RayRendering r = new RayRendering(scene);
+
         r.createImage();
-
-        // lancer fenetre interface
-        //Scene scene = new Scene(mettre array list des spheres, 800, 600);
-        //ray rendering (sphere ...)
-        //createImage(scene);
     }
-    
-}*/
 
+
+    
+}

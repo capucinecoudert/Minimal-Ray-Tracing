@@ -471,6 +471,7 @@ public class Interface extends JFrame implements ActionListener {
             if (index!= comboBoxLight.getItemCount()-1){
                 comboBoxLight.removeItemAt(index);
                 lights.remove(index);
+                LightSetNil(); //on se remet sur l'onglet "create a new light" avec les cases vides
             }
         }
 
@@ -480,6 +481,7 @@ public class Interface extends JFrame implements ActionListener {
             if (index!= comboBoxSphere.getItemCount()-1){
                 comboBoxSphere.removeItemAt(index);
                 spheres.remove(index);
+                SphereSetNil(); //on se remet sur l'onglet "create a new Sphere" avec les cases vides
             }
         }
 
@@ -536,6 +538,25 @@ public class Interface extends JFrame implements ActionListener {
             return false;
         }
         return isDOUBLE;
+    }
+    
+    public static void LightSetNil(){
+        comboBoxLight.setSelectedIndex(comboBoxLight.getItemCount-1);
+        Red1.setText("");
+        Green1.setText("");
+        Blue1.setText("");
+        origin1x.setText("");
+        origin1y.setText("");
+        origin1z.setText("");
+
+    }
+    public static void SphereSetNil(){
+        comboBoxSphere.setSelectedIndex(comboBoxSphere.getItemCount-1);
+        sphere1x.setText("");
+        sphere1y.setText("");
+        sphere1z.setText("");
+        radius1.setText("");
+
     }
     
 }

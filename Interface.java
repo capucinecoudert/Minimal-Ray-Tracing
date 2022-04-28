@@ -315,9 +315,7 @@ public class Interface extends JFrame implements ActionListener {
 
         //COMBOBOX
         PanelComboBoxLight = new JPanel();
-        patatipatata = new LinkedList<String>();
-        patatipatata.add("test combobox avce linked list");
-        comboBoxLight = new JComboBox (patatipatata);
+        comboBoxLight = new JComboBox (lightName);
         comboBoxLight.addActionListener(this);
         PanelComboBoxLight.add(comboBoxLight);
         PanelComboBoxLight.setBounds(450, 125, 140, 50);
@@ -355,6 +353,10 @@ public class Interface extends JFrame implements ActionListener {
     
     
     public void actionPerformed (ActionEvent e){
+        this.c= null;
+        this.spheres=new LinkedList<Sphere>();
+        this.lights = new LinkedList<Light>();
+
         /*Camera c;
         LinkedList<Sphere> spheres=new LinkedList<>();
         LinkedList<Light> lights = new LinkedList<>(); 
@@ -362,19 +364,28 @@ public class Interface extends JFrame implements ActionListener {
 
         if (e.getSource() == comboBoxLight) {
             // faire en sorte d'afficher les attributs de chaque light quand on clique sur le nom correspondant
-        }
-        /*c=null;
-        LinkedList<Sphere> spheres= new LinkedList<Sphere>();
-        LinkedList<Light> lights = new LinkedList<Light>();
-        spheres=null;
-        lights = null;
-        */
-        this.c= null;
-        this.spheres=new LinkedList<Sphere>();
-        this.lights = new LinkedList<Light>();
+            int n = comboBoxLight.getSelectedIndex();
+            if (n!= (comboBoxLight.getItemCount()-1)) {
+                /*Red1.setText(Light[n].Color.); ?? JE SAIS PAS COMMENT FAIRE AVEC LES COULEURS
+                Green1.setText("");
+                Blue1.setText("");
+                origin1x.setText("");
+                origin1y.setText("");
+                origin1z.setText("");*/
+                // AFFICHER LES ATTRIBUTS 
+            }
 
+        }
+        
         if (e.getSource() == comboBoxSphere) {
             // faire en sorte d'afficher les attributs de chaque sphere quand on clique sur le nom correspondant
+            int n = comboBoxSphere.getSelectedIndex();
+            if (n!= (comboBoxSphere.getItemCount()-1)) {
+                sphere1x.setText(Sphere[n].center.x);
+                sphere1y.setText(Sphere[n].center.y);
+                sphere1z.setText(Sphere[n].center.z);
+                radius1.setText(Sphere[n].radius));          
+            }
 
         }
         if((e.getSource()== ValidateCamera)&&(verifINT(Jresolutionx.getText()))&&(verifINT(Jresolutiony.getText()))&&(verifINT(JfocalDistance.getText()))&&(verifDOUBLE(JextentXy.getText()))&&(verifDOUBLE(JextentXx.getText()))&&(verifDOUBLE(JextentXz.getText()))&&(verifDOUBLE(JextentYx.getText()))&&((verifDOUBLE(JextentYy.getText())))&&(verifDOUBLE(JextentYz.getText()))&&(verifDOUBLE(JcentreImgX.getText()))&&(verifDOUBLE(JcentreImgY.getText()))&&(verifDOUBLE(JcentreImgZ.getText()))){
@@ -413,6 +424,7 @@ public class Interface extends JFrame implements ActionListener {
             //Camera c= new Camera(resolutionX, d);
 
         }
+        
         if ((e.getSource()==ValidateLight1)&&(verifINT(Red1.getText()))&&(verifINT(Green1.getText()))&&verifINT(Blue1.getText())&&(verifDOUBLE(origin1x.getText()))&&(verifDOUBLE(origin1y.getText()))&&(verifDOUBLE(origin1z.getText()))){
             Point origin1 = new Point(Double.parseDouble(origin1x.getText()),Double.parseDouble(origin1y.getText()), Double.parseDouble(origin1z.getText()));
             Color i1= new Color(Double.parseDouble(Red1.getText()), Double.parseDouble(Green1.getText()), Double.parseDouble(Blue1.getText()));
@@ -425,14 +437,13 @@ public class Interface extends JFrame implements ActionListener {
             origin1x.setText("");
             origin1y.setText("");
             origin1z.setText("");
-            lights.add(FirstLight);
-            comboBoxLight.addItem("light 1");
-            //faire une boucle pour que ça marche à chaque fois
-
-            lights.add(firstLight);
-           
+            if (comboBoxLight.getSelectedItem()== "create a new light"){ //Si le combobox est sur l'item "create a new light", on rajoute une nouvelle light au combobox, et on crée une nouvelle light
+                int index = comboBoxLight.getItemCount() -1;
+                lights.add(firstLight);
+                comboBoxLight.insertItemAt("light "+index+ " ", index);
+            }
         }
-        
+    
         if(e.getSource()==ValidateSphere1){
             Point pointFirstSphere= new Point (Double.parseDouble(sphere1x.getText()),Double.parseDouble(sphere1y.getText()), Double.parseDouble(sphere1z.getText()));
             Double RadiusFirstSphere = new Double (Double.parseDouble(radius1.getText()));
@@ -442,16 +453,36 @@ public class Interface extends JFrame implements ActionListener {
             sphere1z.setText("");
             radius1.setText("");
             spheres.add(Sphere1);
-            comboBoxSphere.addItem("sphere 1");
-            //faire boucle pour que ça marche à chaque fois
+            if (comboBoxSphere.getSelectedItem()== "create a new sphere"){//Si le combobox est sur l'item "create a new sphere", on rajoute une nouvelle sphere au combobox, et on crée une nouvelle sphere
+                int index = comboBoxSphere.getItemCount() -1;
+                spheres.add(Sphere1);
+                comboBoxSphere.insertItem("sphere "+index+ " ", index);
+            }
         }
         
         if(e.getSource()==DeleteCamera){
             //essayer de choper quelle camera c'est pour la supprimer de la lsite
-        /*if(e.getSource()==DeleteCamera){
-
-        }*/
+        
         }
+        
+        if(e.getSource()==DeleteLight){ 
+            // supprime light selectionnée si on n'est pas sur l'option "create a new light"
+            int index = comboBoxLight.getSelectedIndex();
+            if (index!= comboBoxLight.getItemCount()-1){
+                comboBoxLight.removeItemAt(index);
+                lights.remove(index);
+            }
+        }
+
+        if(e.getSource()==DeleteSphere){
+            // supprime sphere selectionnée si on n'est pas sur l'option "create a new sphere"
+            int index = comboBoxSphere.getSelectedIndex();
+            if (index!= comboBoxSphere.getItemCount()-1){
+                comboBoxSphere.removeItemAt(index);
+                spheres.remove(index);
+            }
+        }
+
 
         if(e.getSource()==ValidateScene){
             if(!(c==null) && !spheres.isEmpty() && !lights.isEmpty()){

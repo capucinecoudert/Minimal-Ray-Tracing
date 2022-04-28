@@ -4,8 +4,8 @@ public class Ray {
     public Vector direction;
 
     public Ray(Point p, Vector v){
-        origin=p;
-        direction=v;
+        this.origin=p;
+        this.direction=v;
     }
 
     // Returns the distance between a point p and the origin of the ray.

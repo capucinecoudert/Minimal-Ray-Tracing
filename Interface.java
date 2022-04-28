@@ -7,17 +7,27 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import javax.swing.BorderFactory;
-import java.awt.Color;
+//import java.awt.Color;
 import java.awt.Dimension;
 import java.util.*;
 import java.awt.Insets;
 import java.awt.*;
+
+import java.io.IOException;
 
 import java.awt.BorderLayout;
 import javax.swing.border.Border;
 
 public class Interface extends JFrame implements ActionListener {
     // 
+        public Material black;
+        public Material white;
+        public Material green;
+        public Material cyan;
+        public Material red;
+        public Material magenta;
+        public Material yellow;
+        public Material blue;
 
          //attributes for the camera's definition
          public Camera c;
@@ -39,7 +49,6 @@ public class Interface extends JFrame implements ActionListener {
          public JButton ValidateCamera; //bouton pour valider la caméra
          public JButton DeleteCamera;
          //on branche les écoueteurs pour la caméra
-         //ValidateCamera.addActionListener(this);
 
          // attributes for the lights definition
          public JTextField origin1x; // we need 3 coordinates to define the location of the first light
@@ -72,55 +81,69 @@ public class Interface extends JFrame implements ActionListener {
         JComboBox comboBoxSphere;
         
 
+        public JButton ValidateScene;
        
 
     public Interface (){
         super("Minimal Ray Tracing");
-       // setExtendedState(JFrame.MAXIMIZED_BOTH);
-      //  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1050, 1000);
         this.setLayout(null);
         JPanel Interface = new JPanel();
         Interface.setBounds(0,0,1050, 700);
+
+        //Create the serie of materials
+        this.white= new Material(1.0, 1.0, new Color(1.0, 1.0, 1.0));
+        this.red= new Material(0.5, 0.5, new Color(1.0, 0.0, 0) );
+        this.black = new Material(1.0, 60.0, new Color(0.01, 0.01, 0.01));
+        this.blue= new Material(0.0, 0.5, new Color(0.0, 0.0, 1.0) );
+        this.cyan= new Material(0.0, 0.5, new Color(0.0, 1.0, 1.0));
+        this.green = new Material(0.5, 0.5, new Color(0.0, 1.0, 0.0));
+        this.magenta= new Material(0.0, 60, new Color(1.0, 0.0, 1.0));
+        this.yellow= new Material(0.5, 60, new Color(1.0, 1.0, 0.0));
+
+
         
-        ValidateCamera = new JButton("Validate Camera");
-        ValidateCamera.addActionListener(this);
-        ValidateLight1= new JButton("Validate Light");
-        ValidateLight1.addActionListener(this);
-        ValidateSphere1= new JButton("Validate Sphere");
-        ValidateSphere1.addActionListener(this);
-        DeleteCamera = new JButton("Delete Camera");
-        DeleteCamera.addActionListener(this);
-        DeleteLight= new JButton("Delete Light");
-        DeleteLight.addActionListener(this);
-        DeleteSphere= new JButton("Delete Sphere");
-        DeleteSphere.addActionListener(this);
+        this.ValidateCamera = new JButton("Validate Camera");
+        this.ValidateCamera.addActionListener(this);
+        this.ValidateLight1= new JButton("Validate Light");
+        this.ValidateLight1.addActionListener(this);
+        this.ValidateSphere1= new JButton("Validate Sphere");
+        this.ValidateSphere1.addActionListener(this);
+        this.DeleteCamera = new JButton("Delete Camera");
+        this.DeleteCamera.addActionListener(this);
+        this.DeleteLight= new JButton("Delete Light");
+        this.DeleteLight.addActionListener(this);
+        this.DeleteSphere= new JButton("Delete Sphere");
+        this.DeleteSphere.addActionListener(this);
+        this.ValidateScene= new JButton("Display the image");
+        this.ValidateScene.addActionListener(this);
 
         //String[] Menu = {"Definition of the camera", "Definition of the lights", "Definition of the spheres"};
         // String Menu2 = (String) JOptionPane.showInputDialog(null,"Select the objects you want to define", "Deinition of the parameters", JOptionPane.QUESTION_MESSAGE,null,Menu,null);
 
-            Jresolutionx=new JTextField();
-            Jresolutiony=new JTextField();
-            JfocalDistance=new JTextField();
-            JcentreImgX=new JTextField(); // on a besoin de 3 points cordonnées pour créer le point le centre de l'image
-            JcentreImgY=new JTextField();
-            JcentreImgZ=new JTextField();
-            JextentXx=new JTextField();// on a besoin de 3 coordonnées pour le vecteur exentent x
-            JextentXy=new JTextField();
-            JextentXz=new JTextField();
-            JextentYx=new JTextField(); //on a besoin de 3 coordonnées pour le vecteur exentent x
-            JextentYy=new JTextField();
-            JextentYz=new JTextField();
-            origin1x=new JTextField(); // we need 3 coordinates to define the location of the first light
-            origin1y=new JTextField();
-            origin1z=new JTextField();
-            Red1=new JTextField();// We need the red-green-blue combination to define the color of the light
-            Green1=new JTextField();
-            Blue1=new JTextField();
-            radius1=new JTextField();
-            sphere1x=new JTextField();
-            sphere1y=new JTextField();
-            sphere1z=new JTextField();
+        this.Jresolutionx=new JTextField();
+        this.Jresolutiony=new JTextField();
+        this.JfocalDistance=new JTextField();
+        this.JcentreImgX=new JTextField(); // on a besoin de 3 points cordonnées pour créer le point le centre de l'image
+        this.JcentreImgY=new JTextField();
+        this.JcentreImgZ=new JTextField();
+        this.JextentXx=new JTextField();// on a besoin de 3 coordonnées pour le vecteur exentent x
+        this.JextentXy=new JTextField();
+        this.JextentXz=new JTextField();
+        this.JextentYx=new JTextField(); //on a besoin de 3 coordonnées pour le vecteur exentent x
+        this.JextentYy=new JTextField();
+        this.JextentYz=new JTextField();
+        this.origin1x=new JTextField(); // we need 3 coordinates to define the location of the first light
+        this.origin1y=new JTextField();
+        this. origin1z=new JTextField();
+        this.Red1=new JTextField();// We need the red-green-blue combination to define the color of the light
+        this.Green1=new JTextField();
+        this.Blue1=new JTextField();
+        this.radius1=new JTextField();
+        this.sphere1x=new JTextField();
+        this.sphere1y=new JTextField();
+        this.sphere1z=new JTextField();
 
         //creation of the camera's definition pan
         JLabel Resolution = new JLabel("Resolution(x,y) :");
@@ -141,27 +164,27 @@ public class Interface extends JFrame implements ActionListener {
         JPanel CAMERA =new JPanel();
         CAMERA.setOpaque(false);
         Border lineborderCAMERA = BorderFactory.createLineBorder(Color.DARK_GRAY, 1); 
-        CAMERA.setBorder(lineborderCAMERA);
-        this.add(CAMERA);
+        CAMERA.setBorder(this.lineborderCAMERA);
+        this.add(this.CAMERA);
         CAMERA.setBounds(0,100, 350,700);
 
         JPanel LIGHT =new JPanel();
         LIGHT.setOpaque(false);
         Border lineborderLIGHT = BorderFactory.createLineBorder(Color.GRAY, 1); 
-        LIGHT.setBorder(lineborderLIGHT);
-        this.add(LIGHT);
+        LIGHT.setBorder(this.lineborderLIGHT);
+        this.add(this.LIGHT);
         LIGHT.setBounds(350,100, 350,700);
 
         JPanel SPHERE =new JPanel();
         SPHERE.setOpaque(false);
         Border lineborderSPHERE = BorderFactory.createLineBorder(Color.GRAY, 1); 
-        SPHERE.setBorder(lineborderSPHERE);
-        this.add(SPHERE);
+        SPHERE.setBorder(this.lineborderSPHERE);
+        this.add(this.SPHERE);
         SPHERE.setBounds(700,100, 350,700);
 
 
 
-        this.add(Scene);
+        this.add(this.Scene);
         Scene.setFont(new Font("Serif", Font.BOLD, 20));
         Scene.setOpaque(true);
         Scene.setForeground(Color.WHITE);
@@ -340,6 +363,15 @@ public class Interface extends JFrame implements ActionListener {
         if (e.getSource() == comboBoxLight) {
             // faire en sorte d'afficher les attributs de chaque light quand on clique sur le nom correspondant
         }
+        /*c=null;
+        LinkedList<Sphere> spheres= new LinkedList<Sphere>();
+        LinkedList<Light> lights = new LinkedList<Light>();
+        spheres=null;
+        lights = null;
+        */
+        this.c= null;
+        this.spheres=new LinkedList<Sphere>();
+        this.lights = new LinkedList<Light>();
 
         if (e.getSource() == comboBoxSphere) {
             // faire en sorte d'afficher les attributs de chaque sphere quand on clique sur le nom correspondant
@@ -382,9 +414,10 @@ public class Interface extends JFrame implements ActionListener {
 
         }
         if ((e.getSource()==ValidateLight1)&&(verifINT(Red1.getText()))&&(verifINT(Green1.getText()))&&verifINT(Blue1.getText())&&(verifDOUBLE(origin1x.getText()))&&(verifDOUBLE(origin1y.getText()))&&(verifDOUBLE(origin1z.getText()))){
-            Point origin1 = new Point (Double.parseDouble(origin1x.getText()),Double.parseDouble(origin1y.getText()), Double.parseDouble(origin1z.getText()));
-            Color i1= new Color (Integer.parseInt(Red1.getText()),Integer.parseInt(Green1.getText()),Integer.parseInt(Blue1.getText()));
-            Light FirstLight = new Light(origin1, i1);
+            Point origin1 = new Point(Double.parseDouble(origin1x.getText()),Double.parseDouble(origin1y.getText()), Double.parseDouble(origin1z.getText()));
+            Color i1= new Color(Double.parseDouble(Red1.getText()), Double.parseDouble(Green1.getText()), Double.parseDouble(Blue1.getText()));
+            Light firstLight = new Light(origin1, i1);
+
             //We delete the informations written the informations written in the JtextField
             Red1.setText("");
             Green1.setText("");
@@ -396,14 +429,14 @@ public class Interface extends JFrame implements ActionListener {
             comboBoxLight.addItem("light 1");
             //faire une boucle pour que ça marche à chaque fois
 
+            lights.add(firstLight);
            
         }
         
         if(e.getSource()==ValidateSphere1){
             Point pointFirstSphere= new Point (Double.parseDouble(sphere1x.getText()),Double.parseDouble(sphere1y.getText()), Double.parseDouble(sphere1z.getText()));
             Double RadiusFirstSphere = new Double (Double.parseDouble(radius1.getText()));
-            Material MaterialThirdSphere=new MaterialBlack();
-            Sphere Sphere1 = new Sphere(pointFirstSphere , RadiusFirstSphere, MaterialThirdSphere);
+            Sphere Sphere1 = new Sphere(pointFirstSphere , RadiusFirstSphere, black);
             sphere1x.setText("");
             sphere1y.setText("");
             sphere1z.setText("");
@@ -415,9 +448,26 @@ public class Interface extends JFrame implements ActionListener {
         
         if(e.getSource()==DeleteCamera){
             //essayer de choper quelle camera c'est pour la supprimer de la lsite
+        /*if(e.getSource()==DeleteCamera){
 
+        }*/
         }
-        if(e.getSource()==)
+
+        if(e.getSource()==ValidateScene){
+            if(!(c==null) && !spheres.isEmpty() && !lights.isEmpty()){
+                Scene s = new Scene(spheres, c, lights);
+                RayRendering r = new RayRendering(s);
+                r.createImage();
+            }else{
+                // display message saying at least 1 cam, 1 shere and 1 light
+            }
+            
+        }
+        //if(e.getSource()==)
+
+        //PB avec les colors à regler
+        //lancement d'1 calcul
+        // voir pour add les remove button 
 
 
     }
@@ -428,12 +478,10 @@ public class Interface extends JFrame implements ActionListener {
         }else{
             return true;
         }
-
     }
 
     // Method to verify that the characters are integers
     public boolean verifINT (String Averifier){
-   
         boolean isINT = true;
         if (Averifier.length() == 0){
             return false;
@@ -448,17 +496,15 @@ public class Interface extends JFrame implements ActionListener {
     
     public boolean verifDOUBLE (String Averifier){
         boolean isDOUBLE=true;
-
         if (Averifier.length() == 0){ //Verify that the string is not empty
             return false;
         }
         try {
-        Double.parseDouble(Averifier);
+            Double.parseDouble(Averifier);
         }catch(NumberFormatException e) {
             return false;
         }
         return isDOUBLE;
-
     }
     
 }

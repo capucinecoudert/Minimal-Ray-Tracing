@@ -1,6 +1,59 @@
 # Minimal-Ray-Tracing
 
-Compute image of a scene composed of Spheres.
+Compute image of a scene composed of spheres and lights from a camera position.
+
+// Point Class
+attributes: 3 double as position coordinates : x, y, z
+methods: add(Vector); substract(Point); distance(Point)
+
+// Vector Class
+attributes: 3 double as position coordinates : x, y, z
+methods: norm(); normalize(); add(Point); add(Vector); substract(Vector); multiply(double); divide(double); 
+         dotProduct(Vector); crossProduct(Vector)
+
+// Light Class
+attributes: a point of Origin, a Vector of direction
+methods: none
+
+
+// Color Class
+attributes: 3 doubles parameters defining the red, green, blue components of the color between 0-1.
+methods: multiply(Color); multiply(double); add(Color); colorToInt()
+
+// ColorInt Class
+attributes: 3 int parameters defining the red, green, blue components of the color between 0-255.
+methods: none
+
+// Material Class
+attributes: a double as its coefficient of reflection, a double as its specular power, a Color of diffusion
+methods: none
+
+// Sphere Class
+attributes: a radius, a Point as centre, a Material
+methods:none
+
+// Camera Class
+attributes: a double as its focal distance, a Point as the origin of the camera, 
+            a Point as the center of the plane of the image; 2 vectors defining the orientation of the plane of the image in space and its size; 2 ints defining the number of pixels of the image
+methods: getRay(int, int)
+
+// Scene Class
+attributes: a Camera, a list of Spheres, a list of Lights
+methods: none
+
+// RayRendering Class
+attributes: a Scene, an int defining the maximum number of times a ray can be reflected 
+methods: intersectRay(Ray, Scene, int); computeColor(Ray, Scene, Sphere, double, int); hitObject(Ray, Sphere); createImage()
+
+// Interface Class
+attributes: several Materials, several JButtons and several JTextField that create the interface
+methods: actionPerformed(actionEvent);
+
+
+// Main Class
+launches the interface
+
+
 
 ## Class Diagram
 

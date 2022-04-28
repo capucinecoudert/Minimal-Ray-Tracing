@@ -9,9 +9,9 @@ public class Color {
     */
 
     public Color(double r, double g, double b){
-        red=r;
-        green=g;
-        blue=b;
+        this.red=r;
+        this.green=g;
+        this.blue=b;
     }
 
     /* this method multiplies 2 colors*/

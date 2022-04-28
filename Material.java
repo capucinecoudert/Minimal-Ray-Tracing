@@ -4,18 +4,13 @@ public class Material {
         a color of diffusion and a specular color.
     */
 
-    double reflectionCoeff;
-    double specularPower;
-    //Color specularColor; //not used
-    Color diffusionColor;
+    double reflectionCoeff; // reflection coefficient of the material
+    double specularPower; // specular Power of the material
+    Color diffusionColor; // the diffusion color of the material
 
-    public Material(double r, double p,/* Color s,*/ Color d){
-        reflectionCoeff=r;
-        specularPower=p;
-        //specularColor=s;
-        diffusionColor=d;
+    public Material(double r, double p,Color d){
+        this.reflectionCoeff=r;
+        this.specularPower=p;
+        this.diffusionColor=d;
     }
-
-    // voir pour les materiaux de l'interface --> sinon error
-    public Material(){}
 }

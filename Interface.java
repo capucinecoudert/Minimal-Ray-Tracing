@@ -326,7 +326,8 @@ public class Interface extends JFrame implements ActionListener {
         Camera c=null;
         LinkedList<Sphere> spheres= new LinkedList<Sphere>();
         LinkedList<Light> lights = new LinkedList<Light>();
-
+        spheres=null;
+        lights = null;
 
         if((e.getSource()== ValidateCamera)&&(verifINT(Jresolutionx.getText()))&&(verifINT(Jresolutiony.getText()))&&(verifINT(JfocalDistance.getText()))&&(verifDOUBLE(JextentXy.getText()))&&(verifDOUBLE(JextentXx.getText()))&&(verifDOUBLE(JextentXz.getText()))&&(verifDOUBLE(JextentYx.getText()))&&((verifDOUBLE(JextentYy.getText())))&&(verifDOUBLE(JextentYz.getText()))&&(verifDOUBLE(JcentreImgX.getText()))&&(verifDOUBLE(JcentreImgY.getText()))&&(verifDOUBLE(JcentreImgZ.getText()))){
             int resolutionX = Integer.parseInt(Jresolutionx.getText()) ;
@@ -392,9 +393,9 @@ public class Interface extends JFrame implements ActionListener {
         
         }
         
-        if(e.getSource()==DeleteCamera){
+        /*if(e.getSource()==DeleteCamera){
 
-        }
+        }*/
 
         if(e.getSource()==ValidateScene){
             if(!(c==null) && !spheres.isEmpty() && !lights.isEmpty()){
@@ -402,19 +403,14 @@ public class Interface extends JFrame implements ActionListener {
                 RayRendering r = new RayRendering(s);
                 r.createImage();
             }else{
-                
+                // display message saying at least 1 cam, 1 shere and 1 light
             }
             
         }
 
-        /*
-
-        if(e.getSource()==ValidateScene){
-            Scene scene = new Scene(spheres, cam , lights);
-            RayRendering r = new RayRendering(scene);
-            r.createImage();
-        }
-        */
+        //PB avec les colors à regler
+        //lancement d'1 calcul
+        // voir pour add les remove button 
 
 
     }
@@ -425,12 +421,10 @@ public class Interface extends JFrame implements ActionListener {
         }else{
             return true;
         }
-
     }
 
     // Method to verify that the characters are integers
     public boolean verifINT (String Averifier){
-   
         boolean isINT = true;
         if (Averifier.length() == 0){
             return false;
@@ -445,17 +439,15 @@ public class Interface extends JFrame implements ActionListener {
     
     public boolean verifDOUBLE (String Averifier){
         boolean isDOUBLE=true;
-
         if (Averifier.length() == 0){ //Verify that the string is not empty
             return false;
         }
         try {
-        Double.parseDouble(Averifier);
+            Double.parseDouble(Averifier);
         }catch(NumberFormatException e) {
             return false;
         }
         return isDOUBLE;
-
     }
     
 }

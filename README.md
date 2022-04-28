@@ -46,14 +46,12 @@ attributes: a Scene, an int defining the maximum number of times a ray can be re
 methods: intersectRay(Ray, Scene, int); computeColor(Ray, Scene, Sphere, double, int); hitObject(Ray, Sphere); createImage()
 
 // Interface Class
-je mets tous les elements ???
+attributes: several Materials, several JButtons and several JTextField that create the interface
+methods: actionPerformed(actionEvent);
 
 
 // Main Class
-creates an interface
-
-
-
+launches the interface
 
 
 

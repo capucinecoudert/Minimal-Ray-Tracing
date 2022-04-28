@@ -31,6 +31,10 @@ public class Interface extends JFrame implements ActionListener {
 
 
          //attributes for the camera's definition
+         public Camera c;
+         public LinkedList<Sphere> spheres=new LinkedList<>(); //liste des spheres
+         public LinkedList<Light> lights = new LinkedList<>(); // liste des lights
+
          public JTextField Jresolutionx;
          public JTextField Jresolutiony;
          public JTextField JfocalDistance;
@@ -73,7 +77,7 @@ public class Interface extends JFrame implements ActionListener {
        
 
     public Interface (){
-        super("Mon Interface");
+        super("Minimal Ray Tracing");
        // setExtendedState(JFrame.MAXIMIZED_BOTH);
       //  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1050, 1000);
@@ -126,7 +130,7 @@ public class Interface extends JFrame implements ActionListener {
             origin1x=new JTextField(); // we need 3 coordinates to define the location of the first light
             origin1y=new JTextField();
             origin1z=new JTextField();
-            Red1=new JTextField();// We need the red-grren-blue combination to define the color of the light
+            Red1=new JTextField();// We need the red-green-blue combination to define the color of the light
             Green1=new JTextField();
             Blue1=new JTextField();
             radius1=new JTextField();
@@ -135,20 +139,20 @@ public class Interface extends JFrame implements ActionListener {
             sphere1z=new JTextField();
 
         //creation of the camera's definition pan
-        JLabel Resolution = new JLabel("Resolution(x,y)=");
-        JLabel FocalDistance = new JLabel("focal distance =");
-        JLabel Centre = new JLabel("Centre of the image (x,y,z)=");
-        JLabel Vectorx = new JLabel(" Vector Extent x (x,t,z)=");
-        JLabel Vectory = new JLabel(" Vector Extent y (x,t,z)=");
+        JLabel Resolution = new JLabel("Resolution(x,y) :");
+        JLabel FocalDistance = new JLabel("Focal distance :");
+        JLabel Centre = new JLabel("Image center (x,y,z) :");
+        JLabel Vectorx = new JLabel(" Vector Extent x (x,y,z) :");
+        JLabel Vectory = new JLabel(" Vector Extent y (x,y,z) :");
         JLabel Camera= new JLabel ("Description of the camera");
-        JLabel Scene= new JLabel("Description of the scene");
+        JLabel Scene= new JLabel(" Description of the scene");
         JLabel Light =new JLabel ("Description of the lights");
         JLabel Sphere =new JLabel ("Description of the spheres");
 
-        JLabel OriginSphere = new JLabel(" Origin of the first light(x,y,z) =");
-        JLabel RGBcode = new JLabel("RGB Code of the first light (Red, Green, Blue)=");
-        JLabel Radius = new JLabel("Radius of the 1st sphere");
-        JLabel centre = new JLabel("Centre of the 1st Sphere");
+        JLabel OriginSphere = new JLabel(" Origin of the light (x,y,z) :");
+        JLabel RGBcode = new JLabel("Light Code (Red, Green, Blue) :");
+        JLabel Radius = new JLabel("Radius of the 1st sphere :");
+        JLabel centre = new JLabel("Centre of the 1st Sphere :");
        
         JPanel CAMERA =new JPanel();
         CAMERA.setOpaque(false);
@@ -184,10 +188,10 @@ public class Interface extends JFrame implements ActionListener {
         Camera.setBounds(10, 50, 340, 50);
         
         this.add(Light);
-        Light.setBounds(350, 50, 350, 50);
+        Light.setBounds(360, 50, 350, 50);
 
         this.add(Sphere);
-        Sphere.setBounds(700, 50, 350, 50);
+        Sphere.setBounds(710, 50, 350, 50);
 
         this.add(Resolution);
         Resolution.setBounds(10, 225, 140, 50);
@@ -205,34 +209,34 @@ public class Interface extends JFrame implements ActionListener {
         Vectory.setBounds(10, 525, 140, 50);
 
         this.add(ValidateCamera);
-        ValidateCamera.setBounds(10,600,140,50);
+        ValidateCamera.setBounds(20,600,130,50);
 
         this.add(DeleteCamera);
-        DeleteCamera.setBounds(200,600,150,50);
+        DeleteCamera.setBounds(200,600,130,50);
 
         this.add(RGBcode);
-        RGBcode.setBounds(350, 225, 150, 50);
+        RGBcode.setBounds(360, 225, 200, 50);
         
         this.add(OriginSphere);
-        OriginSphere.setBounds(350,300,150,50);
+        OriginSphere.setBounds(360,300,150,50);
 
         this.add(Radius);
-        Radius.setBounds(700,225,150,50);
+        Radius.setBounds(710,225,150,50);
 
         this.add(centre);
-        centre.setBounds(700,300,150,50);
+        centre.setBounds(710,300,150,50);
 
         this.add(ValidateLight1);
-        ValidateLight1.setBounds(350,600,150,50);
+        ValidateLight1.setBounds(370,600,130,50);
 
         this.add(DeleteLight);
-        DeleteLight.setBounds(550,600,150,50);
+        DeleteLight.setBounds(550,600,130,50);
 
         this.add(ValidateSphere1);
-        ValidateSphere1.setBounds(700,600,150,50);
+        ValidateSphere1.setBounds(720,600,130,50);
 
         this.add(DeleteSphere);
-        DeleteSphere.setBounds(900,600,150,50);
+        DeleteSphere.setBounds(900,600,130,50);
         
         //ajout des JTextField
 
@@ -302,6 +306,21 @@ public class Interface extends JFrame implements ActionListener {
         this.add(sphere1z);
         sphere1z.setBounds(1000,300,37,50);
 
+        //COMBOBOX
+        JPanel PanelComboBoxLight = new JPanel();
+        String [] lightName = {" "};
+        JComboBox comboBoxLight = new JComboBox (lightName);
+        PanelComboBoxLight.add(comboBoxLight);
+        PanelComboBoxLight.setBounds(450, 125, 140, 50);
+        this.add(PanelComboBoxLight);
+
+        JPanel PanelComboBoxSphere = new JPanel();
+        String [] sphereName = {" "};
+        JComboBox comboBoxSphere = new JComboBox (sphere);
+        PanelComboBoxSphere.add(comboBoxSphere);
+        PanelComboBoxSphere.setBounds(850, 125, 140, 50);
+        this.add(PanelComboBoxSphere);
+
         //final JComboBox<String> material = new JComboBox<String>(Materials1);
        // material.setVisible(true);
         // Interface.add(material);
@@ -312,7 +331,8 @@ public class Interface extends JFrame implements ActionListener {
         //this.setContentPane(Interface);
         this.setVisible(true);
 
-    
+        
+
 
     }
     // choix  de la sphere : radius, materiau, centre avec bouton Add et Remove
@@ -320,6 +340,9 @@ public class Interface extends JFrame implements ActionListener {
     // bouton calculer img
     // zone pour afficher bmp file
     // blablaba
+    
+    // COMBOBOX 
+    
     
     
     public void actionPerformed (ActionEvent e){

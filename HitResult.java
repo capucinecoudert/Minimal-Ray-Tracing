@@ -9,7 +9,7 @@ public class HitResult {
     boolean hit;
 
     public HitResult(double d, boolean h){
-        distance=d;
-        hit=h;
+        this.distance=d;
+        this.hit=h;
     }
 }

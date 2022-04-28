@@ -11,10 +11,9 @@ attributes: 3 double as position coordinates : x, y, z
 methods: norm(); normalize(); add(Point); add(Vector); substract(Vector); multiply(double); divide(double); 
          dotProduct(Vector); crossProduct(Vector)
 
-// Light Class
+// Ray Class
 attributes: a point of Origin, a Vector of direction
-methods: none
-
+methods: distancePoint(Point)
 
 // Color Class
 attributes: 3 doubles parameters defining the red, green, blue components of the color between 0-1.
@@ -24,6 +23,10 @@ methods: multiply(Color); multiply(double); add(Color); colorToInt()
 attributes: 3 int parameters defining the red, green, blue components of the color between 0-255.
 methods: none
 
+// Light Class
+attributes: a Point of origin, a Color of Intensity
+methods: none
+
 // Material Class
 attributes: a double as its coefficient of reflection, a double as its specular power, a Color of diffusion
 methods: none
@@ -31,6 +34,10 @@ methods: none
 // Sphere Class
 attributes: a radius, a Point as centre, a Material
 methods:none
+
+// HitResult Class
+attributes: a double as a distance, a boolean as an indicator if the ray hhas hitten the object or not
+methods: none
 
 // Camera Class
 attributes: a double as its focal distance, a Point as the origin of the camera, 

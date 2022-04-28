@@ -5,7 +5,8 @@ public class Light {
     public Point origin;
 
     public Light(Point o, Color i){
-        intensity=i;
-        origin=o;
+        this.origin=o;
+        this.intensity=i;
+        
     }
 }

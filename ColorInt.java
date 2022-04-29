@@ -11,4 +11,11 @@
         this.green=g;
         this.blue=b;
     }
+
+    public ColorFloat intToColor(){
+        double r= Math.min( this.red/255, 1);
+        double g= Math.min(this.green/255, 1);
+        double b= Math.min(this.blue/255, 1);
+        return new ColorFloat(r, g, b);
+    }
 }

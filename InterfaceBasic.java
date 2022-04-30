@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.*;
+import java.lang.System;
 
 public class InterfaceBasic extends JFrame{
 
@@ -31,7 +32,8 @@ public class InterfaceBasic extends JFrame{
         this.add(this.image);
         
         try { 
-            BufferedImage myPicture = ImageIO.read(new File("C:\\Users\\coude\\Documents\\output.bmp\\"));
+            String path = System.getProperty("user.dir") +"\\output.bmp";
+            BufferedImage myPicture = ImageIO.read(new File(path));
             ImageIcon imgIc = new ImageIcon(myPicture);
             this.image.setIcon(imgIc);
         } catch (IOException a) {

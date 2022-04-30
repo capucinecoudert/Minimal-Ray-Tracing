@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import java.lang.System;
 
 public class RayRendering {
     // Creates an object RayRendering containing a scene and the limit number of reflection of a ray.
@@ -119,7 +120,8 @@ public class RayRendering {
               image.setRGB(x, scene.camera.resolutionY -1 -y, rgb);
            }
         }
-        File outputFile = new File("C:\\Users\\coude\\Documents\\output.bmp\\"); // here, we can write the path we want
+        String path =System.getProperty("user.dir") +"\\output.bmp";
+        File outputFile = new File(path); // here, we can write the path we want
         ImageIO.write(image, "bmp", outputFile);
     }   
 }

@@ -7,8 +7,8 @@ import java.lang.System;
 
 public class InterfaceBasic extends JFrame{
 
-    JLabel b ;
-    JLabel image;
+    JLabel b ; //title
+    JLabel image; //final image
 
     public InterfaceBasic(){
         super("Minimal Ray Tracing");
@@ -31,7 +31,7 @@ public class InterfaceBasic extends JFrame{
         this.image.setAlignmentX(CENTER_ALIGNMENT);
         this.add(this.image);
         
-        try { 
+        try { //Gets the image created by the program and displays it
             String path = System.getProperty("user.dir") +"\\output.bmp";
             BufferedImage myPicture = ImageIO.read(new File(path));
             ImageIcon imgIc = new ImageIcon(myPicture);

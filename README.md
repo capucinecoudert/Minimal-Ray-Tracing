@@ -112,7 +112,6 @@ classDiagram
         dotProduct(Vector v2) : double
         crossProduct(Vector v2) : Vector
     }
-```
 
 
 

@@ -61,7 +61,7 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
     public JButton DeleteCamera;
 
     //List for spheres
-    public JList sphereList;
+    /*public JList sphereList;
     public DefaultListModel sphereListModel;
     public JButton addSphereButton;
     public JTextField sphereName;
@@ -71,7 +71,8 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
     public DefaultListModel  lightListModel;
     public JButton addLightButton;
     public JTextField lightName;
-
+    */
+    
     public InterfaceEdition() {
         // Initialization of the window
         super("Minimal Ray Tracing");
@@ -87,7 +88,7 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
         // Setting of all the buttons ad texts of the window
         this.createIHM();
 
-        //Display scene elemen
+        //Display the elements of the reference scene 
         cameraToInterface();
         lightToInterface(0);
         sphereToInterface(0);

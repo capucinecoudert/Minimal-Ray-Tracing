@@ -66,6 +66,50 @@ launches the interface
 
 ```mermaid
 classDiagram
+
+    Camera --> Point
+    Camera --> Vector
+    Camera <-- Ray
+
+    ColorFloat <--> ColorToInt
+
+    Interface --> Material
+    Interface --> Camera
+    Interface --> Sphere
+    Interface --> Light
+
+    InterfaceEdition --> Material
+    InterfaceBasic --> Camera
+    InterfaceBasic --> Sphere
+    InterfaceBasic --> Light
+
+    Light --> ColorFloat
+    Light --> Point
+
+    Material --> ColorFloat
+
+    Plan <--> Point
+    Plan --> Vector
+    Plan --> Ray
+
+    Point <--> Vector
+
+    Ray --> Point
+    Ray --> Vector
+
+    RayRendering --> Scene
+    RayRendering --> Ray
+    RayRendering <-- ColorFloat
+    RayRendering --> Sphere
+    RayRendering <-- HitResult
+
+    Scene --> Camera
+    Scene --> Sphere
+    Scene --> Light
+
+    Sphere --> Point
+    Sphere --> Material
+
     class Camera{
         + resolutionX : int
         + resolutionY : int
@@ -271,7 +315,7 @@ classDiagram
         + reflectionCoeff : double
         + specularPower : double
         + diffusionColor : ColorFloat
-        Material (double r, double p, ColorFloat s, ColorFloat d)
+        Material (double r, double p, ColorFloat d)
     }
     class Plan{
         - EPSILON : double
@@ -303,7 +347,7 @@ classDiagram
         intersectRay (Ray ray, Scene scene, int generation) : ColorFloat
         computeColor (Ray ray, Sphere sphere, Scene scene, double distance, int generation) : ColorFloat
         hitObject (Ray ray, Sphere sphere) : HitResult
-        createImage ())
+        createImage ()
     }
     class Scene{
         + camera : Camera

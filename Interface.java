@@ -19,7 +19,7 @@ import java.awt.BorderLayout;
 import javax.swing.border.Border;
 
 public class Interface extends JFrame implements ActionListener {
-    //
+    // attributes for the available materials
     public Material black;
     public Material white;
     public Material green;
@@ -28,6 +28,7 @@ public class Interface extends JFrame implements ActionListener {
     public Material magenta;
     public Material yellow;
     public Material blue;
+    public String[] Materials1 = { "Black", "Blue", "Cyan", "Green", "Magenta", "Red", "White", "Yellow" }; // Attributes
 
     // attributes for the camera's definition
     public Camera c;
@@ -61,7 +62,6 @@ public class Interface extends JFrame implements ActionListener {
     public JButton DeleteLight;
 
     // Attributes for the spheres definition
-    public String[] Materials1 = { "Black", "Blue", "Cyan", "Green", "Magenta", "Red", "White", "Yellow" }; // Attributes
                                                                                                             // for the
                                                                                                             // first
                                                                                                             // sphere
@@ -72,15 +72,18 @@ public class Interface extends JFrame implements ActionListener {
     public JButton ValidateSphere1;
     public JButton DeleteSphere;
 
-    // Mise en place des combobox
+    // ComboBox declaration
+    // Light Combobox
     public JPanel PanelComboBoxLight;
-    String[] lightName = { "create a new light" };
-    JComboBox comboBoxLight;
+    public String[] lightName = { "create a new light" };
+    public JComboBox comboBoxLight;
 
+    // Sphere ComboBox
     public JPanel PanelComboBoxSphere;
-    String[] sphereName = { "create a new sphere" };
-    JComboBox comboBoxSphere;
+    public String[] sphereName = { "create a new sphere" };
+    public JComboBox comboBoxSphere;
 
+    // Button to launch the scene
     public JButton ValidateScene;
 
     public Interface() {
@@ -326,9 +329,6 @@ public class Interface extends JFrame implements ActionListener {
         /*
         PanelComboBoxLight = new JPanel();
         comboBoxLight = new JComboBox (lightName);
-        LinkedList<String> patatipatata = new LinkedList<String>();
-        patatipatata.add("test combobox avce linked list");
-        comboBoxLight = new JComboBox(patatipatata);
         comboBoxLight.addActionListener(this);
         PanelComboBoxLight.add(comboBoxLight);
         PanelComboBoxLight.setBounds(450, 125, 140, 50);
@@ -355,11 +355,11 @@ public class Interface extends JFrame implements ActionListener {
     }
     // choix de la sphere : radius, materiau, centre avec bouton Add et Remove
     // a cote affichage de la scene 2D
-    // bouton calculer img
+    
     // zone pour afficher bmp file
     // blablaba
     
-    // COMBOBOX
+   
 
     public void actionPerformed (ActionEvent e){ 
         if (e.getSource() == comboBoxLight) {
@@ -513,7 +513,7 @@ public class Interface extends JFrame implements ActionListener {
     }
 
     // Method to verify that characters have been put in the JTextfield
-    public boolean verifSaisie(String Averifier) {
+    public boolean verifSeaisi(String Averifier) {
         if (Averifier.length() == 0) {
             return false;
         } else {
@@ -548,7 +548,7 @@ public class Interface extends JFrame implements ActionListener {
         return isDOUBLE;
     }
     
-    public static void LightSetNil(){
+    public void LightSetNil(){
         comboBoxLight.setSelectedIndex(comboBoxLight.getItemCount-1);
         Red1.setText("");
         Green1.setText("");
@@ -558,7 +558,7 @@ public class Interface extends JFrame implements ActionListener {
         origin1z.setText("");
 
     }
-    public static void SphereSetNil(){
+    public void SphereSetNil(){
         comboBoxSphere.setSelectedIndex(comboBoxSphere.getItemCount-1);
         sphere1x.setText("");
         sphere1y.setText("");

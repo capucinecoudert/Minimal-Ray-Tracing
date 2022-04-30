@@ -75,27 +75,48 @@ classDiagram
         + extentX : Vector
         + extentY :  Vector
         Camera (Point c, int d, Vector vX, int rX, Vector vY, int rY)
-        computeRay (double percentX, double percentY) Ray
+        getRay (int x, int y) : Ray
     }
-    class ColorInt{
-        + red : int
-        + blue : int
-        + green : int
-        ColorFloat (int r, int b, int g)
-    }
+
     class ColorFloat{
         + red : double
         + blue : double
         + green : double
         ColorFloat (double r, double b, double g)
+        multiply (ColorFloat c) : ColorFloat
+        multiply (double c) : ColorFloat
+        add (ColorFloat c) : ColorFloat
         ColorToInt () : ColorInt
     }
+
+    class ColorInt{
+        + red : int
+        + blue : int
+        + green : int
+        ColorInt (int r, int b, int g)
+        intToColor() : ColorFloat
+    }
+
     class HitResult{
         + distance : double
         + hit : boolean
         HitResult (double d, boolean h)
     }
     class Interface{
+        + black : Material
+        + white : Material
+        + green : Material
+        + cyan : Material
+        + red : Material
+        + magenta : Material
+        + yellow : Material
+        + blue : Material
+        + Materials1 : String[]
+
+        + c : Camera
+        + spheres : ArrayList<Sphere>
+        + lights : ArrayList<Light>
+
         + Jresolutionx : JTextField
         + Jresolutiony : JTextField
         + JfocalDistance : JTextField  
@@ -109,8 +130,94 @@ classDiagram
         + JextentYy : JTextField
         + JextentYz : JTextField
         + ValidateCamera : JButton
-        Interface()
+        + DeleteCamera : JButton
+
+        + origin1x : JTextField
+        + origin1y : JTextField
+        + origin1z : JTextField
+        + Red1 : JTextField
+        + Green1 : JTextField
+        + Blue1 : JTextField
+        + ValidateLight1 : JButton
+        + DeleteLight : JButton
+        
+        + radius 1 :JTextField
+        + sphere1x : JTextField
+        + sphere1y : JTextField
+        + sphere1z : JTextField
+        + ValidateSphere1 : JButton
+        + DeleteSphere : JButton
+
+        + PanelComboBoxLight : JPanel
+        + lightName : String[]
+        + comboBoxLight: JComboBox
+
+        + PanelComboBoxSphere : JPanel
+        + sphereName : String[]
+        + comboBoxSphere: 
+
+        + ValidateScene : JButton
+
+        Interface ()
+        actionPerformed (ActionEvent e)
+        displayMessage (String s)
+        launchRayRendering (ArrayList<Sphere> spheres, ArrayList<Light> lights, camera c)
+        verifSaisie (String AVerifier) : boolean
+        verifINT (String AVerifier) : boolean
+        verifDOUBLE (String AVerifier) : boolean
+        LightSetNil ()
+        SphereSetNil ()
     }
+
+    class InterfaceBasic{
+        + b : JLabel
+        + image : JLabel
+        InterfaceBasic ()
+    }
+
+    class InterfaceEdition{
+        + c: Camera
+        + spheres : ArrayList<Sphere>
+        + lights : ArrayList<Light>
+
+        + nbCamera : int
+        + Jresolutionx : JTextField
+        + Jresolutiony : JTextField
+        + JfocalDistance : JTextField  
+        + JcentreImgX : JTextField
+        + JcentreImgY : JTextField  
+        + JcentreImgZ : JTextField  
+        + JextentXx : JTextField
+        + JextentXy : JTextField  
+        + JextentXz : JTextField
+        + JextentYx : JTextField
+        + JextentYy : JTextField
+        + JextentYz : JTextField
+
+        + origin1x : JTextField
+        + origin1y : JTextField
+        + origin1z : JTextField
+        + Red1 : JTextField
+        + Green1 : JTextField
+        + Blue1 : JTextField
+        
+        + radius 1 :JTextField
+        + sphere1x : JTextField
+        + sphere1y : JTextField
+        + sphere1z : JTextField
+
+        + PanelComboBoxLight : JPanel
+        + lightName : String[]
+        + comboBoxLight: JComboBox
+
+        + PanelComboBoxSphere : JPanel
+        + sphereName : String[]
+        + comboBoxSphere: 
+
+        + ValidateScene : JButton
+
+    }
+
     class Light{
         + intensity : ColorFloat
         + origin : Point

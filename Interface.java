@@ -47,8 +47,7 @@ public class Interface extends JFrame implements ActionListener {
     public JTextField JextentYx; // on a besoin de 3 coordonnées pour le vecteur exentent x
     public JTextField JextentYy;
     public JTextField JextentYz;
-    public JButton ValidateCamera; // bouton pour valider la caméra
-    public JButton DeleteCamera;
+    
     // on branche les écoueteurs pour la caméra
 
     // attributes for the lights definition
@@ -58,9 +57,7 @@ public class Interface extends JFrame implements ActionListener {
     public JTextField Red1; // We need the red-grren-blue combination to define the color of the light
     public JTextField Green1;
     public JTextField Blue1;
-    public JButton ValidateLight1;
-    public JButton DeleteLight;
-
+    
     // Attributes for the spheres definition
                                                                                                             // for the
                                                                                                             // first
@@ -69,8 +66,7 @@ public class Interface extends JFrame implements ActionListener {
     public JTextField sphere1x;
     public JTextField sphere1y;
     public JTextField sphere1z;
-    public JButton ValidateSphere1;
-    public JButton DeleteSphere;
+    
 
     // ComboBox declaration
     // Light Combobox
@@ -84,7 +80,14 @@ public class Interface extends JFrame implements ActionListener {
     public JComboBox comboBoxSphere;
 
     // Button to launch the scene
+    public JButton ValidateSphere1;
+    public JButton DeleteSphere;
+    public JButton ValidateLight1;
+    public JButton DeleteLight;
+    public JButton ValidateCamera; // bouton pour valider la caméra
+    public JButton DeleteCamera;
     public JButton ValidateScene;
+    
 
     public Interface() {
         // Initialization of the window

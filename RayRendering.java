@@ -15,7 +15,7 @@ public class RayRendering {
     }
 
     //this method returns the color of the pixel if the given ray hits an object of the sphere
-    public ColorFloat intersectRay(Ray ray, Scene scene, int generation){
+    public ColorFloat intersectRay (Ray ray, Scene scene, int generation){
         ColorFloat backgroundColor= new ColorFloat(0,0,0);
         double distance= Double.POSITIVE_INFINITY;
         Sphere object= null;
@@ -33,7 +33,7 @@ public class RayRendering {
     }
 
     //this method compute the color of the pixel for a given ray and  the nearest sphere it hits
-    public ColorFloat computeColor(Ray ray, Sphere sphere, Scene scene, double distance, int generation){
+    public ColorFloat computeColor (Ray ray, Sphere sphere, Scene scene, double distance, int generation){
         ColorFloat pixelColor= new ColorFloat(0,0,0);
         // Compute the point where the ray intersected the object.
         Point intersectPoint= ray.origin.add(ray.direction.multiply(distance));

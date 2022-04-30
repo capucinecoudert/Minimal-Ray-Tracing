@@ -73,6 +73,50 @@ launches the interface
 
 ```mermaid
 classDiagram
+
+    Camera --> Point
+    Camera --> Vector
+    Camera <-- Ray
+
+    ColorFloat <--> ColorToInt
+
+    Interface --> Material
+    Interface --> Camera
+    Interface --> Sphere
+    Interface --> Light
+
+    InterfaceEdition --> Material
+    InterfaceBasic --> Camera
+    InterfaceBasic --> Sphere
+    InterfaceBasic --> Light
+
+    Light --> ColorFloat
+    Light --> Point
+
+    Material --> ColorFloat
+
+    Plan <--> Point
+    Plan --> Vector
+    Plan --> Ray
+
+    Point <--> Vector
+
+    Ray --> Point
+    Ray --> Vector
+
+    RayRendering --> Scene
+    RayRendering --> Ray
+    RayRendering <-- ColorFloat
+    RayRendering --> Sphere
+    RayRendering <-- HitResult
+
+    Scene --> Camera
+    Scene --> Sphere
+    Scene --> Light
+
+    Sphere --> Point
+    Sphere --> Material
+
     class Camera{
         + resolutionX : int
         + resolutionY : int
@@ -136,8 +180,6 @@ classDiagram
         + JextentYx : JTextField
         + JextentYy : JTextField
         + JextentYz : JTextField
-        + ValidateCamera : JButton
-        + DeleteCamera : JButton
 
         + origin1x : JTextField
         + origin1y : JTextField
@@ -145,15 +187,11 @@ classDiagram
         + Red1 : JTextField
         + Green1 : JTextField
         + Blue1 : JTextField
-        + ValidateLight1 : JButton
-        + DeleteLight : JButton
         
         + radius 1 :JTextField
         + sphere1x : JTextField
         + sphere1y : JTextField
         + sphere1z : JTextField
-        + ValidateSphere1 : JButton
-        + DeleteSphere : JButton
 
         + PanelComboBoxLight : JPanel
         + lightName : String[]
@@ -163,6 +201,12 @@ classDiagram
         + sphereName : String[]
         + comboBoxSphere: 
 
+        + ValidateSphere1 : JButton
+        + DeleteSphere : JButton
+        + ValidateLight1 : JButton
+        + DeleteLight : JButton
+        + ValidateCamera : JButton
+        + DeleteCamera : JButton
         + ValidateScene : JButton
 
         Interface ()
@@ -183,6 +227,16 @@ classDiagram
     }
 
     class InterfaceEdition{
+        + black : Material
+        + white : Material
+        + green : Material
+        + cyan : Material
+        + red : Material
+        + magenta : Material
+        + yellow : Material
+        + blue : Material
+        + comboBoxMaterial : JComboBox<String> 
+
         + c: Camera
         + spheres : ArrayList<Sphere>
         + lights : ArrayList<Light>
@@ -213,29 +267,71 @@ classDiagram
         + sphere1y : JTextField
         + sphere1z : JTextField
 
-        + PanelComboBoxLight : JPanel
-        + lightName : String[]
-        + comboBoxLight: JComboBox
-
-        + PanelComboBoxSphere : JPanel
-        + sphereName : String[]
-        + comboBoxSphere: 
-
+        + ValidateSphere : JButton
+        + DeleteSphere : JButton
+        + ValidateLight1 : JButton
+        + DeleteLight : JButton
+        + ValidateCamera : JButton
+        + DeleteCamera : JButton
         + ValidateScene : JButton
 
+        + sphereList : JList
+        + sphereListModel : DefaultListModel
+        + addSphereButton : JButton
+        + sphereName : JTextField
+
+        + lightList : JList 
+        + lightListModel : DefaultListModel
+        + addLightButton : JButton
+        + lightName : JTextField
+
+        InterfaceEdition ()
+        actionPerformed (ActionEvent e)
+        initScene ()
+        displayMessage (String s)
+        launchRayRendering (ArrayList<Sphere> sp, ArrayList<Light> l, Camera ca)
+        verifSaisie (String AVerifier) : boolean
+        verifINT (String AVerifier) : boolean
+        verifDOUBLE (String AVerifier) : boolean
+        comboToMaterial (String selected) : Material
+        materialToCombo (material m) : int
+        resetCamera ()
+        cameraToInterface ()
+        resetLight ()
+        lightToInterface (int i)
+        interfaceToLight (int j)
+        resetSphere ()
+        sphereToInterface (int i)
+        interfaceToSphere (int i)
+        isCameraValid () : boolean
+        isLightValid () : boolean
+        checkRGBvalue (String s) : boolean
+        isSphereValid () : boolean
+        isSceneValid () : boolean
+        initializeMaterials ()
+        createIHM ()
     }
 
     class Light{
         + intensity : ColorFloat
         + origin : Point
-        Light(Point o, ColorFloat i)
+        Light (Point o, ColorFloat i)
     }
+    
     class Material{
         + reflectionCoeff : double
         + specularPower : double
-        + specularColor : ColorFloat
         + diffusionColor : ColorFloat
-        Material (double r, double p, ColorFloat s, ColorFloat d)
+        Material (double r, double p, ColorFloat d)
+    }
+    class Plan{
+        - EPSILON : double
+        + origin : Point
+        + normalVector : Vector
+        + vX : Vector
+        + vY : Vector
+        Plan (Point origin, Vector vX, Vector vY)
+        intersectRayPlane (Ray ray) : Point
     }
     class Point{
         + x : double
@@ -243,26 +339,28 @@ classDiagram
         + z : double
         Point (double x, double y, double z)
         add (Vector v1) : Point
+        substract (Point v1) : Point
         distance (Point p) : double
     }
     class Ray{
         + origin : Point
         + direction : Vector
         Ray (Point p, vector v)
+        distancePoint (Point p) : double
     }
     class RayRendering{
         + scene : Scene
-        + camera : Camera
-        main () 
-        computeColor (Ray ray, Scene scene) : ColorFloat
-        hitObject (Ray ray, Sphere sphere, double distance) : HitResult
-        createImage (Scene scene)
+        + maxReflectionGeneration : int
+        intersectRay (Ray ray, Scene scene, int generation) : ColorFloat
+        computeColor (Ray ray, Sphere sphere, Scene scene, double distance, int generation) : ColorFloat
+        hitObject (Ray ray, Sphere sphere) : HitResult
+        createImage ()
     }
     class Scene{
         + camera : Camera
         + spheres : ArrayList<Sphere>
         + lights : ArrayList <Light>
-        Scene (ArrayList<Sphere> s, Camera c, ArrayList<Light> 1)
+        Scene (ArrayList<Sphere> s, Camera c, ArrayList<Light> l)
     }
     class Sphere{
         + center : Point
@@ -276,15 +374,15 @@ classDiagram
         + z : double
         Vector (double x, double y, double x)
         Vector (Point p1, Point p2)
-        norm() : double
-        normalize() 
-        add(Point p) : Point
-        add(Vector v1, Vector v2) : Vector
-        substract(Vector v2) : Vector
-        multiply(double c) : Vector
-        divide(double c) : Vector
-        dotProduct(Vector v2) : double
-        crossProduct(Vector v2) : Vector
+        norm () : double
+        normalize () 
+        add (Point p) : Point
+        add (Vector v2) : Vector
+        substract (Vector v2) : Vector
+        multiply (double c) : Vector
+        divide (double c) : Vector
+        dotProduct (Vector v2) : double
+        crossProduct (Vector v2) : Vector
     }
 ```
 

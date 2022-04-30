@@ -13,8 +13,7 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
     public ArrayList<Sphere> spheres;
     public ArrayList<Light> lights; 
 
-    //Camera definition,
-    public int nbCamera;
+    //Camera definition
     public JTextField Jresolutionx;
     public JTextField Jresolutiony;
     public JTextField JfocalDistance;
@@ -97,22 +96,18 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
         this.setVisible(true);
     }
 
-    public void actionPerformed (ActionEvent e){ 
+    public void actionPerformed (ActionEvent e){ //Deals with the different actions to do when clicking on a button
+        //When clicking on ValidateCamera, update the values of the Camera c and reset the buttons
         if(e.getSource()== ValidateCamera){
             if(isCameraValid()){
                 interfaceToCamera();
                 resetCamera();
-                nbCamera++;
                 displayMessage("The camera has been successfully added to the scene.");
             }else{
-                if (nbCamera>0){
-                    displayMessage("The scene can't have more than one camera.");
-                }else{
-                    displayMessage("The camera can't be validated. Please check the values you have entered.");
-                }
+                displayMessage("The camera can't be validated. Please check the values you have entered.");
             }
         }
-
+        // When clicking on DeleteCamera, set the Camera c to a null object
         if(e.getSource()==DeleteCamera){
             resetCamera();
             c=null;

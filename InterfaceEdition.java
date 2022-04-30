@@ -114,7 +114,7 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
             c=null;
             displayMessage("The camera has been deleted. You can add a new one.");
         }
-        
+        //Update the first light of the arraylist lights with the values entered by the user
         if(e.getSource()==ValidateLight1){  
             if (isLightValid()){
                 interfaceToLight(0);
@@ -124,7 +124,7 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
                 displayMessage("The light can't be validated. Please check the values you have entered.");
             }
         }  
-
+        //Update the first sphere of the arraylist spheres with the values entered by the user
         if(e.getSource()==ValidateSphere1){
             if (isSphereValid()){
                 interfaceToSphere(0);
@@ -134,6 +134,7 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
                 displayMessage("The sphere can't be validated. Please check the values you have entered.");
             }  
         }
+        //Call the lauchRayRendering() function 
         if(e.getSource()==ValidateScene){
             if(isSceneValid()){
                 launchRayRendering(this.spheres, this.lights, this.c);
@@ -166,12 +167,12 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
         this.c = new Camera(pointOrigin, distanceFocale, vX, rX, vY, rY);
     }
 
-
+    //Method to displaay a message window
     public void displayMessage(String s) {
         JOptionPane.showMessageDialog(null,  s);
     }
 
-
+    //Create a RayRendering object, compute its image and call the InterfaceBasic to display it
     public void launchRayRendering(ArrayList<Sphere> sp, ArrayList<Light> l, Camera ca) {
         Scene s = new Scene(sp, ca, l);
         RayRendering r = new RayRendering(s);
@@ -205,6 +206,7 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
         return true;
     }
 
+    //Method to verify the user entered a value and if yes that it's a double
     public boolean verifDOUBLE(String Averifier) {
         boolean isDOUBLE = true;
         if (Averifier.length() == 0) { // Verify that the string is not empty
@@ -218,6 +220,7 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
         return isDOUBLE;
     }
     
+    //method that associates the selected material in a combo box to a Material element
     public Material comboToMaterial (String selected){
         if( selected == "red"){return red;
         }else if( selected == "cyan"){
@@ -238,6 +241,7 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
         return red;
     }
 
+    // method that returns the index of the associated Material in the ComboBox of the interface
     public int materialToCombo( Material m){ 
         if( m == this.red){return 5;
         }else if( m == this.cyan){
@@ -258,6 +262,7 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
         return 5;
     }
     
+    //Reset the Camera values
     public void resetCamera(){
         Jresolutionx.setText("0");
         Jresolutiony.setText("0");
@@ -273,6 +278,7 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
         JextentYz.setText("0");
     }
 
+    // method that takes the values entered in the interface and update the Camera c with it
     public void interfaceToCamera(){
         int rX = Integer.parseInt(Jresolutionx.getText()) ;
         int rY = Integer.parseInt(Jresolutiony.getText());
@@ -284,7 +290,6 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
     }
 
     public void cameraToInterface(){
-        nbCamera=0;
         Jresolutionx.setText(String.valueOf(this.c.resolutionX));
         Jresolutiony.setText(String.valueOf(this.c.resolutionY));
         JfocalDistance.setText(String.valueOf(this.c.focalDistance));
@@ -299,6 +304,7 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
         JextentYz.setText(String.valueOf(this.c.extentY.z));
     }
 
+    //Reset the light values on interface
     public void resetLight(){
         Red1.setText("0");
         Green1.setText("0");
@@ -307,7 +313,9 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
         origin1y.setText("0");
         origin1z.setText("0");
     }
-    public void lightToInterface(int i){//allows to modif 
+
+    //Write the values of the Light l (at position i in lights) in the interface
+    public void lightToInterface(int i){
         Light l= lights.get(i);
         Red1.setText(String.valueOf((int)(l.intensity.red*255)));
         Green1.setText(String.valueOf((int)(l.intensity.green*255)));
@@ -317,6 +325,7 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
         origin1z.setText(String.valueOf(l.origin.z));
     }
 
+    // method that takes the values entered in the interface and update the Light l  at position j in lights with it
     public void interfaceToLight(int j){
         Point origin1 = new Point(Double.parseDouble(origin1x.getText()),Double.parseDouble(origin1y.getText()), Double.parseDouble(origin1z.getText()));
         ColorInt i1= new ColorInt(Integer.parseInt(Red1.getText()),Integer.parseInt(Green1.getText()), Integer.parseInt(Blue1.getText()));
@@ -325,6 +334,7 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
         lights.set(j,firstLight);
     }
 
+    // resets the values of the sphere in the interface
     public void resetSphere(){
         sphere1x.setText("0");
         sphere1y.setText("0");
@@ -332,6 +342,7 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
         radius1.setText("0");
     }
 
+    //Write the values of the Sphere s (at position i in spheres) in the interface 
     public void sphereToInterface(int i){
         Sphere s= spheres.get(i);
         sphere1x.setText(String.valueOf(s.center.x));
@@ -341,6 +352,7 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
         comboBoxMaterial.setSelectedIndex(materialToCombo(s.material));
     }
 
+    // method that takes the values entered in the interface and update the Sphere s  at position i in spheres with it
     public void interfaceToSphere(int i){
         Point pointFirstSphere= new Point(Double.parseDouble(sphere1x.getText()),Double.parseDouble(sphere1y.getText()), Double.parseDouble(sphere1z.getText()));
         double RadiusFirstSphere = Double.parseDouble(radius1.getText());
@@ -349,6 +361,7 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
         spheres.set(i,Sphere1);
     }
 
+    // checks the values entered by user are correct for the camera
     public boolean isCameraValid(){
         return verifINT(Jresolutionx.getText())
                 &&(verifINT(Jresolutiony.getText()))
@@ -361,10 +374,10 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
                 &&(verifDOUBLE(JextentYz.getText()))
                 &&(verifDOUBLE(JcentreImgX.getText()))
                 &&(verifDOUBLE(JcentreImgY.getText()))
-                &&(verifDOUBLE(JcentreImgZ.getText())
-                && nbCamera<1);
+                &&(verifDOUBLE(JcentreImgZ.getText()));
     }
 
+    // checks the values entered by user are correct for the light
     public boolean isLightValid(){
         String r= Red1.getText();
         String g= Green1.getText();
@@ -380,11 +393,13 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
                 &&verifDOUBLE(origin1z.getText()));
     }
 
+    //Check the value entered is between 0-255
     public boolean checkRGBvalue(String s){
         int i = Integer.parseInt(s);
-        return (i/255 <= 1);
+        return (i/255 <= 1 && i>= 0);
     }
 
+    // checks the values entered by user are correct for the sphere
     public boolean isSphereValid(){
         return (verifDOUBLE(radius1.getText())
                 && verifDOUBLE(sphere1x.getText())
@@ -392,10 +407,12 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
                 && verifDOUBLE(sphere1z.getText()));
     }
 
+    // checks the values entered by user are correct for the scene
     public boolean isSceneValid(){
         return (!(c==null) && !spheres.isEmpty() && !lights.isEmpty());
     }
 
+    // initializes the material of the scene
     public void initializeMaterials(){
         this.white= new Material(0.0, 1.0, new ColorFloat(1, 1, 1) );
         this.red = new Material(0.5, 0.5, new ColorFloat(1.0, 0.0, 0));
@@ -407,6 +424,7 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
         this.yellow = new Material(0.5, 60, new ColorFloat(1.0, 1.0, 0.0));
     }
 
+    // Creates and places all the swing components of the interface
     public void createIHM(){
         this.ValidateCamera = new JButton("Validate Camera");
         this.ValidateCamera.addActionListener(this);

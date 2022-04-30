@@ -9,6 +9,16 @@ import javax.swing.border.Border;
 
 public class InterfaceEdition extends JFrame implements ActionListener, ListSelectionListener {
     // attributes for the camera's definition
+    public Material black;
+    public Material white;
+    public Material green;
+    public Material cyan;
+    public Material red;
+    public Material magenta;
+    public Material yellow;
+    public Material blue;
+    public JComboBox<String> comboBoxMaterial;
+    
     public Camera c;
     public ArrayList<Sphere> spheres;
     public ArrayList<Light> lights; 
@@ -41,24 +51,15 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
     public JTextField sphere1x;
     public JTextField sphere1y;
     public JTextField sphere1z;
-    public Material black;
-    public Material white;
-    public Material green;
-    public Material cyan;
-    public Material red;
-    public Material magenta;
-    public Material yellow;
-    public Material blue;
-    public JComboBox<String> comboBoxMaterial;
 
     //Validate and Delete buttons
     public JButton ValidateSphere1;
     public JButton DeleteSphere;
-    public JButton ValidateScene;
     public JButton ValidateLight1;
     public JButton DeleteLight;
     public JButton ValidateCamera; 
     public JButton DeleteCamera;
+    public JButton ValidateScene;
 
     //List for spheres
     public JList sphereList;
@@ -221,7 +222,7 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
         return isDOUBLE;
     }
     
-    public Material comboToMaterial( String selected){
+    public Material comboToMaterial (String selected){
         if( selected == "red"){return red;
         }else if( selected == "cyan"){
             return cyan;
@@ -286,7 +287,7 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
         this.c= new Camera(centre, d, vX, rX, vY, rY);
     }
 
-    public void  cameraToInterface(){
+    public void cameraToInterface(){
         nbCamera=0;
         Jresolutionx.setText(String.valueOf(this.c.resolutionX));
         Jresolutiony.setText(String.valueOf(this.c.resolutionY));

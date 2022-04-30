@@ -3,7 +3,7 @@ import java.util.*;
 
  class Main {
     public static void main(String[] args) {
-        InterfaceEdition monInterface =new InterfaceEdition();
+        InterfaceEdition monInterface = new InterfaceEdition();
     }
 }
  

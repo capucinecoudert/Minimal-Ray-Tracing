@@ -1,72 +1,69 @@
 # Minimal-Ray-Tracing
 
-## Archive Presentation 
 The program contained in this archive computes the image of a scene composed of spheres and lights from a camera position by using a ray tracing algorithm.
 
-### Point Class
-attributes: 3 double as position coordinates : x, y, z
-methods: add(Vector); substract(Point); distance(Point)
+// Camera Class
+attributes: a double as its focal distance, a Point as the origin of the camera, 
+            a Point as the center of the plane of the image; 2 vectors defining the orientation of the plane of the image in space and its size; 2 ints defining the number of pixels of the image
+methods: getRay (int, int)
 
-### Vector Class
-attributes: 3 double as position coordinates : x, y, z
-methods: norm(); normalize(); add(Point); add(Vector); substract(Vector); multiply(double); divide(double); 
-         dotProduct(Vector); crossProduct(Vector)
-
-### Ray Class
-attributes: a point of Origin, a Vector of direction
-methods: distancePoint(Point)
-
-### ColorFloat Class
+// ColorFloat Class
 attributes: 3 doubles parameters defining the red, green, blue components of the color between 0-1.
-methods: multiply(ColorFloat); multiply(double); add(ColorFloat); colorToInt()
+methods: multiply (ColorFloat); multiply (double); add (ColorFloat); colorToInt ()
 
-### ColorInt Class
+// ColorInt Class
 attributes: 3 int parameters defining the red, green, blue components of the color between 0-255.
 methods: none
 
-### Light Class
-attributes: a Point of origin, a Color of Intensity
-methods: none
-
-### Material Class
-attributes: a double as its coefficient of reflection, a double as its specular power, a Color of diffusion
-methods: none
-
-### Sphere Class
-attributes: a radius, a Point as centre, a Material
-methods:none
-
-### HitResult Class
+// HitResult Class
 attributes: a double as a distance, a boolean as an indicator if the ray hhas hitten the object or not
 methods: none
 
-### Camera Class
-attributes: a double as its focal distance, a Point as the origin of the camera, 
-            a Point as the center of the plane of the image; 2 vectors defining the orientation of the plane of the image in space and its size; 2 ints defining the number of pixels of the image
-methods: getRay(int, int)
+// Interface Class   
 
-### Scene Class
+
+// InterfaceBasic Class
+attributes: two JLabels
+methods: none
+
+// InterfaceEdition Class
+attributes: several Materials, several JButtons and several JTextField that create the interface, and a Camera and two ArrayList made of Spheres and Lights
+methods: actionPerformed (actionEvent); initScene (); displayMessage (String); launchRayRendering (ArrayList<Sphere>, ArrayList<Light>, Camera); verifSaisie (String); verifINT (String); verifDOUBLE(String); comboToMaterial (String); materialToCombo (Material); resetCamera () ; interfaceToCamera (); cameraToInterface (); resetLight (); lightToInterface (int); InterfaceToLight (int); resetSpher (); sphereToInterface (int); interfaceToSphere (int); isCameraValid (); isLightValid(); checkRGBValue(String); isSphereValid (); isSceneValid (); initializeMaterials (); createIHM ()
+
+// Light Class
+attributes: a Point of origin, a Color of Intensity
+methods: none
+
+// Main Class
+launches the interface
+
+// Material Class
+attributes: a double as its coefficient of reflection, a double as its specular power, a Color of diffusion
+methods: none
+
+// Point Class
+attributes: 3 double as position coordinates : x, y, z
+methods: add (Vector); substract (Point); distance (Point)
+
+// Ray Class
+attributes: a point of Origin, a Vector of direction
+methods: distancePoint (Point)
+
+// RayRendering Class
+attributes: a Scene, an int defining the maximum number of times a ray can be reflected 
+methods: intersectRay (Ray, Scene, int); computeColor (Ray, Scene, Sphere, double, int); hitObject (Ray, Sphere); createImage ()
+
+// Scene Class
 attributes: a Camera, a list of Spheres, a list of Lights
 methods: none
 
-### RayRendering Class
-attributes: a Scene, an int defining the maximum number of times a ray can be reflected 
-methods: intersectRay(Ray, Scene, int); computeColor(Ray, Scene, Sphere, double, int); hitObject(Ray, Sphere); createImage()
+// Sphere Class
+attributes: a radius, a Point as centre, a Material
+methods:none
 
-### InterfaceEdition  Class
-attributes: several Materials, several JButtons and several JTextField that create the interface
-methods: actionPerformed(actionEvent); verifSaisie(String); verifINT(String); verifDOUBLE(String)
-
-A MODIFIER 
-
-
-### InterfaceBasic Class
- A MODIFIER
-
-
-### Main Class
-launches the interface
-
+// Vector Class
+attributes: 3 double as position coordinates : x, y, z
+methods: norm (); normalize (); add (Point); add (Vector); substract (Vector); multiply (double); divide (double); dotProduct (Vector); crossProduct (Vector)
 
 
 ## Class Diagram
@@ -76,39 +73,21 @@ classDiagram
 
     Camera --> Point
     Camera --> Vector
-    Camera <-- Ray
-
-    ColorFloat <--> ColorToInt
-
-    Interface --> Material
-    Interface --> Camera
-    Interface --> Sphere
-    Interface --> Light
 
     InterfaceEdition --> Material
-    InterfaceBasic --> Camera
-    InterfaceBasic --> Sphere
-    InterfaceBasic --> Light
+    InterfaceEdition --> Camera
+    InterfaceEdition --> Sphere
+    InterfaceEdition --> Light
 
     Light --> ColorFloat
     Light --> Point
 
     Material --> ColorFloat
 
-    Plan <--> Point
-    Plan --> Vector
-    Plan --> Ray
-
-    Point <--> Vector
-
     Ray --> Point
     Ray --> Vector
 
     RayRendering --> Scene
-    RayRendering --> Ray
-    RayRendering <-- ColorFloat
-    RayRendering --> Sphere
-    RayRendering <-- HitResult
 
     Scene --> Camera
     Scene --> Sphere
@@ -116,6 +95,7 @@ classDiagram
 
     Sphere --> Point
     Sphere --> Material
+
 
     class Camera{
         + resolutionX : int
@@ -153,72 +133,6 @@ classDiagram
         + hit : boolean
         HitResult (double d, boolean h)
     }
-    class Interface{
-        + black : Material
-        + white : Material
-        + green : Material
-        + cyan : Material
-        + red : Material
-        + magenta : Material
-        + yellow : Material
-        + blue : Material
-        + Materials1 : String[]
-
-        + c : Camera
-        + spheres : ArrayList<Sphere>
-        + lights : ArrayList<Light>
-
-        + Jresolutionx : JTextField
-        + Jresolutiony : JTextField
-        + JfocalDistance : JTextField  
-        + JcentreImgX : JTextField
-        + JcentreImgY : JTextField  
-        + JcentreImgZ : JTextField  
-        + JextentXx : JTextField
-        + JextentXy : JTextField  
-        + JextentXz : JTextField
-        + JextentYx : JTextField
-        + JextentYy : JTextField
-        + JextentYz : JTextField
-
-        + origin1x : JTextField
-        + origin1y : JTextField
-        + origin1z : JTextField
-        + Red1 : JTextField
-        + Green1 : JTextField
-        + Blue1 : JTextField
-        
-        + radius 1 :JTextField
-        + sphere1x : JTextField
-        + sphere1y : JTextField
-        + sphere1z : JTextField
-
-        + PanelComboBoxLight : JPanel
-        + lightName : String[]
-        + comboBoxLight: JComboBox
-
-        + PanelComboBoxSphere : JPanel
-        + sphereName : String[]
-        + comboBoxSphere: 
-
-        + ValidateSphere1 : JButton
-        + DeleteSphere : JButton
-        + ValidateLight1 : JButton
-        + DeleteLight : JButton
-        + ValidateCamera : JButton
-        + DeleteCamera : JButton
-        + ValidateScene : JButton
-
-        Interface ()
-        actionPerformed (ActionEvent e)
-        displayMessage (String s)
-        launchRayRendering (ArrayList<Sphere> spheres, ArrayList<Light> lights, camera c)
-        verifSaisie (String AVerifier) : boolean
-        verifINT (String AVerifier) : boolean
-        verifDOUBLE (String AVerifier) : boolean
-        LightSetNil ()
-        SphereSetNil ()
-    }
 
     class InterfaceBasic{
         + b : JLabel
@@ -241,7 +155,6 @@ classDiagram
         + spheres : ArrayList<Sphere>
         + lights : ArrayList<Light>
 
-        + nbCamera : int
         + Jresolutionx : JTextField
         + Jresolutiony : JTextField
         + JfocalDistance : JTextField  
@@ -267,23 +180,13 @@ classDiagram
         + sphere1y : JTextField
         + sphere1z : JTextField
 
-        + ValidateSphere : JButton
-        + DeleteSphere : JButton
-        + ValidateLight1 : JButton
-        + DeleteLight : JButton
         + ValidateCamera : JButton
         + DeleteCamera : JButton
+        + ValidateLight1 : JButton
+        + DeleteLight : JButton
+        + ValidateSphere : JButton
+        + DeleteSphere : JButton
         + ValidateScene : JButton
-
-        + sphereList : JList
-        + sphereListModel : DefaultListModel
-        + addSphereButton : JButton
-        + sphereName : JTextField
-
-        + lightList : JList 
-        + lightListModel : DefaultListModel
-        + addLightButton : JButton
-        + lightName : JTextField
 
         InterfaceEdition ()
         actionPerformed (ActionEvent e)
@@ -296,6 +199,7 @@ classDiagram
         comboToMaterial (String selected) : Material
         materialToCombo (material m) : int
         resetCamera ()
+        interfaceToCamera
         cameraToInterface ()
         resetLight ()
         lightToInterface (int i)
@@ -324,15 +228,7 @@ classDiagram
         + diffusionColor : ColorFloat
         Material (double r, double p, ColorFloat d)
     }
-    class Plan{
-        - EPSILON : double
-        + origin : Point
-        + normalVector : Vector
-        + vX : Vector
-        + vY : Vector
-        Plan (Point origin, Vector vX, Vector vY)
-        intersectRayPlane (Ray ray) : Point
-    }
+   
     class Point{
         + x : double
         + y : double
@@ -384,6 +280,7 @@ classDiagram
         dotProduct (Vector v2) : double
         crossProduct (Vector v2) : Vector
     }
+```
 
 
 

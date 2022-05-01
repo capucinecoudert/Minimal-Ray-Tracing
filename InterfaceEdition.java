@@ -45,19 +45,19 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
     public JTextField Green1;
     public JTextField Blue1;
 
-   // Sphere definition
+   //Sphere definition
     public JTextField radius1;
     public JTextField sphere1x;
     public JTextField sphere1y;
     public JTextField sphere1z;
 
     //Validate and Delete buttons
-    public JButton ValidateSphere1;
-    public JButton DeleteSphere;
-    public JButton ValidateLight1;
-    public JButton DeleteLight;
     public JButton ValidateCamera; 
     public JButton DeleteCamera;
+    public JButton ValidateLight1;
+    public JButton DeleteLight;
+    public JButton ValidateSphere1;
+    public JButton DeleteSphere;
     public JButton ValidateScene;
 
     //List for spheres
@@ -71,6 +71,16 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
     public DefaultListModel  lightListModel;
     public JButton addLightButton;
     public JTextField lightName;
+
+    //A RAJOUTER DANS LE READ ME SI ON AJOUTE LES LIST FOR LIGHT ET SPHERE : + sphereList : JList
+        + sphereListModel : DefaultListModel
+        + addSphereButton : JButton
+        + sphereName : JTextField
+
+        + lightList : JList 
+        + lightListModel : DefaultListModel
+        + addLightButton : JButton
+        + lightName : JTextField
     */
     
     public InterfaceEdition() {

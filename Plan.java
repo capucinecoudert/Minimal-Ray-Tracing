@@ -7,7 +7,7 @@ public class Plan {
     public Vector vX;
     public Vector vY;
 
-    public Plan(Point origin, Vector vX, Vector vY){
+    public Plan (Point origin, Vector vX, Vector vY){
         this.origin=origin;
         this.vX= vX;
         this.vY=vY;

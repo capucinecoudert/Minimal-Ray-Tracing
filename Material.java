@@ -5,7 +5,7 @@ public class Material {
     */
 
     double reflectionCoeff; // reflection coefficient of the material
-    double specularPower; // specular Power of the material
+    double specularPower; // specular power of the material which defines the polishness of a material 
     ColorFloat diffusionColor; // the diffusion color of the material
 
     public Material(double r, double p,ColorFloat d){

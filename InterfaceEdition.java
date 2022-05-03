@@ -44,19 +44,19 @@ public class InterfaceEdition extends JFrame implements ActionListener{
     public JTextField Green1;
     public JTextField Blue1;
 
-   // Sphere definition
+   //Sphere definition
     public JTextField radius1;
     public JTextField sphere1x;
     public JTextField sphere1y;
     public JTextField sphere1z;
 
     //Validate and Delete buttons
-    public JButton ValidateSphere1;
-    public JButton DeleteSphere;
-    public JButton ValidateLight1;
-    public JButton DeleteLight;
     public JButton ValidateCamera; 
     public JButton DeleteCamera;
+    public JButton ValidateLight1;
+    public JButton DeleteLight;
+    public JButton ValidateSphere1;
+    public JButton DeleteSphere;
     public JButton ValidateScene;
     
     public InterfaceEdition() {

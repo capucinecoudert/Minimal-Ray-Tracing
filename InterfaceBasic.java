@@ -24,10 +24,12 @@ public class InterfaceBasic extends JFrame{
         this.b.setBackground(Color.DARK_GRAY);
         this.b.setBounds(400, 0, 210, 50);
         this.b.setAlignmentX(CENTER_ALIGNMENT);
+        this.b.setHorizontalAlignment(SwingConstants.CENTER); 
         this.add(this.b);
 
         this.image = new JLabel();
         this.image.setBounds(100, 100, 800, 600);
+        this.image.setHorizontalAlignment(SwingConstants.CENTER); 
         this.image.setAlignmentX(CENTER_ALIGNMENT);
         this.add(this.image);
         

@@ -1,15 +1,14 @@
 import javax.swing.*;
-import javax.swing.event.*;
 import java.awt.event.*;
 import java.util.*;
 import java.awt.*;
 import java.io.IOException;
-import java.awt.BorderLayout;
 import javax.swing.border.Border;
 
-public class InterfaceEdition extends JFrame implements ActionListener, ListSelectionListener {
+public class InterfaceEdition extends JFrame implements ActionListener{
     // attributes for the camera's definition
-    public Material black;
+    public Material orange;
+    public Material pink;
     public Material white;
     public Material green;
     public Material cyan;
@@ -59,28 +58,15 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
     public JButton ValidateCamera; 
     public JButton DeleteCamera;
     public JButton ValidateScene;
-
-    //List for spheres
-    /*public JList sphereList;
-    public DefaultListModel sphereListModel;
-    public JButton addSphereButton;
-    public JTextField sphereName;
-
-    //List for lights
-    public JList lightList;
-    public DefaultListModel  lightListModel;
-    public JButton addLightButton;
-    public JTextField lightName;
-    */
     
     public InterfaceEdition() {
         // Initialization of the window
         super("Minimal Ray Tracing");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1050, 1000);
+        setSize(1100, 1100);
         this.setLayout(null);
         JPanel Interface = new JPanel();
-        Interface.setBounds(0, 0, 1100, 800);
+        Interface.setBounds(0, 0, 1100, 1100);
 
         // Initialization of a reference scene
         this.initScene();
@@ -149,13 +135,14 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
         // Spheres
         this.spheres = new ArrayList<Sphere>();
         spheres.add(new Sphere(new Point(0, 0, 500.0), 100.0, this.white));
-        spheres.add(new Sphere(new Point(150, 0, 400.0), 30.0, this.red ));
-        spheres.add(new Sphere(new Point(100, -100, 400.0), 40.0, this.blue ));
+        spheres.add(new Sphere(new Point(150, 0, 400.0), 30.0, this.magenta ));
+        spheres.add(new Sphere(new Point(100, -100, 400.0), 40.0, this.cyan ));
 
         // lights
         this.lights= new ArrayList<Light>();
-        lights.add(new Light(new Point(250, 0, 300), new ColorFloat(0.4, 0.4, 0))); // lumiere cote droit jaune
-        lights.add(new Light(new Point(0, 200, 0), new ColorFloat(0.6, 0.6, 0.6))); // lumiere face grise
+        lights.add(new Light(new Point(0, 200, 0), new ColorFloat(1, 1, 1)));
+        lights.add(new Light(new Point(250, 0, 300), new ColorFloat(0.6, 0.6, 0.6))); // lumiere cote droit jaune
+         // lumiere face grise
             
         // camera
         Point pointOrigin= new Point(0,0,0);
@@ -222,20 +209,22 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
     
     //method that associates the selected material in a combo box to a Material element
     public Material comboToMaterial (String selected){
-        if( selected == "red"){return red;
-        }else if( selected == "cyan"){
+        if( selected == "Red"){return red;
+        }else if( selected == "Cyan"){
             return cyan;
-        }else if( selected == "blue"){
+        }else if( selected == "Blue"){
             return blue;
-        }else if( selected == "black"){
-            return black;
-        }else if( selected == "white"){
+        }else if( selected == "Orange"){
+            return orange;
+        }else if( selected == "Pink"){
+            return pink;
+        }else if( selected == "White"){
             return white;
-        }else if( selected == "magenta"){
+        }else if( selected == "Magenta"){
             return magenta;
-        }else if ( selected == "yellow"){
+        }else if ( selected == "Yellow"){
             return yellow;
-        }else if ( selected == "green"){
+        }else if ( selected == "Green"){
             return green;
         }
         return red;
@@ -248,7 +237,9 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
             return 2;
         }else if( m == this.blue){
             return 1;
-        }else if( m == this.black){
+        }else if( m == this.orange){
+            return 8;
+        }else if(m == this.pink){
             return 0;
         }else if( m == this.white){
             return 6;
@@ -356,7 +347,7 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
     public void interfaceToSphere(int i){
         Point pointFirstSphere= new Point(Double.parseDouble(sphere1x.getText()),Double.parseDouble(sphere1y.getText()), Double.parseDouble(sphere1z.getText()));
         double RadiusFirstSphere = Double.parseDouble(radius1.getText());
-        Material m = comboToMaterial(comboBoxMaterial.getSelectedItem().toString());
+        Material m = comboToMaterial((String)comboBoxMaterial.getSelectedItem());
         Sphere Sphere1 = new Sphere(pointFirstSphere , RadiusFirstSphere, m);
         spheres.set(i,Sphere1);
     }
@@ -414,14 +405,15 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
 
     // initializes the material of the scene
     public void initializeMaterials(){
-        this.white= new Material(0.0, 1.0, new ColorFloat(1, 1, 1) );
+        this.white= new Material(0.0, 1.0, new ColorFloat(1, 1, 1));
         this.red = new Material(0.5, 0.5, new ColorFloat(1.0, 0.0, 0));
-        this.black = new Material(1.0, 60.0, new ColorFloat(0, 0, 0));
-        this.blue = new Material(0.0, 0.5, new ColorFloat(0.0, 0.0, 1.0));
-        this.cyan = new Material(0.0, 0.5, new ColorFloat(0.0, 1.0, 1.0));
+        this.orange = new Material(0, 1.0, new ColorFloat(1.0, 0.6, 0.2));
+        this.pink=new Material(1.0, 0.5, new ColorFloat(1.0, 0.4, 1.0)); 
+        this.blue = new Material(0.3, 0.5, new ColorFloat(0.0, 0.0, 1.0));
+        this.cyan = new Material(0.25, 0.5, new ColorFloat(0.0, 1.0, 1.0));
         this.green = new Material(0.5, 0.5, new ColorFloat(0.0, 1.0, 0.0));
-        this.magenta = new Material(0.0, 60, new ColorFloat(1.0, 0.0, 1.0));
-        this.yellow = new Material(0.5, 60, new ColorFloat(1.0, 1.0, 0.0));
+        this.magenta = new Material(1.0, 1.0, new ColorFloat(1.0, 0.0, 1.0));
+        this.yellow = new Material(0.25, 1.0, new ColorFloat(1.0, 1.0, 0.6));
     }
 
     // Creates and places all the swing components of the interface
@@ -465,7 +457,7 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
         this.sphere1y = new JTextField();
         this.sphere1z = new JTextField();
         
-        String[] Materials1 = { "Black", "Blue", "Cyan", "Green", "Magenta", "Red", "White", "Yellow" }; 
+        String[] Materials1 = { "Pink", "Blue", "Cyan", "Green", "Magenta", "Red", "White", "Yellow", "Orange" }; 
         comboBoxMaterial = new JComboBox<>(Materials1); 
 
         // creation of the camera's definition pan
@@ -476,11 +468,16 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
         JLabel Vectory = new JLabel(" Vector Extent y (x,y,z) :");
         JLabel Camera = new JLabel("Description of the camera");
         Camera.setAlignmentX(CENTER_ALIGNMENT);
+        Camera.setHorizontalAlignment(SwingConstants.CENTER); 
         JLabel Scene = new JLabel(" Description of the scene");
         Scene.setAlignmentX(CENTER_ALIGNMENT);
+        Scene.setHorizontalAlignment(SwingConstants.CENTER); 
         JLabel Light = new JLabel("Description of the lights");
         Light.setAlignmentX(CENTER_ALIGNMENT);
+        Light.setHorizontalAlignment(SwingConstants.CENTER); 
         JLabel Sphere = new JLabel("Description of the spheres");
+        Sphere.setAlignmentX(CENTER_ALIGNMENT);
+        Sphere.setHorizontalAlignment(SwingConstants.CENTER); 
 
         JLabel OriginSphere = new JLabel(" Origin of the light (x,y,z) :");
         JLabel RGBcode = new JLabel("Light Intensity RGB (0-255) :");
@@ -514,16 +511,19 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
         Scene.setOpaque(true);
         Scene.setForeground(Color.WHITE);
         Scene.setBackground(Color.DARK_GRAY);
-        Scene.setBounds(400, 0, 210, 50);
+        Scene.setBounds(430, 0, 210, 50);
         // Addition and positioning of different elements in the window
+
+        Font font = new Font(Font.SANS_SERIF, Font.BOLD, 15);
         this.add(Camera);
         Camera.setBounds(10, 50, 340, 50);
-
+        Camera.setFont(font);
         this.add(Light);
         Light.setBounds(360, 50, 350, 50);
-
+        Light.setFont(font);
         this.add(Sphere);
         Sphere.setBounds(710, 50, 350, 50);
+        Sphere.setFont(font);
 
         this.add(Resolution);
         Resolution.setBounds(10, 225, 140, 50);
@@ -645,43 +645,5 @@ public class InterfaceEdition extends JFrame implements ActionListener, ListSele
 
         this.add(sphere1z);
         sphere1z.setBounds(1000, 300, 37, 50);
-
-       /* //Setting Sphere list
-        this.sphereListModel = new DefaultListModel();
- 
-        //Create the list and put it in a scroll pane.
-        this.sphereList = new JList(this.sphereListModel);
-        this.sphereList .setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.sphereList .setSelectedIndex(0);
-        this.sphereList .addListSelectionListener(this);
-        this.sphereList .setVisibleRowCount(5);
-        JScrollPane listScrollPane = new JScrollPane(this.sphereList );
- 
-
-        this.addSphereButton = new JButton("New Sphere");
-        this.addSphereButton.setActionCommand("New Sphere");
-        this.addSphereButton.addActionListener(new AddSphereListener());
-
- 
-        this.sphereName = new JTextField(10);
-        this.sphereName.addActionListener(hireListener);
-        this.sphereName.getDocument().addDocumentListener(hireListener);
-        String name = this.sphereListModel.getElementAt(
-                              this.sphereList.getSelectedIndex()).toString();
- 
-        //Create a panel that uses BoxLayout.
-        JPanel buttonPane = new JPanel();
-        buttonPane.setLayout(new BoxLayout(buttonPane,
-                                           BoxLayout.LINE_AXIS));
-        buttonPane.add(addSphereButton);
-        buttonPane.add(Box.createHorizontalStrut(5));
-        buttonPane.add(new JSeparator(SwingConstants.VERTICAL));
-        buttonPane.add(Box.createHorizontalStrut(5));
-        buttonPane.add(sphereName);
-        buttonPane.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
- 
-        add(listScrollPane, BorderLayout.CENTER);
-        add(buttonPane, BorderLayout.PAGE_END);
-*/
     }
 }

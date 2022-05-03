@@ -54,9 +54,7 @@ public class InterfaceEdition extends JFrame implements ActionListener{
     public JButton ValidateCamera; 
     public JButton DeleteCamera;
     public JButton ValidateLight1;
-    public JButton DeleteLight;
     public JButton ValidateSphere1;
-    public JButton DeleteSphere;
     public JButton ValidateScene;
     
     public InterfaceEdition() {
@@ -424,12 +422,8 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         this.ValidateLight1.addActionListener(this);
         this.ValidateSphere1 = new JButton("Validate Sphere");
         this.ValidateSphere1.addActionListener(this);
-        this.DeleteCamera = new JButton("Delete Camera");
+        this.DeleteCamera = new JButton("Reset Camera");
         this.DeleteCamera.addActionListener(this);
-        this.DeleteLight = new JButton("Delete Light");
-        this.DeleteLight.addActionListener(this);
-        this.DeleteSphere = new JButton("Delete Sphere");
-        this.DeleteSphere.addActionListener(this);
         this.ValidateScene = new JButton("Display the image");
         this.ValidateScene.addActionListener(this);
 
@@ -466,16 +460,16 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         JLabel Centre = new JLabel("Image center (x,y,z) :");
         JLabel Vectorx = new JLabel(" Vector Extent x (x,y,z) :");
         JLabel Vectory = new JLabel(" Vector Extent y (x,y,z) :");
-        JLabel Camera = new JLabel("Description of the camera");
+        JLabel Camera = new JLabel("Definition of the camera");
         Camera.setAlignmentX(CENTER_ALIGNMENT);
         Camera.setHorizontalAlignment(SwingConstants.CENTER); 
-        JLabel Scene = new JLabel(" Description of the scene");
+        JLabel Scene = new JLabel(" Definition of the scene");
         Scene.setAlignmentX(CENTER_ALIGNMENT);
         Scene.setHorizontalAlignment(SwingConstants.CENTER); 
-        JLabel Light = new JLabel("Description of the lights");
+        JLabel Light = new JLabel("Definition of the lights");
         Light.setAlignmentX(CENTER_ALIGNMENT);
         Light.setHorizontalAlignment(SwingConstants.CENTER); 
-        JLabel Sphere = new JLabel("Description of the spheres");
+        JLabel Sphere = new JLabel("Definiton of the spheres");
         Sphere.setAlignmentX(CENTER_ALIGNMENT);
         Sphere.setHorizontalAlignment(SwingConstants.CENTER); 
 
@@ -507,22 +501,21 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         SPHERE.setBounds(700, 100, 350, 700);
 
         this.add(Scene);
-        Scene.setFont(new Font("Serif", Font.BOLD, 20));
+        Scene.setFont(new Font("Serif", Font.BOLD, 40));
         Scene.setOpaque(true);
-        Scene.setForeground(Color.WHITE);
-        Scene.setBackground(Color.DARK_GRAY);
-        Scene.setBounds(430, 0, 210, 50);
+        Scene.setForeground(Color.DARK_GRAY);
+        Scene.setBounds(280, 20, 500, 50);
         // Addition and positioning of different elements in the window
 
-        Font font = new Font(Font.SANS_SERIF, Font.BOLD, 15);
+        Font font = new Font(Font.SANS_SERIF, Font.BOLD, 20);
         this.add(Camera);
-        Camera.setBounds(10, 50, 340, 50);
+        Camera.setBounds(10, 100, 340, 50);
         Camera.setFont(font);
         this.add(Light);
-        Light.setBounds(360, 50, 350, 50);
+        Light.setBounds(360, 100, 350, 50);
         Light.setFont(font);
         this.add(Sphere);
-        Sphere.setBounds(710, 50, 350, 50);
+        Sphere.setBounds(710, 100, 350, 50);
         Sphere.setFont(font);
 
         this.add(Resolution);
@@ -541,10 +534,10 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         Vectory.setBounds(10, 525, 140, 50);
 
         this.add(ValidateCamera);
-        ValidateCamera.setBounds(20, 600, 130, 50);
+        ValidateCamera.setBounds(20, 700, 130, 50);
 
         this.add(DeleteCamera);
-        DeleteCamera.setBounds(200, 600, 130, 50);
+        DeleteCamera.setBounds(200, 700, 130, 50);
 
         this.add(RGBcode);
         RGBcode.setBounds(360, 225, 200, 50);
@@ -565,19 +558,13 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         centre.setBounds(710, 300, 150, 50);
 
         this.add(ValidateLight1);
-        ValidateLight1.setBounds(370, 600, 130, 50);
-
-        this.add(DeleteLight);
-        DeleteLight.setBounds(550, 600, 130, 50);
+        ValidateLight1.setBounds(460, 700, 130, 50);
 
         this.add(ValidateScene);
-        ValidateScene.setBounds(450, 800, 200, 50);
+        ValidateScene.setBounds(435, 850, 200, 50);
 
         this.add(ValidateSphere1);
-        ValidateSphere1.setBounds(720, 600, 130, 50);
-
-        this.add(DeleteSphere);
-        DeleteSphere.setBounds(900, 600, 130, 50);
+        ValidateSphere1.setBounds(820, 700, 130, 50);
 
         // Addition and positioning of JTextFields in the window
         this.add(Jresolutionx);

@@ -18,11 +18,10 @@ public class InterfaceBasic extends JFrame{
 
         this.b= new JLabel("FINAL IMAGE");
         this.add(this.b);
-        this.b.setFont(new Font("Serif", Font.BOLD, 20));
+        this.b.setFont(new Font("Serif", Font.BOLD, 40));
         this.b.setOpaque(true);
-        this.b.setForeground(Color.WHITE);
-        this.b.setBackground(Color.DARK_GRAY);
-        this.b.setBounds(400, 0, 210, 50);
+        this.b.setForeground(Color.DARK_GRAY);
+        this.b.setBounds(350, 0, 300, 100);
         this.b.setAlignmentX(CENTER_ALIGNMENT);
         this.b.setHorizontalAlignment(SwingConstants.CENTER); 
         this.add(this.b);

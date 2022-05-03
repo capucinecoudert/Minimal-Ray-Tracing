@@ -64,7 +64,7 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         setSize(1100, 1100);
         this.setLayout(null);
         JPanel Interface = new JPanel();
-        Interface.setBounds(0, 0, 1100, 1100);
+        Interface.setBounds(0, 0, 1050, 1100);
 
         // Initialization of a reference scene
         this.initScene();
@@ -86,7 +86,6 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         if(e.getSource()== ValidateCamera){
             if(isCameraValid()){
                 interfaceToCamera();
-                resetCamera();
                 displayMessage("The camera has been successfully added to the scene.");
             }else{
                 displayMessage("The camera can't be validated. Please check the values you have entered.");
@@ -102,7 +101,6 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         if(e.getSource()==ValidateLight1){  
             if (isLightValid()){
                 interfaceToLight(0);
-                resetLight();
                 displayMessage("The light has been successfully added to the scene.");
             }else{
                 displayMessage("The light can't be validated. Please check the values you have entered.");
@@ -112,7 +110,6 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         if(e.getSource()==ValidateSphere1){
             if (isSphereValid()){
                 interfaceToSphere(0);
-                resetSphere();
                 displayMessage("The sphere has been successfully added to the scene.");
             }else{
                 displayMessage("The sphere can't be validated. Please check the values you have entered.");
@@ -251,7 +248,7 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         return 5;
     }
     
-    //Reset the Camera values
+    //resets the Camera c values
     public void resetCamera(){
         Jresolutionx.setText("0");
         Jresolutiony.setText("0");
@@ -293,15 +290,6 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         JextentYz.setText(String.valueOf(this.c.extentY.z));
     }
 
-    //Reset the light values on interface
-    public void resetLight(){
-        Red1.setText("0");
-        Green1.setText("0");
-        Blue1.setText("0");
-        origin1x.setText("0");
-        origin1y.setText("0");
-        origin1z.setText("0");
-    }
 
     //Write the values of the Light l (at position i in lights) in the interface
     public void lightToInterface(int i){
@@ -321,14 +309,6 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         ColorFloat i= i1.intToColor();
         Light firstLight = new Light(origin1, i);
         lights.set(j,firstLight);
-    }
-
-    // resets the values of the sphere in the interface
-    public void resetSphere(){
-        sphere1x.setText("0");
-        sphere1y.setText("0");
-        sphere1z.setText("0");
-        radius1.setText("0");
     }
 
     //Write the values of the Sphere s (at position i in spheres) in the interface 
@@ -403,14 +383,14 @@ public class InterfaceEdition extends JFrame implements ActionListener{
 
     // initializes the material of the scene
     public void initializeMaterials(){
-        this.white= new Material(0.0, 1.0, new ColorFloat(1, 1, 1));
+        this.white= new Material(0, 1, new ColorFloat(1, 1, 1));
         this.red = new Material(0.5, 0.5, new ColorFloat(1.0, 0.0, 0));
-        this.orange = new Material(0, 1.0, new ColorFloat(1.0, 0.6, 0.2));
-        this.pink=new Material(1.0, 0.5, new ColorFloat(1.0, 0.4, 1.0)); 
-        this.blue = new Material(0.3, 0.5, new ColorFloat(0.0, 0.0, 1.0));
+        this.orange = new Material(0.0, 1, new ColorFloat(1.0, 0.6, 0.2));
+        this.pink=new Material(0.8, 0.5, new ColorFloat(1.0, 0.4, 1.0)); 
+        this.blue = new Material(1, 0.5, new ColorFloat(0.0, 0.0, 1.0));
         this.cyan = new Material(0.25, 0.5, new ColorFloat(0.0, 1.0, 1.0));
         this.green = new Material(0.5, 0.5, new ColorFloat(0.0, 1.0, 0.0));
-        this.magenta = new Material(1.0, 1.0, new ColorFloat(1.0, 0.0, 1.0));
+        this.magenta = new Material(1.0, 1, new ColorFloat(1.0, 0.0, 1.0));
         this.yellow = new Material(0.25, 1.0, new ColorFloat(1.0, 1.0, 0.6));
     }
 

@@ -13,7 +13,8 @@ public class InterfaceBasic extends JFrame{
     public InterfaceBasic(){
         super("Minimal Ray Tracing");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1050, 1000);
+        setSize(900, 1100);
+        setLocation(1050, 0);
         this.setLayout(null);
 
         this.b= new JLabel("FINAL IMAGE");
@@ -21,13 +22,13 @@ public class InterfaceBasic extends JFrame{
         this.b.setFont(new Font("Serif", Font.BOLD, 40));
         this.b.setOpaque(true);
         this.b.setForeground(Color.DARK_GRAY);
-        this.b.setBounds(350, 0, 300, 100);
+        this.b.setBounds(300, 0, 300, 100);
         this.b.setAlignmentX(CENTER_ALIGNMENT);
         this.b.setHorizontalAlignment(SwingConstants.CENTER); 
         this.add(this.b);
 
         this.image = new JLabel();
-        this.image.setBounds(100, 100, 800, 600);
+        this.image.setBounds(50, 100, 800, 600);
         this.image.setHorizontalAlignment(SwingConstants.CENTER); 
         this.image.setAlignmentX(CENTER_ALIGNMENT);
         this.add(this.image);

@@ -120,6 +120,7 @@ public class RayRendering {
               image.setRGB(x, scene.camera.resolutionY -1 -y, rgb);
            }
         }
+        //Saves the document in the project file 
         String path =System.getProperty("user.dir") +"\\output.bmp";
         File outputFile = new File(path); // here, we can write the path we want
         ImageIO.write(image, "bmp", outputFile);

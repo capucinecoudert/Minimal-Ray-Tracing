@@ -6,7 +6,7 @@ import java.io.IOException;
 import javax.swing.border.Border;
 
 public class InterfaceEdition extends JFrame implements ActionListener{
-    // attributes for the camera's definition
+    // attributes for the materials definition
     public Material orange;
     public Material pink;
     public Material white;
@@ -18,6 +18,7 @@ public class InterfaceEdition extends JFrame implements ActionListener{
     public Material blue;
     public JComboBox<String> comboBoxMaterial;
     
+    //Elements of the scene
     public Camera c;
     public ArrayList<Sphere> spheres;
     public ArrayList<Light> lights; 
@@ -81,7 +82,8 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         this.setVisible(true);
     }
 
-    public void actionPerformed (ActionEvent e){ //Deals with the different actions to do when clicking on a button
+    //Deals with the different actions to do when clicking on the interface's buttons
+    public void actionPerformed (ActionEvent e){ 
         //When clicking on ValidateCamera, update the values of the Camera c and reset the buttons
         if(e.getSource()== ValidateCamera){
             if(isCameraValid()){
@@ -127,7 +129,7 @@ public class InterfaceEdition extends JFrame implements ActionListener{
 
     public void initScene() { //Definition of a reference scene
         this.initializeMaterials();
-        // Spheres
+        // spheres
         this.spheres = new ArrayList<Sphere>();
         spheres.add(new Sphere(new Point(0, 0, 500.0), 100.0, this.white));
         spheres.add(new Sphere(new Point(150, 0, 400.0), 30.0, this.magenta ));
@@ -149,12 +151,12 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         this.c = new Camera(pointOrigin, distanceFocale, vX, rX, vY, rY);
     }
 
-    //Method to displaay a message window
+    //Displays a message window
     public void displayMessage(String s) {
         JOptionPane.showMessageDialog(null,  s);
     }
 
-    //Create a RayRendering object, compute its image and call the InterfaceBasic to display it
+    //Creates a RayRendering object, compute its image and call the InterfaceBasic to display it
     public void launchRayRendering(ArrayList<Sphere> sp, ArrayList<Light> l, Camera ca) {
         Scene s = new Scene(sp, ca, l);
         RayRendering r = new RayRendering(s);
@@ -166,7 +168,7 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         }
     }
 
-    // Method to verify that characters have been put in the JTextfield
+    //Verifies that characters have been written in the JTextfield
     public boolean verifSaisie(String Averifier) {
         if (Averifier.length() == 0) {
             return false;
@@ -175,7 +177,7 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         }
     }
 
-    // Method to verify that the characters are integers
+    //Verifies that the characters are integers
     public boolean verifINT(String Averifier) {
         if (Averifier.length() == 0) {
             return false;
@@ -188,7 +190,7 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         return true;
     }
 
-    //Method to verify the user entered a value and if yes that it's a double
+    //Verifies the user entered a value and if yes that it's a double
     public boolean verifDOUBLE(String Averifier) {
         boolean isDOUBLE = true;
         if (Averifier.length() == 0) { // Verify that the string is not empty
@@ -202,7 +204,7 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         return isDOUBLE;
     }
     
-    //method that associates the selected material in a combo box to a Material element
+    //Associates the selected material in a combo box to a Material element
     public Material comboToMaterial (String selected){
         if( selected == "Red"){return red;
         }else if( selected == "Cyan"){
@@ -225,7 +227,7 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         return red;
     }
 
-    // method that returns the index of the associated Material in the ComboBox of the interface
+    //Returns the index of the associated Material in the ComboBox of the interface
     public int materialToCombo( Material m){ 
         if( m == this.red){return 5;
         }else if( m == this.cyan){
@@ -248,7 +250,7 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         return 5;
     }
     
-    //resets the Camera c values
+    //Resets the Camera c values
     public void resetCamera(){
         Jresolutionx.setText("0");
         Jresolutiony.setText("0");
@@ -264,7 +266,7 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         JextentYz.setText("0");
     }
 
-    // method that takes the values entered in the interface and update the Camera c with it
+    //Takes the values entered in the interface and update the Camera c with it
     public void interfaceToCamera(){
         int rX = Integer.parseInt(Jresolutionx.getText()) ;
         int rY = Integer.parseInt(Jresolutiony.getText());
@@ -275,6 +277,7 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         this.c= new Camera(centre, d, vX, rX, vY, rY);
     }
 
+    //Takes the values of the Camera c and writes it in the interface 
     public void cameraToInterface(){
         Jresolutionx.setText(String.valueOf(this.c.resolutionX));
         Jresolutiony.setText(String.valueOf(this.c.resolutionY));
@@ -290,7 +293,6 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         JextentYz.setText(String.valueOf(this.c.extentY.z));
     }
 
-
     //Write the values of the Light l (at position i in lights) in the interface
     public void lightToInterface(int i){
         Light l= lights.get(i);
@@ -302,7 +304,7 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         origin1z.setText(String.valueOf(l.origin.z));
     }
 
-    // method that takes the values entered in the interface and update the Light l  at position j in lights with it
+    //Takes the values entered in the interface and update the Light l  at position j in lights with it
     public void interfaceToLight(int j){
         Point origin1 = new Point(Double.parseDouble(origin1x.getText()),Double.parseDouble(origin1y.getText()), Double.parseDouble(origin1z.getText()));
         ColorInt i1= new ColorInt(Integer.parseInt(Red1.getText()),Integer.parseInt(Green1.getText()), Integer.parseInt(Blue1.getText()));
@@ -311,7 +313,7 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         lights.set(j,firstLight);
     }
 
-    //Write the values of the Sphere s (at position i in spheres) in the interface 
+    //Writes the values of the Sphere s (at position i in spheres) in the interface 
     public void sphereToInterface(int i){
         Sphere s= spheres.get(i);
         sphere1x.setText(String.valueOf(s.center.x));
@@ -321,7 +323,7 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         comboBoxMaterial.setSelectedIndex(materialToCombo(s.material));
     }
 
-    // method that takes the values entered in the interface and update the Sphere s  at position i in spheres with it
+    //Takes the values entered in the interface and update the Sphere s  at position i in spheres with it
     public void interfaceToSphere(int i){
         Point pointFirstSphere= new Point(Double.parseDouble(sphere1x.getText()),Double.parseDouble(sphere1y.getText()), Double.parseDouble(sphere1z.getText()));
         double RadiusFirstSphere = Double.parseDouble(radius1.getText());
@@ -330,7 +332,7 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         spheres.set(i,Sphere1);
     }
 
-    // checks the values entered by user are correct for the camera
+    //Checks the values entered by user are correct for the camera
     public boolean isCameraValid(){
         return verifINT(Jresolutionx.getText())
                 &&(verifINT(Jresolutiony.getText()))
@@ -346,7 +348,7 @@ public class InterfaceEdition extends JFrame implements ActionListener{
                 &&(verifDOUBLE(JcentreImgZ.getText()));
     }
 
-    // checks the values entered by user are correct for the light
+    //Checks the values entered by user are correct for the light
     public boolean isLightValid(){
         String r= Red1.getText();
         String g= Green1.getText();
@@ -362,13 +364,13 @@ public class InterfaceEdition extends JFrame implements ActionListener{
                 &&verifDOUBLE(origin1z.getText()));
     }
 
-    //Check the value entered is between 0-255
+    //Checks the value entered is between 0-255
     public boolean checkRGBvalue(String s){
         int i = Integer.parseInt(s);
         return (i/255 <= 1 && i>= 0);
     }
 
-    // checks the values entered by user are correct for the sphere
+    //Checks the values entered by user are correct for the sphere
     public boolean isSphereValid(){
         return (verifDOUBLE(radius1.getText())
                 && verifDOUBLE(sphere1x.getText())
@@ -376,12 +378,12 @@ public class InterfaceEdition extends JFrame implements ActionListener{
                 && verifDOUBLE(sphere1z.getText()));
     }
 
-    // checks the values entered by user are correct for the scene
+    //Checks the values entered by user are correct for the scene
     public boolean isSceneValid(){
         return (!(c==null) && !spheres.isEmpty() && !lights.isEmpty());
     }
 
-    // initializes the material of the scene
+    //Initializes the material of the scene
     public void initializeMaterials(){
         this.white= new Material(0, 1, new ColorFloat(1, 1, 1));
         this.red = new Material(0.5, 0.5, new ColorFloat(1.0, 0.0, 0));
@@ -396,6 +398,7 @@ public class InterfaceEdition extends JFrame implements ActionListener{
 
     // Creates and places all the swing components of the interface
     public void createIHM(){
+        // Initialization of the buttons 
         this.ValidateCamera = new JButton("Validate Camera");
         this.ValidateCamera.addActionListener(this);
         this.ValidateLight1 = new JButton("Validate Light");
@@ -411,19 +414,19 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         this.Jresolutionx = new JTextField();
         this.Jresolutiony = new JTextField();
         this.JfocalDistance = new JTextField();
-        this.JcentreImgX = new JTextField(); // on a besoin de 3 points cordonnées pour créer le point le centre del'image
+        this.JcentreImgX = new JTextField(); 
         this.JcentreImgY = new JTextField();
         this.JcentreImgZ = new JTextField();
-        this.JextentXx = new JTextField();// on a besoin de 3 coordonnées pour le vecteur exentent x
+        this.JextentXx = new JTextField();
         this.JextentXy = new JTextField();
         this.JextentXz = new JTextField();
-        this.JextentYx = new JTextField(); // on a besoin de 3 coordonnées pour le vecteur exentent x
+        this.JextentYx = new JTextField(); 
         this.JextentYy = new JTextField();
         this.JextentYz = new JTextField();
-        this.origin1x = new JTextField(); // we need 3 coordinates to define the location of the first light
+        this.origin1x = new JTextField(); 
         this.origin1y = new JTextField();
         this.origin1z = new JTextField();
-        this.Red1 = new JTextField();// We need the red-green-blue combination to define the color of the light
+        this.Red1 = new JTextField();
         this.Green1 = new JTextField();
         this.Blue1 = new JTextField();
         this.radius1 = new JTextField();
@@ -440,25 +443,18 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         JLabel Centre = new JLabel("Image center (x,y,z) :");
         JLabel Vectorx = new JLabel(" Vector Extent x (x,y,z) :");
         JLabel Vectory = new JLabel(" Vector Extent y (x,y,z) :");
-        JLabel Camera = new JLabel("Definition of the camera");
-        Camera.setAlignmentX(CENTER_ALIGNMENT);
-        Camera.setHorizontalAlignment(SwingConstants.CENTER); 
-        JLabel Scene = new JLabel(" Definition of the scene");
-        Scene.setAlignmentX(CENTER_ALIGNMENT);
-        Scene.setHorizontalAlignment(SwingConstants.CENTER); 
-        JLabel Light = new JLabel("Definition of the lights");
-        Light.setAlignmentX(CENTER_ALIGNMENT);
-        Light.setHorizontalAlignment(SwingConstants.CENTER); 
-        JLabel Sphere = new JLabel("Definiton of the spheres");
-        Sphere.setAlignmentX(CENTER_ALIGNMENT);
-        Sphere.setHorizontalAlignment(SwingConstants.CENTER); 
-
+        
+        
+        //Creation of the light's definition pan
         JLabel OriginSphere = new JLabel(" Origin of the light (x,y,z) :");
         JLabel RGBcode = new JLabel("Light Intensity RGB (0-255) :");
+
+        //Creation of the sphere's definition pan
         JLabel Radius = new JLabel("Radius of the 1st sphere :");
         JLabel centre = new JLabel("Centre of the 1st Sphere :");
         JLabel material = new JLabel("Material of the sphere :");
 
+        //Camera's Panel
         JPanel CAMERA = new JPanel();
         CAMERA.setOpaque(false);
         Border lineborderCAMERA = BorderFactory.createLineBorder(Color.DARK_GRAY, 1);
@@ -466,6 +462,7 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         this.add(CAMERA);
         CAMERA.setBounds(0, 100, 350, 700);
 
+        //Light's Panel
         JPanel LIGHT = new JPanel();
         LIGHT.setOpaque(false);
         Border lineborderLIGHT = BorderFactory.createLineBorder(Color.GRAY, 1);
@@ -473,6 +470,7 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         this.add(LIGHT);
         LIGHT.setBounds(350, 100, 350, 700);
 
+        //Sphere's Pane
         JPanel SPHERE = new JPanel();
         SPHERE.setOpaque(false);
         Border lineborderSPHERE = BorderFactory.createLineBorder(Color.GRAY, 1);
@@ -480,14 +478,28 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         this.add(SPHERE);
         SPHERE.setBounds(700, 100, 350, 700);
 
+        
+        //title settings
+        JLabel Scene = new JLabel(" Definition of the scene");
+        Scene.setAlignmentX(CENTER_ALIGNMENT);
+        Scene.setHorizontalAlignment(SwingConstants.CENTER); 
         this.add(Scene);
         Scene.setFont(new Font("Serif", Font.BOLD, 40));
         Scene.setOpaque(true);
         Scene.setForeground(Color.DARK_GRAY);
         Scene.setBounds(280, 20, 500, 50);
-        // Addition and positioning of different elements in the window
 
         Font font = new Font(Font.SANS_SERIF, Font.BOLD, 20);
+        //Subtitles settings
+        JLabel Camera = new JLabel("Definition of the camera");
+        Camera.setAlignmentX(CENTER_ALIGNMENT);
+        Camera.setHorizontalAlignment(SwingConstants.CENTER); 
+        JLabel Light = new JLabel("Definition of the lights");
+        Light.setAlignmentX(CENTER_ALIGNMENT);
+        Light.setHorizontalAlignment(SwingConstants.CENTER); 
+        JLabel Sphere = new JLabel("Definiton of the spheres");
+        Sphere.setAlignmentX(CENTER_ALIGNMENT);
+        Sphere.setHorizontalAlignment(SwingConstants.CENTER); 
         this.add(Camera);
         Camera.setBounds(10, 100, 340, 50);
         Camera.setFont(font);
@@ -498,6 +510,8 @@ public class InterfaceEdition extends JFrame implements ActionListener{
         Sphere.setBounds(710, 100, 350, 50);
         Sphere.setFont(font);
 
+
+        // Addition and positioning of different elements in the window
         this.add(Resolution);
         Resolution.setBounds(10, 225, 140, 50);
 

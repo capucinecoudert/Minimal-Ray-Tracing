@@ -1,8 +1,17 @@
 # Minimal-Ray-Tracing
 
-## Archive Presentation 
-The program contained in this archive computes the image of a scene composed of spheres and lights from a camera position by using a ray tracing algorithm.
+## Overall Presentation
+Authors: Ninon Delamarre-Tronel, Perrine Peygourdi, Capucine Coudert
+Group: SCAN 73
+Date of publication : 5/4/2022
+Language: 100% Java
 
+The program contained in this archive computes the image of a scene composed of spheres and lights from a camera position by using a ray tracing algorithm.
+## Prerequisites
+Open and run the Main.java file in te folder \\src.
+
+
+## Archive Presentation 
 ### Camera Class
 attributes: a double as its focal distance, a Point as the origin of the camera, a Point as the center of the plane of the image; 2 vectors defining the orientation of the plane of the image in space and its size; 2 ints defining the number of pixels of the image
 methods: getRay (int, int)

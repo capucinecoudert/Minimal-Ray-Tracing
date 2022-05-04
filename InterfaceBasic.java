@@ -34,7 +34,7 @@ public class InterfaceBasic extends JFrame{
         this.add(this.image);
         
         try { //Gets the image created by the program and displays it
-            String path = System.getProperty("user.dir") +"\\output.bmp";
+            String path = System.getProperty("user.dir") +"\\Img\\output.bmp";
             BufferedImage myPicture = ImageIO.read(new File(path));
             ImageIcon imgIc = new ImageIcon(myPicture);
             this.image.setIcon(imgIc);

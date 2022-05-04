@@ -121,7 +121,7 @@ public class RayRendering {
            }
         }
         //Saves the document in the project file 
-        String path =System.getProperty("user.dir") +"\\output.bmp";
+        String path =System.getProperty("user.dir") +"\\Img\\output.bmp";
         File outputFile = new File(path); // here, we can write the path we want
         ImageIO.write(image, "bmp", outputFile);
     }   
